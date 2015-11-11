@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/zhuodianying/!svn/ver/751/1/Application/Weixin/Model
+END
+MenuModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Model/MenuModel.class.php
+END
+QixiActivityModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Model/QixiActivityModel.class.php
+END
+ResourceModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Model/ResourceModel.class.php
+END
+BaseModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/zhuodianying/!svn/ver/705/1/Application/Weixin/Model/BaseModel.class.php
+END
+OrderrecordModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Model/OrderrecordModel.class.php
+END
+ActivityUserModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/455/1/Application/Weixin/Model/ActivityUserModel.class.php
+END
+TemplateModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/zhuodianying/!svn/ver/684/1/Application/Weixin/Model/TemplateModel.class.php
+END
+ActivityModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/zhuodianying/!svn/ver/623/1/Application/Weixin/Model/ActivityModel.class.php
+END
+JssdkModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Model/JssdkModel.class.php
+END
+UserModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/zhuodianying/!svn/ver/751/1/Application/Weixin/Model/UserModel.class.php
+END
+PartyModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Model/PartyModel.class.php
+END
+BasicModel.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Model/BasicModel.class.php
+END

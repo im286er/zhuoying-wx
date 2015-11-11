@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title>我的二维码</title>
+        <link rel="stylesheet" type="text/css" href="__CSS__/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/layout.css" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/index.css" />
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">我的二维码</h1>
+        </header>
+        <div class="mui-content row mui-fullscreen middle-span center-span">
+            <!--页面主体内容-->
+            <div class="white" style="padding: 30px;box-shadow: 2px 2px 2px rgba(0,0,0,0.4)">
+                <div id="qrcode_content" style="width: 200px;height: 200px;">
+
+                </div>
+                <div style="background: #b0b0b0;height: 2px;margin-top: 20px;width: 100%;"></div>
+                <div class="row-span-1 col center-span middle-span" >
+                    <div id="user" class="menu-item" style="width:80px;height:80px;border-radius: 100%;overflow: hidden;border:solid white 3px;box-shadow: 2px 2px 2px rgba(0,0,0,0.3);">
+                        <img id="useravatar" style="width:100%;height: auto;" src="{$info['avatar']|default='__IMG__/user/user.png'}" />
+                    </div>
+                    <div id="username" style="margin-top: 15px;">{$info['nickname']|default='快去起个昵称吧'}</div>
+                </div>
+            </div>
+        </div>
+
+        <!--模版列表 start-->
+        <!--模版列表 end-->
+        <!--框架载入start-->
+        <script src="__JS__/mui.min.js"></script>
+        <script src="__JS__/sea.js"></script>
+        <!--框架载入end-->
+        <!--业务逻辑start-->
+        <script type="text/javascript" charset="utf-8">
+            seajs.config({
+                base: "__JS__",
+                alias: {
+                    "qrcode": "qrcode"
+                }
+            });
+            seajs.use(["qrcode"], function(qrcode) {
+                /**定义变量  start */
+                /** 定义变量  end**/
+                /**模版方法  start */
+                /**模版方法  end**/
+                /**页面相关功能  start**/
+                var fun = (function(fun) {　
+                    return fun;　　
+                })(fun || {});
+                /** 页面相关功能逻辑  end**/
+                //mui初始化
+                mui.init();
+                //HTMLplus初始化
+                mui.ready(function() {
+                    /** 页面主逻辑 start **/
+                    //TODO:在此处书写页面逻辑
+                    /** 页面主逻辑 end **/
+                    var qrcode = new QRCode(document.getElementById("qrcode_content"), {
+                        width: 200,
+                        height: 200,
+                        typeNumber: 4
+                    });
+                    qrcode.makeCode("{$info['id']}");
+                });
+            });
+        </script>
+        <!--业务逻辑end-->
+    </body>
+
+</html>

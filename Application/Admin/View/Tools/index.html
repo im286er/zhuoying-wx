@@ -1,0 +1,89 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>南琦的工具箱</h2>
+    </div>
+
+    <h2>时间戳转换</h2>
+    <div class="tab-wrap">
+        <input id="sourceTime" type="text" class="text" value="{:date('Y-m-d H:i')}">
+        <button id="converterTime" class="btn btn-primary">转换</button>
+        <input id="targetTime" type="text" class="text input-large">
+    </div>
+
+    <h2>编码转换</h2>
+    <div class="tab-wrap">
+        <input id="sourceMessage" type="text" class="text">
+        <button id="converterMessage" class="btn btn-primary">转换</button>
+        <input id="targetMessage" type="text" class="text input-large">
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+        ';
+    </php>
+
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            Date.prototype.format =function(format)
+            {
+                var o = {
+                    "M+" : this.getMonth()+1, //month
+                    "d+" : this.getDate(), //day
+                    "h+" : this.getHours(), //hour
+                    "m+" : this.getMinutes(), //minute
+                    "s+" : this.getSeconds(), //second
+                    "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+                    "S" : this.getMilliseconds() //millisecond
+                }
+                if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+                        (this.getFullYear()+"").substr(4- RegExp.$1.length));
+                for(var k in o)if(new RegExp("("+ k +")").test(format))
+                    format = format.replace(RegExp.$1,
+                            RegExp.$1.length==1? o[k] :
+                                    ("00"+ o[k]).substr((""+ o[k]).length));
+                return format;
+            };
+
+            $('#converterTime').click(function() {
+                var val = $('#sourceTime').val();
+
+                var targetValue = '';
+
+                if (!isNaN(val)) {
+                    targetValue = new Date(val * 1000).format('yyyy-MM-dd hh:mm');
+                }
+                else {
+                    targetValue = new Date(val).getTime()/1000;
+                }
+
+                $('#targetTime').val(targetValue);
+            });
+
+            $('#converterMessage').click(function() {
+                var val = $('#sourceMessage').val().split("\\u");
+                var targetValue=val[0];
+                for(var i=1;i<val.length;i++){
+                    var code=val[i];
+                    targetValue+=String.fromCharCode(parseInt("0x"+code.substring(0,4)));
+                    if(code.length>4){
+                        targetValue+=code.substring(4,code.length);
+                    }
+                }
+
+                $('#targetMessage').val(targetValue);
+            });
+        });
+    </script>
+</block>

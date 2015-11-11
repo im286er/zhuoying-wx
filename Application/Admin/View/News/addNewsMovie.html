@@ -1,0 +1,93 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title cf">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <notempty name="nid">
+                <li><a href="{:U('edit?id='.$nid)}">基 本</a></li>
+                <li><a href="{:U('editParty?nid='.$nid)}">活 动</a></li>
+                <li><a href="{:U('editMovies?nid='.$nid)}">电 影</a></li>
+                <li class="current"><a href="javascript:void(0);">添加电影</a></li>
+            </notempty>
+        </ul>
+        <div class="tab-content">
+            <form action="{:U()}" method="post" class="form-horizontal">
+                <div class="form-item">
+                    <label class="item-label">电影<span class="check-tips">（选择资讯需要添加的电影）</span></label>
+
+                    <div class="controls">
+                        <select id="mid" class="input-large easyui-combobox" name="mid" style="height: 20px; width: 220px"></select>
+                    </div>
+
+                </div>
+                <div class="form-item">
+                    <label class="item-label">开始时间<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" id="starttime" name="starttime" class="text time" value="{$info.starttime|time_format}"
+                               placeholder="请选择时间">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">结束时间<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" id="endtime" name="endtime" class="text time" value="{$info.endtime|time_format}"
+                               placeholder="请选择时间">
+                    </div>
+                </div>
+
+                <div class="form-item" style="margin-top: 20px">
+                    <input type="hidden" name="nid" value="{$nid|default=''}">
+                    <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+                    <button class="btn btn-return" onclick="javascript:location.href='{:U("editMovies?nid=".$nid)}';return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+        ';
+    </php>
+
+    <link href="__STATIC__/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="__STATIC__/EasyUI/themes/icon.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+        Think.setValue("atype", {$info.atype|default=0});
+
+        $(function () {
+
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+
+            loadData();
+        })
+
+        function loadData(){
+            $('#mid').combobox({
+                url:'{:U("Movie/getList")}',
+                valueField:'id',
+                textField:'mname'
+            });
+        }
+    </script>
+</block>

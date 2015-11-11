@@ -1,0 +1,19 @@
+
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <font style="margin-left: 20px">媒体合作: media@myline.cc</font>
+            <font style="margin-left: 20px">市场合作: market@myline.cc</font>
+            <font style="margin-left: 20px">商务合作: bs@myline.cc</font>
+            <b style="margin-left: 20px">2015<a href="http://www.myline.cc" target="_blank">西安慢连互联网有限公司</a> {:C('WEB_SITE_ICP')}</b>
+        </div>
+    </footer>
+
+<include file="Public/var"/>
+<block name="script"></block> <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	<block name="hidden"></block>
+</div>

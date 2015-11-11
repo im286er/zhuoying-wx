@@ -1,0 +1,209 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/zhuodianying/!svn/ver/765/1/Application/Admin/Controller
+END
+UpdateController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/UpdateController.class.php
+END
+QiniuController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/QiniuController.class.php
+END
+VersionController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/398/1/Application/Admin/Controller/VersionController.class.php
+END
+AdminController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/AdminController.class.php
+END
+OperatorController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/OperatorController.class.php
+END
+AuthManagerController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/AuthManagerController.class.php
+END
+CinemaController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/CinemaController.class.php
+END
+OperateController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/738/1/Application/Admin/Controller/OperateController.class.php
+END
+MovieSubjectController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/738/1/Application/Admin/Controller/MovieSubjectController.class.php
+END
+ConfigController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ConfigController.class.php
+END
+IndexController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/IndexController.class.php
+END
+ChannelController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ChannelController.class.php
+END
+OrderController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/OrderController.class.php
+END
+ActionController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ActionController.class.php
+END
+UserController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/UserController.class.php
+END
+BasicController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/738/1/Application/Admin/Controller/BasicController.class.php
+END
+ArticleController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ArticleController.class.php
+END
+ReplyController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/418/1/Application/Admin/Controller/ReplyController.class.php
+END
+PartyController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/PartyController.class.php
+END
+ModelController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ModelController.class.php
+END
+ToolsController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ToolsController.class.php
+END
+AuthController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/765/1/Application/Admin/Controller/AuthController.class.php
+END
+AttributeController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/AttributeController.class.php
+END
+DatabaseController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/DatabaseController.class.php
+END
+MenuController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/MenuController.class.php
+END
+LuckyDrawController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/LuckyDrawController.class.php
+END
+AddonsController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/AddonsController.class.php
+END
+NewsController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/NewsController.class.php
+END
+CategoryController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/CategoryController.class.php
+END
+ThinkController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/ThinkController.class.php
+END
+PublicController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/PublicController.class.php
+END
+MovieController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/312/1/Application/Admin/Controller/MovieController.class.php
+END
+AppUserController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/738/1/Application/Admin/Controller/AppUserController.class.php
+END
+FileController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/2/1/Application/Admin/Controller/FileController.class.php
+END

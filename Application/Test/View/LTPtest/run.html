@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LTPTest</title>
+        <link href="/LTPTest/Test/Common/css/css-table.css" rel="stylesheet">
+
+        <script src="/LTPTest/Test/Common/js/style-table.js"></script>
+        <script src="/LTPTest/Test/Common/js/jquery-1.2.6.min.js"></script>
+
+    </head>
+
+    <body>
+
+
+        <table id="travel" summary="Travel times to work by main mode (Autumn 2006) - Source: London Travel Report 2007 http://www.tfl.gov.uk/assets/downloads/corporate/London-Travel-Report-2007-final.pdf">
+
+            <caption>LTPTest Output</caption>
+
+            <thead>    
+                <tr>
+                    <th scope="col" rowspan="3">LTPTest</th>
+                    <th scope="col" colspan="4">测试输出</th>
+                </tr>
+
+                <tr>
+                    <th scope="col">测试总数</th>
+                    <th scope="col">测试通过</th>
+                    <th scope="col">测试未通过</th>
+                    <th scope="col">输出</th>
+                </tr>  
+                <tr>
+                    <th scope="col">{$test_num}</th>
+                    <th scope="col">{$test_success_num}</th>
+                    <th scope="col">{$test_failed_num}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <volist name="test_list" id="list">
+                <tr>
+                    <th scope="row">{$list.name}</th>
+                    <td></td>
+
+
+                <if condition="$list['flag'] neq 1 ">
+                    <td>通过</td>
+                    <else /> <td> </td>
+                </if>   
+                <if condition="$list['flag'] eq 1 ">
+                    <td style='color: red'>未通过</td>
+                    <else /> <td> </td>
+                </if>
+
+                <td></td>
+                </tr>
+
+            </volist>                               
+
+        </tbody>
+
+    </table>
+</body>
+</html>

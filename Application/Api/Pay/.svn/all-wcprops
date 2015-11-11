@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/zhuodianying/!svn/ver/766/1/Application/Api/Pay
+END
+WxPay.Config.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/zhuodianying/!svn/ver/747/1/Application/Api/Pay/WxPay.Config.php
+END
+WxPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/zhuodianying/!svn/ver/341/1/Application/Api/Pay/WxPay.class.php
+END
+WxPay.Notify.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/zhuodianying/!svn/ver/766/1/Application/Api/Pay/WxPay.Notify.php
+END
+WxPay.Api.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/zhuodianying/!svn/ver/134/1/Application/Api/Pay/WxPay.Api.php
+END
+WxPay.Data.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/zhuodianying/!svn/ver/134/1/Application/Api/Pay/WxPay.Data.php
+END
+AliPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/zhuodianying/!svn/ver/213/1/Application/Api/Pay/AliPay.class.php
+END
+WxPay.Exception.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/zhuodianying/!svn/ver/134/1/Application/Api/Pay/WxPay.Exception.php
+END
+BasePay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/zhuodianying/!svn/ver/134/1/Application/Api/Pay/BasePay.class.php
+END

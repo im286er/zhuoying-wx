@@ -1,0 +1,41 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{$meta_title}</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">主题名称<span class="check-tips">（电影主题的对应的名称）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="title" name="title" value="{$info['title']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">推荐影片<span class="check-tips">（该主题下的一些标志性电影，直接输入电影名称，用空格分割，一般小于4个）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="subtitle" name="subtitle" value="{$info['subtitle']}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">主题图片<span class="check-tips"></span></label>
+            <div class="controls">
+                <img src="{$info['url']}" width="512">
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(function() {
+            //初始化选中用户名输入框
+            $("#title").focus();
+        })
+    </script>
+</block>

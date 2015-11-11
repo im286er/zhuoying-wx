@@ -1,0 +1,41 @@
+<extend name="Public/base" />
+
+<block name="style">
+
+</block>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>电影归类</h2>
+    </div>
+    <notempty name="_list">
+        <div class="cf">
+           <div class="fl">
+                <form action="{:U()}" method="post" class="form-horizontal">
+                    <input type="hidden" name="mid" value="{$info.id|default=''}">
+                    <button class="btn submit-btn ajax-post" type="submit" target-form="form-horizontal">确 定</button>
+                    <div class="cf">
+                        <volist name="_list" id="vo">
+                            <label style="200px"><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" />{$vo.title}</label>
+                        </volist>
+                    </div>
+                </form>
+            </div> 
+        </div>
+        <div class="data-table table-striped">
+            <img src="{$info['large_images']}" height="300px">
+            <h3>{$info['title']}</h3>
+        </div>
+        <else/>
+        <td colspan="9" class="text-center"> <a href="{:U('MovieSubject/index')}">点此添加电影主题</a> </td>
+    </notempty>
+    
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U("Movie/classify")}');
+    </script>
+</block>

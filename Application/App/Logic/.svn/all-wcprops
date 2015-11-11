@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/zhuodianying/!svn/ver/2/1/Application/App/Logic
+END
+JPushLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/JPushLogic.class.php
+END
+PayLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/PayLogic.class.php
+END
+BaseLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/BaseLogic.class.php
+END
+SaeChannelLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/SaeChannelLogic.class.php
+END
+SmsLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/SmsLogic.class.php
+END
+TrieLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/TrieLogic.class.php
+END
+ImLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/ImLogic.class.php
+END
+QiniuLogic.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/zhuodianying/!svn/ver/2/1/Application/App/Logic/QiniuLogic.class.php
+END

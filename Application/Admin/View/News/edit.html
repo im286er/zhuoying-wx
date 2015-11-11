@@ -1,0 +1,121 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title cf">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <li class="current"><a href="javascript:void(0);">基 本</a></li>
+            <empty name="info">
+                <li><a class="disabled" href="javascript:void(0);">活 动</a></li>
+                <li><a class="disabled" href="javascript:void(0);">电 影</a></li>
+            <else/>
+                <li><a href="{:U('editParty?nid='.$info['id'])}">活 动</a></li>
+                <li><a href="{:U('editMovies?nid='.$info['id'])}">电 影</a></li>
+            </empty>
+        </ul>
+        <div class="tab-content">
+            <form action="{:U()}" method="post" class="form-horizontal">
+                <div class="form-item">
+                    <label class="item-label">标题<span class="check-tips">（用于显示的影讯标题）</span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">沙龙类型<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <label class="radio"><input type="radio" name="atype" value="0">电影沙龙</label>
+                        <label class="radio"><input type="radio" name="atype" value="1">正常院线电影</label>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">推荐语<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-large" name="recommend"
+                               value="{$info.recommend|default=''}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">推送内容<span class="check-tips">（用户收到的推送信息）</span></label>
+
+                    <div class="controls">
+                        <label class="textarea input-large">
+                            <textarea name="pushcontent">{$info.pushcontent}</textarea>
+                        </label>
+                    </div>
+                </div>
+
+
+
+                <div class="form-item" style="margin-top: 20px">
+                    <input type="hidden" name="id" value="{$info.id|default=''}">
+                    <empty name="info">
+                        <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">下一步</button>
+                    <else/>
+                        <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+                    </empty>
+                    <button class="btn btn-return" onclick="javascript:location.href='{:U('index')}';return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--选择电影弹出层-->
+    <div id="divChooseCinema" class="easyui-dialog" style="width:580px;height:450px;padding:10px 20px"
+         closed="true" resizable="true" modal="true" buttons="#dlg-buttons">
+        <iframe scrolling="no" id='IframeUpdate' frameborder="0" src="" style="width:100%;height:100%;padding:0"></iframe>
+    </div>
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+        ';
+    </php>
+
+    <link href="__STATIC__/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="__STATIC__/EasyUI/themes/icon.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+        Think.setValue("atype", {$info.atype|default=0});
+
+        $(function () {
+
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+
+            loadData();
+        })
+
+        function loadData(){
+            $('#cinema').combobox({
+                url:'{:U("Cinema/getList")}',
+                valueField:'id',
+                textField:'cname'
+            });
+        }
+
+        //显示选择影院对话框
+        function showChooseCinemaDialog() {
+            $("#IframeUpdate")[0].src = '{:U("Cinema/Choose")}';
+            $("#divChooseCinema").dialog('open').dialog('setTitle', '选择影院');
+        }
+    </script>
+</block>

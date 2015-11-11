@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/zhuodianying/!svn/ver/2/1/Application/Install/Data
+END
+update.sql
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/zhuodianying/!svn/ver/2/1/Application/Install/Data/update.sql
+END
+conf.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/zhuodianying/!svn/ver/2/1/Application/Install/Data/conf.tpl
+END
+install.sql
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/zhuodianying/!svn/ver/2/1/Application/Install/Data/install.sql
+END
+user.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/zhuodianying/!svn/ver/2/1/Application/Install/Data/user.tpl
+END

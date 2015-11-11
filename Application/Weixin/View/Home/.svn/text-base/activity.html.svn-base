@@ -1,0 +1,1198 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>电影活动</title>
+		<link href="__CSS__/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__CSS__/index.css" />
+		<link rel="stylesheet" href="__CSS__/layout.css" />
+
+		<link rel="stylesheet" href="__CSS__/index/index.css?1.0" />
+		<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	    <script type="text/javascript">
+	        wx.config({
+	            debug: false,
+	            appId: '{$package["appid"]}',
+	            timestamp: {$package["timestamp"]|default=0},
+	            nonceStr: '{$package["nonceStr"]}', 
+	            signature: '{$package["signature"]}',
+	            jsApiList: [
+	                'chooseImage',
+	                'hideOptionMenu',
+	                'showOptionMenu',
+	                'uploadImage',
+	                'hideMenuItems',
+	                'onMenuShareTimeline',
+	                'onMenuShareAppMessage',
+	                'onMenuShareQQ',
+	                'onMenuShareWeibo',
+	                'onMenuShareQZone',
+	                'closeWindow',
+	                'getLocation',
+	                'showMenuItems'
+	            ]
+	        });
+
+	        city_change = null;
+
+	        function renderReverse(res) {
+	        	if (res.status == 0) {
+	        		var city = res.result.addressComponent.city;
+	        		city = city.substr(0, city.length - 1);
+
+	        		city_change && city_change(city);
+	        	}
+	        }
+	    </script>
+
+	    
+	</head>
+
+	<body id="main">
+		<!--页面主结构开始-->
+		<div id="main-view" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar" style="z-index:999">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+
+		<div id="subjectList" class="mui-page">
+			<div class="mui-page-content">
+				<!-- <div class="mui-navbar-inner mui-bar mui-bar-nav">
+					<button id='city-button' type="button" class="mui-left mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+						<img class="city" style="height: 18px;padding:0 5px 0 15px;flex: 0 0 auto;" src="__IMG__/app/city_icon.png" />
+						<label id="current-city" class="city" style="color: #565656;flex: 0 0 auto;padding:0px;">...</label>
+					</button>
+					<h1 class="mui-center mui-title">电影活动</h1>
+					<button id="search-button" class="mui-btn mui-btn-link mui-pull-right">
+						<span class="mui-icon mui-icon-search" style="color: orangered;margin-right: 10px;"></span>
+					</button>
+				</div> -->
+				<div class="mui-content mui-fullscreen">
+					<div class="mui-scroll-wrapper">
+
+						<div class="mui-scroll mui-slider">
+							<ul id="subject_list" class="mui-table-view" style="margin-bottom:50px;background: black;"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 单页面 start -->
+		<div id="activityList" class="mui-page">
+			<div class="mui-page-content">
+				<div class="mui-navbar-inner mui-bar mui-bar-nav">
+					<button id='city-button' type="button" class="mui-left mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+						<img class="city" style="height: 18px;padding:0 5px 0 15px;flex: 0 0 auto;" src="__IMG__/app/city_icon.png" />
+						<label id="current-city" class="city" style="color: #565656;flex: 0 0 auto;padding:0px;">...</label>
+					</button>
+					<h1 class="mui-center mui-title">电影活动</h1>
+					<button id="search-button" class="mui-btn mui-btn-link mui-pull-right">
+						<span class="mui-icon mui-icon-search" style="color: orangered;margin-right: 10px;"></span>
+					</button>
+				</div>
+
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!--<div class="mui-input-row mui-search margin-10">
+							<input id="search" type="search" class="mui-input-clear" placeholder=" 想看什么? " style="background-color: white;">
+						</div>-->
+						<ul id="activity_list" class="mui-table-view">
+
+						</ul>
+						<div id="empty_act_list_item" class="hidden" style="width: 100%;height: 120px;background-image: url(__IMG__/activity/no_activity.jpg);background-size: 100% auto;background-repeat: no-repeat;background-position: center;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="city-location" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>电影活动
+				</button>
+				<h1 class="mui-center mui-title">定位城市</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-input-row mui-content-padded white">
+					<label>定位城市:</label>
+					<input id="location-city" class="city-item" type="text" placeholder="定位中..." readonly="true">
+				</div>
+				<div style="display: none">
+					<h4 class="mui-content-padded">最近访问</h4>
+
+					<div id="recently-city" class="box nopadding">
+						<ul class="table">
+						</ul>
+					</div>
+				</div>
+				<h4 class="mui-content-padded">热门城市</h4>
+				<div id="hot-city" class="box mui-content-padded row hot-city city-container">
+					<div class="col-span-3 city-item">北京</div>
+					<div class="col-span-3 city-item">上海</div>
+					<div class="col-span-3 city-item">天津</div>
+					<div class="col-span-3 city-item">杭州</div>
+					<div class="col-span-3 city-item">西安</div>
+					<div class="col-span-3 city-item">成都</div>
+					<div class="col-span-3 city-item">郑州</div>
+					<div class="col-span-3 city-item">厦门</div>
+					<div class="col-span-3 city-item">青岛</div>
+					<div class="col-span-3 city-item">深圳</div>
+					<div class="col-span-3 city-item">太原</div>
+					<div class="col-span-3 city-item">重庆</div>
+					<div class="col-span-3 city-item">武汉</div>
+					<div class="col-span-3 city-item">南京</div>
+					<div class="col-span-3 city-item">广州</div>
+					<div class="col-span-3 city-item">沈阳</div>
+					<div class="col-span-3 city-item">济南</div>
+					<div class="col-span-3 city-item">哈尔滨</div>
+				</div>
+				<h4 class="mui-content-padded">全部城市</h4>
+				<div id="hot-city" class="box mui-content-padded row abc" style="margin-bottom: 0 !important;">
+					<div>A</div>
+					<div>B</div>
+					<div>C</div>
+					<div>D</div>
+					<div>E</div>
+					<div>F</div>
+					<div>G</div>
+					<div>H</div>
+					<div>J</div>
+					<div>K</div>
+					<div>L</div>
+					<div>M</div>
+					<div>N</div>
+					<div>P</div>
+					<div>Q</div>
+					<div>R</div>
+					<div>S</div>
+					<div>T</div>
+					<div>W</div>
+					<div>X</div>
+					<div>Y</div>
+					<div>Z</div>
+				</div>
+				<div class="box mui-content-padded" style="margin-top: 0;">
+					<ul id="A" class="table mui-table-view">
+						<h4>A</h4>
+						<li class="city-item">鞍山</li>
+						<li class="city-item">阿拉善</li>
+						<li class="city-item">安庆</li>
+						<li class="city-item">安阳</li>
+						<!--<li class="city-item">阿坝藏族羌族</li>-->
+						<li class="city-item">安顺</li>
+						<li class="city-item">阿里</li>
+						<li class="city-item">安康</li>
+						<li class="city-item">安丘</li>
+						<li class="city-item">阿克苏</li>
+					<!--	<li class="city-item">克孜勒苏柯尔克孜</li>-->
+						<li class="city-item">阿勒泰</li>
+						<li class="city-item">澳门</li>
+						<li class="city-item">安吉</li>
+					</ul>
+					<ul id="B" class="table mui-table-view">
+						<h4>B</h4>
+						<li class="city-item">璧山</li>
+						<li class="city-item">北碚</li>
+						<li class="city-item">北京</li>
+						<li class="city-item">保定</li>
+						<li class="city-item">包头</li>
+						<li class="city-item">滨州</li>
+						<li class="city-item">蚌埠</li>
+						<li class="city-item">宝鸡</li>
+						<li class="city-item">巴彦淖尔</li>
+						<li class="city-item">本溪</li>
+						<li class="city-item">白山</li>
+						<li class="city-item">白城</li>
+						<li class="city-item">北海</li>
+						<li class="city-item">百色</li>
+						<li class="city-item">巴中</li>
+						<li class="city-item">毕节</li>
+						<li class="city-item">保山</li>
+						<li class="city-item">白银</li>
+						<li class="city-item">亳州</li>
+						<!--<li class="city-item">博尔塔拉蒙古</li>
+						<li class="city-item">巴音郭楞蒙古</li>-->
+						<li class="city-item">保亭</li>
+						<li class="city-item">白沙</li>
+					</ul>
+
+					<ul id="C" class="table mui-table-view">
+						<h4>C</h4>
+							<li class="city-item">长乐</li>
+							<li class="city-item">长寿</li>
+							<li class="city-item">长沙</li>
+							<li class="city-item">重庆</li>
+							<li class="city-item">常熟</li>
+							<li class="city-item">成都</li>
+							<li class="city-item">长春</li>
+							<li class="city-item">常州</li>
+							<li class="city-item">承德</li>
+							<li class="city-item">沧州</li>
+							<li class="city-item">长治</li>
+							<li class="city-item">赤峰</li>
+							<li class="city-item">朝阳</li>
+							<li class="city-item">滁州</li>
+							<li class="city-item">巢湖</li>
+							<li class="city-item">池州</li>
+							<li class="city-item">郴州</li>
+							<li class="city-item">潮州</li>
+							<li class="city-item">楚雄彝族</li>
+							<li class="city-item">昌都</li>
+							<li class="city-item">昌吉回族</li>
+							<li class="city-item">常德</li>
+							<li class="city-item">崇左</li>
+							<li class="city-item">慈溪</li>
+							<li class="city-item">澄迈</li>
+							<li class="city-item">昌江</li>
+							<li class="city-item">长兴</li>
+							<li class="city-item">苍南</li>
+					</ul>
+					<ul id="D" class="table mui-table-view">
+						<h4>D</h4>
+						<li class="city-item">大足</li>
+						<li class="city-item">独山子</li>
+						<li class="city-item">大连</li>
+						<li class="city-item">东莞</li>
+						<li class="city-item">大庆</li>
+						<li class="city-item">东营</li>
+						<li class="city-item">德州</li>
+						<li class="city-item">大同</li>
+						<li class="city-item">丹东</li>
+						<li class="city-item">大兴安岭</li>
+						<li class="city-item">德阳</li>
+						<li class="city-item">达州</li>
+						<li class="city-item">大理白族</li>
+						<li class="city-item">迪庆藏族</li>
+						<li class="city-item">定西</li>
+						<!--<li class="city-item">德宏傣族景颇族</li>-->
+						<li class="city-item">儋州</li>
+						<li class="city-item">东方</li>
+						<li class="city-item">定安</li>
+						<li class="city-item">德清</li>
+						<li class="city-item">东阳</li>
+					</ul>
+					<ul id="E" class="table mui-table-view">
+						<h4>E</h4>
+						<li class="city-item">鄂尔多斯</li>
+						<li class="city-item">鄂州</li>
+						<li class="city-item">恩施</li>
+					</ul>
+					<ul id="F" class="table mui-table-view">
+						<h4>F</h4>
+							<li class="city-item">涪陵</li>
+							<li class="city-item">佛山</li>
+							<li class="city-item">福州</li>
+							<li class="city-item">抚顺</li>
+							<li class="city-item">阜新</li>
+							<li class="city-item">阜阳</li>
+							<li class="city-item">抚州</li>
+							<li class="city-item">防城港</li>
+							<li class="city-item">凤凰</li>
+							<li class="city-item">阜康</li>
+					</ul>
+					<ul id="G" class="table mui-table-view">
+						<h4>G</h4>
+						<li class="city-item">广汉</li>
+						<li class="city-item">广州</li>
+						<li class="city-item">桂林</li>
+						<li class="city-item">贵阳</li>
+						<li class="city-item">赣州</li>
+						<li class="city-item">贵港</li>
+						<li class="city-item">甘南藏族</li>
+						<li class="city-item">果洛藏族</li>
+						<li class="city-item">固原</li>
+						<li class="city-item">广元</li>
+						<li class="city-item">广安</li>
+						<li class="city-item">甘孜藏族</li>
+					</ul>
+					<ul id="H" class="table mui-table-view">
+						<h4>H</h4>
+						<li class="city-item">杭州</li>
+						<li class="city-item">合肥</li>
+						<li class="city-item">哈尔滨</li>
+						<li class="city-item">呼和浩特</li>
+						<li class="city-item">海口</li>
+						<li class="city-item">惠州</li>
+						<li class="city-item">邯郸</li>
+						<li class="city-item">湖州</li>
+						<li class="city-item">鹤岗</li>
+						<li class="city-item">淮安</li>
+						<li class="city-item">衡水</li>
+						<li class="city-item">呼伦贝尔</li>
+						<li class="city-item">葫芦岛</li>
+						<li class="city-item">黑河</li>
+						<li class="city-item">淮南</li>
+						<li class="city-item">淮北</li>
+						<li class="city-item">鹤壁</li>
+						<li class="city-item">衡阳</li>
+						<li class="city-item">怀化</li>
+						<li class="city-item">河源</li>
+						<li class="city-item">贺州</li>
+						<li class="city-item">河池</li>
+						<!--<li class="city-item">红河哈尼族彝族</li>-->
+						<li class="city-item">汉中</li>
+						<li class="city-item">海东</li>
+						<li class="city-item">海北藏族</li>
+						<li class="city-item">黄南藏族</li>
+						<!--<li class="city-item">海西蒙古族藏族</li>-->
+						<li class="city-item">哈密</li>
+						<li class="city-item">菏泽</li>
+						<li class="city-item">黄山</li>
+						<li class="city-item">海南藏族</li>
+						<li class="city-item">和田</li>
+						<li class="city-item">黄冈</li>
+						<li class="city-item">海宁</li>
+						<li class="city-item">合川</li>
+					</ul>
+					<ul id="J" class="table mui-table-view">
+						<h4>J</h4>
+							<li class="city-item">江油</li>
+							<li class="city-item">江阴</li>
+							<li class="city-item">济南</li>
+							<li class="city-item">嘉兴</li>
+							<li class="city-item">金华</li>
+							<li class="city-item">江门</li>
+							<li class="city-item">济宁</li>
+							<li class="city-item">吉林</li>
+							<li class="city-item">晋城</li>
+							<li class="city-item">晋中</li>
+							<li class="city-item">锦州</li>
+							<li class="city-item">鸡西</li>
+							<li class="city-item">佳木斯</li>
+							<li class="city-item">晋江</li>
+							<li class="city-item">吉安</li>
+							<li class="city-item">焦作</li>
+							<li class="city-item">济源</li>
+							<li class="city-item">荆门</li>
+							<li class="city-item">荆州</li>
+							<li class="city-item">揭阳</li>
+							<li class="city-item">嘉峪关</li>
+							<li class="city-item">金昌</li>
+							<li class="city-item">酒泉</li>
+							<li class="city-item">景德镇</li>
+							<li class="city-item">九江</li>
+							<li class="city-item">九寨沟</li>
+							<li class="city-item">江津</li>
+					</ul>
+					<ul id="K" class="table mui-table-view">
+						<h4>K</h4>
+						<li class="city-item">库尔勒</li>
+						<li class="city-item">昆明</li>
+						<li class="city-item">昆山</li>
+						<li class="city-item">开封</li>
+						<li class="city-item">克拉玛依</li>
+						<li class="city-item">喀什</li>
+						<li class="city-item">开县</li>
+						<li class="city-item">奎屯</li>
+					</ul>
+					<ul id="L" class="table mui-table-view">
+						<h4>L</h4>
+						<li class="city-item">阆中</li>
+						<li class="city-item">兰州</li>
+						<li class="city-item">临沂</li>
+						<li class="city-item">洛阳</li>
+						<li class="city-item">连云港</li>
+						<li class="city-item">聊城</li>
+						<li class="city-item">廊坊</li>
+						<li class="city-item">柳州</li>
+						<li class="city-item">临汾</li>
+						<li class="city-item">吕梁</li>
+						<li class="city-item">辽阳</li>
+						<li class="city-item">辽源</li>
+						<li class="city-item">丽水</li>
+						<li class="city-item">六安</li>
+						<li class="city-item">龙岩</li>
+						<li class="city-item">莱芜</li>
+						<li class="city-item">漯河</li>
+						<li class="city-item">娄底</li>
+						<li class="city-item">泸州</li>
+						<li class="city-item">凉山彝族</li>
+						<li class="city-item">六盘水</li>
+						<li class="city-item">丽江</li>
+						<li class="city-item">临沧</li>
+						<li class="city-item">拉萨</li>
+						<li class="city-item">临夏回族</li>
+						<li class="city-item">来宾</li>
+						<li class="city-item">陇南</li>
+						<li class="city-item">乐山</li>
+						<li class="city-item">临高</li>
+						<li class="city-item">龙胜</li>
+						<li class="city-item">乐东</li>
+						<li class="city-item">陵水</li>
+						<li class="city-item">兰溪</li>
+						<li class="city-item">临夏</li>
+						<li class="city-item">浏阳</li>
+					</ul>
+					<ul id="M" class="table mui-table-view">
+						<h4>M</h4>
+						<li class="city-item">绵竹</li>
+						<li class="city-item">茂名</li>
+						<li class="city-item">牡丹江</li>
+						<li class="city-item">马鞍山</li>
+						<li class="city-item">梅州</li>
+						<li class="city-item">绵阳</li>
+						<li class="city-item">眉山</li>
+						<li class="city-item">满洲里</li>
+						<li class="city-item">明光</li>
+					</ul>
+					<ul id="N" class="table mui-table-view">
+						<h4>N</h4>
+						<li class="city-item">南部</li>
+						<li class="city-item">南京</li>
+						<li class="city-item">宁波</li>
+						<li class="city-item">南昌</li>
+						<li class="city-item">南宁</li>
+						<li class="city-item">南通</li>
+						<li class="city-item">南阳</li>
+						<li class="city-item">南平</li>
+						<li class="city-item">宁德</li>
+						<li class="city-item">南充</li>
+						<li class="city-item">怒江傈僳族</li>
+						<li class="city-item">那曲</li>
+						<li class="city-item">林芝</li>
+						<li class="city-item">内江</li>
+						<li class="city-item">南川</li>
+					</ul>
+					<ul id="P" class="table mui-table-view">
+						<h4>P</h4>
+						<li class="city-item">平潭</li>
+						<li class="city-item">莆田</li>
+						<li class="city-item">盘锦</li>
+						<li class="city-item">平顶山</li>
+						<li class="city-item">濮阳</li>
+						<li class="city-item">攀枝花</li>
+						<li class="city-item">平凉</li>
+						<li class="city-item">萍乡</li>
+						<li class="city-item">普洱</li>
+						<li class="city-item">平湖</li>
+						<li class="city-item">平阳</li>
+					</ul>
+					<ul id="Q" class="table mui-table-view">
+						<h4>Q</h4>
+						<li class="city-item">黔江</li>
+						<li class="city-item">青岛</li>
+						<li class="city-item">泉州</li>
+						<li class="city-item">秦皇岛</li>
+						<li class="city-item">齐齐哈尔</li>
+						<li class="city-item">七台河</li>
+						<li class="city-item">清远</li>
+						<li class="city-item">钦州</li>
+						<!--<li class="city-item">黔西南布依族苗族</li>
+						<li class="city-item">黔南布依族苗族</li>-->
+						<li class="city-item">曲靖</li>
+						<li class="city-item">庆阳</li>
+						<!--<li class="city-item">黔东南苗族侗族</li>-->
+						<li class="city-item">衢州</li>
+						<li class="city-item">琼海</li>
+						<li class="city-item">曲阜</li>
+						<li class="city-item">琼中</li>
+						<li class="city-item">綦江</li>
+					</ul>
+					<ul id="R" class="table mui-table-view">
+						<h4>R</h4>
+						<li class="city-item">日照</li>
+						<li class="city-item">日喀则</li>
+						<li class="city-item">瑞安</li>
+					</ul>
+					<ul id="S" class="table mui-table-view">
+						<h4>S</h4>
+						<li class="city-item">什邡</li>
+						<li class="city-item">上海</li>
+						<li class="city-item">深圳</li>
+						<li class="city-item">苏州</li>
+						<li class="city-item">沈阳</li>
+						<li class="city-item">三亚</li>
+						<li class="city-item">汕头</li>
+						<li class="city-item">石家庄</li>
+						<li class="city-item">绍兴</li>
+						<li class="city-item">朔州</li>
+						<li class="city-item">四平</li>
+						<li class="city-item">双鸭山</li>
+						<li class="city-item">绥化</li>
+						<li class="city-item">宿迁</li>
+						<li class="city-item">宿州</li>
+						<li class="city-item">三明</li>
+						<li class="city-item">石狮</li>
+						<li class="city-item">上饶</li>
+						<li class="city-item">三门峡</li>
+						<li class="city-item">商丘</li>
+						<li class="city-item">十堰</li>
+						<li class="city-item">随州</li>
+						<li class="city-item">邵阳</li>
+						<li class="city-item">韶关</li>
+						<li class="city-item">汕尾</li>
+						<li class="city-item">遂宁</li>
+						<li class="city-item">山南</li>
+						<li class="city-item">石嘴山</li>
+						<li class="city-item">商洛</li>
+						<li class="city-item">松原</li>
+						<li class="city-item">石河子</li>
+					</ul>
+					<ul id="T" class="table mui-table-view">
+						<h4>T</h4>
+						<li class="city-item">滕州</li>
+						<li class="city-item">铜梁</li>
+						<li class="city-item">天津</li>
+						<li class="city-item">太原</li>
+						<li class="city-item">唐山</li>
+						<li class="city-item">台州</li>
+						<li class="city-item">泰州</li>
+						<li class="city-item">泰安</li>
+						<li class="city-item">通辽</li>
+						<li class="city-item">铁岭</li>
+						<li class="city-item">通化</li>
+						<li class="city-item">铜陵</li>
+						<li class="city-item">铜仁</li>
+						<li class="city-item">铜川</li>
+						<li class="city-item">天水</li>
+						<li class="city-item">吐鲁番</li>
+						<li class="city-item">塔城</li>
+						<li class="city-item">塘沽</li>
+						<li class="city-item">屯昌</li>
+						<li class="city-item">太仓</li>
+						<li class="city-item">天长</li>
+					</ul>
+					<ul id="W" class="table mui-table-view">
+						<h4>W</h4>
+						<li class="city-item">乌苏</li>
+						<li class="city-item">武汉</li>
+						<li class="city-item">吴江</li>
+						<li class="city-item">无锡</li>
+						<li class="city-item">温州</li>
+						<li class="city-item">威海</li>
+						<li class="city-item">潍坊</li>
+						<li class="city-item">芜湖</li>
+						<li class="city-item">乌海</li>
+						<li class="city-item">乌兰察布</li>
+						<li class="city-item">梧州</li>
+						<!--<li class="city-item">文山壮族苗族</li>-->
+						<li class="city-item">渭南</li>
+						<li class="city-item">武威</li>
+						<li class="city-item">吴忠</li>
+						<li class="city-item">乌鲁木齐</li>
+						<li class="city-item">五指山</li>
+						<li class="city-item">文昌</li>
+						<li class="city-item">万宁</li>
+						<li class="city-item">武夷山</li>
+						<li class="city-item">婺源</li>
+						<li class="city-item">万州</li>
+					</ul>
+					<ul id="X" class="table mui-table-view">
+						<h4>X</h4>
+						<li class="city-item">西安</li>
+						<li class="city-item">西宁</li>
+						<li class="city-item">厦门</li>
+						<li class="city-item">徐州</li>
+						<li class="city-item">湘潭</li>
+						<li class="city-item">许昌</li>
+						<li class="city-item">咸阳</li>
+						<li class="city-item">邢台</li>
+						<li class="city-item">忻州</li>
+						<li class="city-item">兴安</li>
+						<li class="city-item">锡林郭勒</li>
+						<li class="city-item">宣城</li>
+						<li class="city-item">新余</li>
+						<li class="city-item">新乡</li>
+						<li class="city-item">信阳</li>
+						<li class="city-item">襄阳</li>
+						<li class="city-item">咸宁</li>
+						<!--<li class="city-item">湘西土家族苗族</li>
+						<li class="city-item">西双版纳傣族</li>-->
+						<li class="city-item">香港</li>
+						<li class="city-item">象山</li>
+					</ul>
+					<ul id="Y" class="table mui-table-view">
+						<h4>Y</h4>
+						<li class="city-item">杨陵</li>
+						<li class="city-item">银川</li>
+						<li class="city-item">烟台</li>
+						<li class="city-item">盐城</li>
+						<li class="city-item">扬州</li>
+						<li class="city-item">宜昌</li>
+						<li class="city-item">岳阳</li>
+						<li class="city-item">兖州</li>
+						<li class="city-item">阳泉</li>
+						<li class="city-item">运城</li>
+						<li class="city-item">营口</li>
+						<li class="city-item">延边朝鲜族</li>
+						<li class="city-item">伊春</li>
+						<li class="city-item">鹰潭</li>
+						<li class="city-item">宜春</li>
+						<li class="city-item">益阳</li>
+						<li class="city-item">永州</li>
+						<li class="city-item">阳江</li>
+						<li class="city-item">云浮</li>
+						<li class="city-item">玉林</li>
+						<li class="city-item">宜宾</li>
+						<li class="city-item">玉溪</li>
+						<li class="city-item">延安</li>
+						<li class="city-item">榆林</li>
+						<li class="city-item">玉树藏族</li>
+						<li class="city-item">伊犁哈萨克</li>
+						<li class="city-item">雅安</li>
+						<li class="city-item">义乌</li>
+						<li class="city-item">阳朔</li>
+						<li class="city-item">仪征</li>
+						<li class="city-item">宜兴</li>
+						<li class="city-item">乐清</li>
+						<li class="city-item">余姚</li>
+						<li class="city-item">永康</li>
+						<li class="city-item">永川</li>
+					</ul>
+					<ul id="Z" class="table mui-table-view">
+						<h4>Z</h4>
+						<li class="city-item">郑州</li>
+						<li class="city-item">中山</li>
+						<li class="city-item">舟山</li>
+						<li class="city-item">镇江</li>
+						<li class="city-item">淄博</li>
+						<li class="city-item">漳州</li>
+						<li class="city-item">株洲</li>
+						<li class="city-item">湛江</li>
+						<li class="city-item">枣庄</li>
+						<li class="city-item">张家口</li>
+						<li class="city-item">涿州</li>
+						<li class="city-item">周口</li>
+						<li class="city-item">驻马店</li>
+						<li class="city-item">珠海</li>
+						<li class="city-item">肇庆</li>
+						<li class="city-item">自贡</li>
+						<li class="city-item">遵义</li>
+						<li class="city-item">昭通</li>
+						<li class="city-item">张掖</li>
+						<li class="city-item">张家界</li>
+						<li class="city-item">中卫</li>
+						<li class="city-item">资阳</li>
+						<li class="city-item">张家港</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="search-page" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>电影活动
+				</button>
+				<h1 class="mui-center mui-title">活动搜索</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-input-row mui-search margin-10">
+					<input id="search-input" type="search" class="mui-input-clear" placeholder=" 想看什么? " style="background-color: white;">
+				</div>
+
+				<ul id="search_result" class="mui-table-view margin-10" style="top: -15px;">
+
+				</ul>
+			</div>
+		</div>
+
+		<!--模块列表 start-->
+		<script id="catelog_item" type="text/html">
+			{{each list as value i }}
+			<li class="catelog-item catelog-image row end-span bottom-span" style="background-image: url(__IMG__/nanqi/{{value.url}});">
+				<div class="id hidden">{{value.id}}</div>
+				<div class="row middle-span catelog-item-activity-1">
+					<div class="catelog-item-activity-1-count">{{value.activity_count}}</div>
+					<span class="catelog-item-activity-1-label">场活动</span>
+				</div>
+				<div class="row catelog-item-activity-2">
+					<div class="col-span-12 catelog-item-activity-2-title">{{value.title}}</div>
+					<div class="col-span-12 row middle-span catelog-item-activity-2-subtitle">{{value.subtitle}}</div>
+				</div>
+			</li> 
+			{{/each}}
+		</script>
+
+		<script id="result_item" type="text/html">
+			{{each list as value i}}
+			<li class="mui-table-view-cell row between-span nopadding">
+				<div class="movie_id hidden">{{value.id}}</div>
+				<div class="movie_title">{{value.title}}</div>
+				<div class="fs0-8">{{value.activity_total_count}}个活动</div>
+			</li>
+			{{/each}}
+		</script>
+
+		<script id="result_none" type="text/html">
+			<li class="mui-table-view-cell" style="color:lightgray;">
+				暂无搜索结果
+			</li>
+		</script>
+
+		<script id="activity_list_item" type="text/html">
+			<!--第一个选项卡内容区-->
+			<!--活动列表-->
+			{{each list as value index}}
+			<li class="mui-table-view-cell activity-list-item-li">
+				<div class="hidden aid">{{value.aid}}</div>
+				<div class="hidden title">{{value.title}}</div>
+				<div class="hidden latitude">{{value.latitude}}</div>
+				<div class="hidden longitude">{{value.longitude}}</div>
+				<div class="row activity-list-item-1">
+					<div class="row-span-12 activity-list-item-1-1">
+						<span class="row-span-5 fs1-2 nopadding">{{value.money | convert_money}}</span>
+						<span class="row-span-5 fs0-8">元/人</span>
+					</div>
+					<div class="activity-list-item-1-2" style="background: url({{value.avatar}});background-size:100% 100%;">
+					</div>
+				</div>
+				<div class="activity-list-item-2">
+					<img data-lazyload="{{value.picture}}" src="__IMG__/app/loading.jpg" class="activity-list-item-2-1">
+				</div>
+				<div class="col row-span-12 activity-list-item-3">
+					<div class="row row-span-12 nopadding activity-list-item-3-1">
+						<span class="fs1-2 activity-list-item-3-1-1">{{value.title}}</span>
+					</div>
+					<div class="row row-span-12 nopadding fs0-8">
+						<div class="row nopadding middle-span">
+							<span class="activity-list-item-3-2-0 activity-list-item-3-2-1"></span>
+							<span class="activity-list-item-3-2-2">{{value.movie_name}}</span>
+						</div>
+						<div class="row nopadding middle-span fs0-8 ">
+							<span class="activity-list-item-3-2-0 activity-list-item-3-2-3"></span>
+							<span class="activity-list-item-3-2-2">{{value.starttime | dateFormat:'MM月dd日 hh:mm'}} 至 {{value.endtime | dateFormat:'MM月dd日 hh:mm'}}</span>
+						</div>
+					</div>
+					<div class="row row-span-12 nopadding fs0-8 ">
+						<span class="activity-list-item-3-2-0 activity-list-item-3-3-1"></span>
+						<span class="activity-list-item-3-3-2">{{value.address}}</span>
+					</div>
+				</div>
+			</li>
+			{{/each}}
+		</script>
+
+		<!--模块列表 end-->
+		<!--框架载入start-->
+		<script src="__JS__/mui.min.js?d=1"></script>
+		<script src="//cdn.myline.cc/nanqi/mui/1.8.0/js/mui.view.js"></script>
+		<script src="__JS__/sea.js "></script>
+		<script src="__STATIC__/jquery-1.10.2.min.js"></script>
+		<!--框架载入end-->
+
+
+		<!--业务逻辑start-->
+		<script type="text/javascript" charset="utf-8">
+			seajs.config({
+				base: "__JS__",
+				alias: {
+					"catalog": 'controller/movie/catalog',
+					"template": "template",
+					"common": "util/common",
+					"views": "config/views",
+					"navigate": "util/navigate",
+					"lazyload": "lazyload",
+					"user": "config/user",
+					"net": "util/net",
+					"server": "config/server",
+					"pullToRefresh": "pullToRefresh",
+					"convert": "util/convert"
+				}
+			});
+			seajs.use([
+				"catalog",
+				"template",
+				"common",
+				"views",
+				"navigate",
+				"user",
+				"net",
+				"server",
+				"pullToRefresh",
+				"lazyload",
+				"convert"
+			], function(app, template, common, views, navigate, user, net, server, pullToRefresh, lazyload, convert) {
+				/**定义变量 start */
+				var pulldown;
+				var lazyLoadApi; //懒加载操作
+				var subject_id;
+				var movie_id;
+				/**	定义变量	end**/
+				/**	页面相关功能  start**/
+				var fun = (function(fun) {
+					fun.loadCatalog = function() {
+						var uid = user.getUserData(user.userid);
+						var city = user.getUserData(user.city);
+						net.send({
+							server: server.activity.getSubjectList,
+							params: {
+								uid: uid,
+								city: city
+							},
+							success: fun.loadCatalogSuccess
+						})
+					},
+					/**
+					 * 加载活动目录数据
+					 */
+					fun.loadCatalogSuccess = function(data) {
+						mui.each(data, function(index, item) {
+							if (item.subtitle.length > 12) {
+								item.subtitle = item.subtitle.substr(0, 13) + "...";
+							}
+						});
+						var html = template('catelog_item', {
+							list: data
+						});
+						var items = common.parseDom(html);
+						var ul = document.getElementById("subject_list");
+						ul.innerHTML = "";
+						mui.each(items, function(index, item) {
+							ul.appendChild(item);
+						});
+						if (pulldown) {
+							mui.toast("更新成功");
+							pulldown.endPullDownToRefresh();
+							pulldown = null
+						}
+					};
+					/**
+					 * 加载活动分类
+					 */
+					fun.loadActivity = function(sid) {
+						subject_id = sid;
+						fun.getActivity();
+						viewApi.go('#activityList');
+					};
+
+					/**
+					 * 获取活动数据
+					 */
+					fun.getActivity = function() {
+						//获取用户所在城市
+						var city = user.getUserData(user.city);
+						//传入非空验证
+						if (!movie_id && !subject_id) {
+							return;
+						}
+						//请求活动数据
+						net.send({
+							server: subject_id ? server.activity.getactivitybysubject : server.activity.getactivitybymovie,
+							params: {
+								city: city,
+								sid: subject_id,
+								mid: movie_id
+							},
+							success: fun.getActivitysuccess,
+							failure: fun.getActivityfailure
+						});
+					};
+
+					
+
+					/**
+					 * 获取活动数据
+					 */
+					fun.getActivitysuccess = function(data) {
+						if(data.length==0){
+							document.getElementById("empty_act_list_item").classList.remove("hidden");
+						}else{
+							document.getElementById("empty_act_list_item").classList.add("hidden");
+						}
+						//更新活动列表查询结果
+						activity_list = data
+						
+						//更新list活动数据
+						var list_html = template("activity_list_item", {
+							list: data
+						});
+						var list = document.getElementById("activity_list");
+						list.innerHTML = "";
+						var items_list = common.parseDom(list_html);
+						mui.each(items_list, function(index, item) {
+							list.appendChild(item);
+						});
+						//懒加载刷新
+						lazyLoadApi.refresh(true);
+					};
+					/**
+					 * 获取活动失败回调
+					 */
+					fun.getActivityfailure = function() {
+						mui.toast('获取活动失败');
+					};
+
+					/**
+					 * 获取活动数据
+					 */
+					fun.get_activity_list_by_weixin = function() {
+						//获取用户所在城市
+						var city = user.getUserData(user.city);
+						
+						//请求活动数据
+						net.send({
+							server: {
+								controller: 'activity',
+								action: 'get_list_by_weixin'
+							},
+							params: {
+								city: city,
+							},
+							success: fun.get_activity_list_by_weixin_success,
+						});
+					};
+					/**
+					 * 加载活动数据
+					 */
+					fun.get_activity_list_by_weixin_success = function(data) {
+						if(data.length==0){
+							document.getElementById("empty_act_list_item").classList.remove("hidden");
+						}else{
+							document.getElementById("empty_act_list_item").classList.add("hidden");
+						}
+						//更新活动列表查询结果
+						activity_list = data
+						
+						//更新list活动数据
+						var list_html = template("activity_list_item", {
+							list: data
+						});
+						var list = document.getElementById("activity_list");
+						list.innerHTML = "";
+						var items_list = common.parseDom(list_html);
+						mui.each(items_list, function(index, item) {
+							list.appendChild(item);
+						});
+						//懒加载刷新
+						lazyLoadApi.refresh(true);
+					};
+
+					/**
+					 * 打开活动详情
+					 */
+					fun.openDetail = function() {
+						var aid = this.querySelector(".aid").innerText;
+
+						window.location.href = '/Weixin/activitys/' + aid;
+					};
+
+					fun.selectABC = function() {
+						var id = this.innerText;
+						var item = document.getElementById(id);
+						window.item = item;
+						if (item) {
+							mui.scrollTo(item.offsetTop, 100);
+						}
+					};
+					fun.selcetCity = function() {
+						var city = this.innerHTML||this.value;
+						
+						city_change && city_change(city);
+						
+						mui.back();
+					};
+					fun.positionCity = function  () {
+						localcity = user.getUserData(user.localcity); //用户所在城市
+						document.querySelector('.city-item').value=localcity;
+					};
+
+					/**
+					 * 进行电影搜索
+					 * @param {Object} str
+					 */
+					fun.search = function(str) {
+						net.send({
+							server: server.movie.getMovieList,
+							params: {
+								city: user.getUserData(user.city),
+								title: str
+							},
+							success: fun.updateRestult,
+							failure: fun.failResult,
+							callback: function() {
+							}
+						})
+					};
+					/**
+					 * 更新搜索结果
+					 * @param {Object} data
+					 */
+					fun.updateRestult = function(data) {
+						if (!data) {
+							fun.failResult();
+							return;
+						}
+						mui.each(data, function(index, item) {
+							if (item.title.length > 14) {
+								item.title = item.title.substr(0, 14) + "...";
+							}
+						})
+						var html = template('result_item', {
+							list: data
+						});
+						document.getElementById("search_result").innerHTML = html;
+					};
+					fun.failResult = function() {
+						var html = template('result_none', {});
+						document.getElementById("search_result").innerHTML = html;
+					};
+					/**
+					 * 清空搜索结果
+					 */
+					fun.clearResult = function() {
+						document.getElementById("search_result").innerHTML = '';
+					};
+
+					return fun;　　
+				})(fun || {});
+
+				
+				/** 页面相关功能逻辑  end**/
+				/** 页面主逻辑 start **/
+
+				wx.ready(function () {
+					wx.getLocation({
+					    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+					    success: function (res) {
+					        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+					        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+					        var speed = res.speed; // 速度，以米/每秒计
+					        var accuracy = res.accuracy; // 位置精度
+
+					        var script = document.createElement("script");  
+							script.src = 'http://api.map.baidu.com/geocoder/v2/?ak=5024db5cbf5ee86ce222dcf71bd5e11e&location=' + latitude + ',' + longitude + '&output=json&pois=0&coordtype=wgs84ll&callback=renderReverse';
+							document.body.appendChild(script);  
+					    }
+					});
+				});
+
+
+
+				//mui初始化
+				mui.init();
+				//
+				city_change = function(city) {
+					        	
+					var origin = user.getUserData(user.city);
+
+					if (city != origin) {
+						user.setUserData(user.city, city);
+
+						document.getElementById("current-city").innerHTML = city;
+						document.getElementById("location-city").value = city;
+
+			        	fun.get_activity_list_by_weixin();
+					}
+		        };
+
+		        //user.setUserData(user.city, '西安');
+
+				document.getElementById("current-city").innerHTML = user.getUserData(user.city);
+	        	fun.get_activity_list_by_weixin();
+				
+				//初始化懒加载
+				lazyLoadApi = mui("#activity_list").imageLazyload({
+					autoDestroy: false
+				});
+				//初始化单页view
+				var viewApi = mui('#main-view').view({
+					defaultPage: '#activityList'
+				});
+				//初始化单页的区域滚动
+				mui('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+
+				var view = viewApi.view;
+				(function($) {
+					//处理view的后退与webview后退
+					var oldBack = $.back;
+					$.back = function() {
+						if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+							viewApi.back();
+						} else { //执行webview后退
+							oldBack();
+						}
+					};
+				})(mui);
+
+				view.addEventListener('pageBeforeShow', function(e) {
+					if (e.detail.page.id == 'activityList') {
+						mui('#search-button')[0].classList.remove('hidden');
+					}
+					else {
+						mui('#search-button')[0].classList.add('hidden');
+					}
+				});
+
+				mui(".abc").on("tap", "div", fun.selectABC);
+				mui("#city-location").on("tap", ".city-item", fun.selcetCity);
+
+				document.getElementById("city-button").addEventListener('tap', function(e) {
+					$('#location-city').val(user.getUserData(user.city));
+					viewApi.go('#city-location');
+				})
+				//击查找搜索框，查找电影
+				document.getElementById("search-button").addEventListener('tap', function(e) {
+					viewApi.go('#search-page');
+				})
+
+				var timeId = 0;
+				document.getElementById("search-input").addEventListener("input", function(e) {
+					var str = e.target.value.trim();
+					if (!!str) {
+						if (timeId) {
+							clearTimeout(timeId);
+							timeId = 0;
+						}
+						timeId = setTimeout(function() {
+							fun.search(str);
+						}, 500);
+					} else {
+						clearTimeout(timeId);
+						fun.clearResult();
+					}
+				});
+				//点击清除按钮
+				mui(".mui-icon.mui-icon-clear")[0].addEventListener("tap", function() {
+					fun.clearResult();
+				});
+				//点击跳转电影详情
+				mui('#search_result').on("tap", 'li', function(e) {
+					movie_id = this.querySelector('.movie_id').innerText;
+					fun.getActivity();
+					viewApi.go('#activityList');
+				});
+				
+				//点击分类目录跳转活动中心
+				mui('#subject_list').on('tap', 'li', function(e) {
+					var id = this.querySelector('.id').innerText.trim();
+					fun.loadActivity(id);
+				});
+
+				mui("#activity_list").on("tap", ".mui-table-view-cell", fun.openDetail);
+
+				
+
+				var recruit = mui(".mui-scroll")[0];
+				mui(recruit).pullToRefresh({
+					down: {
+						callback: function() {
+							pulldown = this;
+							fun.loadCatalog();
+							setTimeout(function() {
+								if (pulldown) {
+									pulldown.endPullDownToRefresh();
+									pulldown = null;
+								}
+							}, 10000);
+						}
+					}
+				});
+				
+				fun.positionCity();
+			});
+		</script>
+		<!--业务逻辑end-->
+	</body>
+
+</html>

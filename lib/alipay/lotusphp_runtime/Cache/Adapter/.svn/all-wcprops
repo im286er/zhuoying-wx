@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter
+END
+CacheAdapterMemcached.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterMemcached.php
+END
+CacheAdapterEAccelerator.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterEAccelerator.php
+END
+CacheAdapterPhps.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterPhps.php
+END
+CacheAdapterXcache.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterXcache.php
+END
+CacheAdapter.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapter.php
+END
+CacheAdapterFile.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterFile.php
+END
+CacheAdapterMemcache.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterMemcache.php
+END
+CacheAdapterApc.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/lotusphp_runtime/Cache/Adapter/CacheAdapterApc.php
+END

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<link href="__CSS__/party.css" rel="stylesheet" type="text/css"/>-->
+    <link href="__CSS__/party.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>7.25 捉影宠物电影专场活动</title>
+    <link href="__STATIC__/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="__STATIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+
+    <style type="text/css">
+        body
+        {
+            background-image: url('__IMG__/snw_10.jpg');
+            background-size: 100% 100%;
+        }
+
+        a {
+            color: #e2e2e2;
+        }
+        a:hover {
+            color: #e2e2e2;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <dl style="color: #e2e2e2;font-size: 16px">
+        <dt>咨询电话：</dt>
+        <dd>183-0292-3357</dd>
+        <dt>活动费用：</dt>
+        <dd>9.9元/位</dd>
+    </dl>
+    <div class="row-fluid" style="color: #e2e2e2">
+        <p>活动总人数{$party.cnttotal}位/当前剩余{$party.cntremain}位</p>
+    </div>
+    <form id="payform">
+        <div class="row-fluid">
+            <input class="input-block-level" type="text" id="nickname" name="nickname" placeholder="姓名">
+        </div>
+        <div class="row-fluid">
+            <input class="input-block-level" type="text" id="phonenumber" name="phonenumber" placeholder="手机号">
+        </div>
+        <div class="row-fluid">
+            <label class="checkbox" style="color: #e2e2e2;">
+                <input type="checkbox" id="is_carry" name="is_carry">是否携带宠物入场
+            </label>
+        </div>
+        <div class="row-fluid">
+            <input class="input-block-level" type="text" id="pet_type" name="pet_type" placeholder="宠物类别（如猫、狗、乌龟等）">
+        </div> 
+        <div class="row-fluid">
+            <select class="input-block-level" name="pet_sex">
+                <option value="0">选择宠物性别</option>
+                <option value="1">小公主</option>
+                <option value="2">小王子</option>
+            </select>
+            <!-- <input class="input-block-level" type="text" id="pet_sex" name="pet_sex" placeholder="宠物性别（如小公主，小王子等）"> -->
+        </div>
+        <div class="row-fluid">
+            <input type="hidden" name="openid" value="{$openid}">
+            <button class="btn btn-block btn-primary" id="btnPay" type="button">报名并支付</button>
+        </div>
+    </form>
+    <script type="text/javascript">
+
+        //调用微信JS api 支付
+        function jsApiCall(para) {
+            WeixinJSBridge.invoke('getBrandWCPayRequest', JSON.parse(para), function(res){
+                if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                    // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                    WeixinJSBridge.invoke('closeWindow',{},function(res){});
+                }
+            });
+        }
+
+        function callPay() {
+            var postData = $("#payform").serializeArray();
+            $.ajax({
+                url:"{:U('getPayParameters')}",
+                type:'POST',
+                dataType:'json',
+                async:false,
+                data:postData,
+                success : function(data) {
+                    if (data.success) {
+                        jsApiCall(data.data);
+                    }
+                    else {
+                        alert(data.errmsg);
+                    }
+                }
+            });
+        }
+
+        $(function(){
+            $('#btnPay').click(function(){
+                if (typeof WeixinJSBridge == "undefined"){
+                    if( document.addEventListener ){
+                        document.addEventListener('WeixinJSBridgeReady', callPay, false);
+                    }else if (document.attachEvent){
+                        document.attachEvent('WeixinJSBridgeReady', callPay);
+                        document.attachEvent('onWeixinJSBridgeReady', callPay);
+                    }
+                }else{
+                    callPay();
+                }
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title cf">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <li><a href="{:U('edit?id='.$nid)}">基 本</a></li>
+            <li><a href="{:U('editParty?nid='.$nid)}">活 动</a></li>
+            <li class="current"><a href="javascript:void(0);">电 影</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="cf">
+                <div class="fl">
+                    <a class="btn" href="{:U('addNewsMovie?nid='.$nid)}">新 增</a>
+                    <button class="btn ajax-post confirm" url="{:U('deleteNewsMovie?nid='.$nid)}" target-form="ids">删 除</button>
+                </div>
+            </div>
+
+            <!-- 数据列表 -->
+            <div class="data-table table-striped">
+                <table class="">
+                    <thead>
+                    <tr>
+                        <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                        <th class="">MID</th>
+                        <th class="">电影名称</th>
+                        <th class="">开始时间</th>
+                        <th class="">结束时间</th>
+                        <th class="">删除</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="_list" id="vo">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+                            <td>{$vo.mid} </td>
+                            <td>{$vo.mname}</td>
+                            <td><span>{$vo.starttime|time_format}</span></td>
+                            <td><span>{$vo.endtime|time_format}</span></td>
+                            <td>
+                                <a href="{:U('deleteNewsMovie?nid='.$nid.'&id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+        ';
+    </php>
+
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+        })
+
+    </script>
+</block>

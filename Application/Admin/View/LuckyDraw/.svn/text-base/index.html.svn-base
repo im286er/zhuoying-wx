@@ -1,0 +1,19 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>抽奖管理</h2>
+    </div>
+
+    <div class="fl">
+        <a class="btn" href="{:U('luckyDraw?id=1')}">开启第1轮抽奖</a>
+        <a class="btn" href="{:U('luckyDraw?id=2')}">开启第2轮抽奖</a>
+        <a class="btn" href="{:U('luckyDraw?id=3')}">开启第3轮抽奖</a>
+    </div>
+
+
+</block>
+
+<block name="script">
+</block>

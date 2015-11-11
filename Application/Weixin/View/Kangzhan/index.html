@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdn.myline.cc/nanqi/bootstrap-notify.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/style.css" />
+    <title>答题抢红包</title>
+    <style>
+        .xbtn{
+            width:30%;
+            height: 8%;
+            display: block;
+            position:absolute;
+            bottom: 20%;
+            left:38%;
+        }
+        #share{
+            width:100%;
+            height:100%;
+            display: block;
+            position: fixed;
+            top:0;
+            left:0;
+            background: rgba(100,100,100,0.6);
+            z-index: 9;
+        }
+    </style>
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false,
+            appId: '{$package["appid"]}',
+            timestamp: {$package["timestamp"]},
+            nonceStr: '{$package["nonceStr"]}',
+            signature: '{$package["signature"]}',
+            jsApiList: [
+                'hideOptionMenu',
+                'showOptionMenu',
+                'hideMenuItems',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'closeWindow',
+                'showMenuItems'
+            ]
+        });
+        $(function(){
+//            wx.showOptionMenu();
+
+
+            var title = '向刘烨、赵丽颖发起挑战，抗日知识答题！答完抢红包！！';
+            var desc = '拥抱和平！拥抱捉影！答题抢红包！';
+            var link = 'http://weixin.myline.cc/Weixin/kangzhan';
+            var imgUrl = 'http://file.myline.cc/kangzhan/kangzhan_cover.jpg';
+            setTimeout(function(){
+                wx.onMenuShareTimeline({
+                    title: title,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                        wx.closeWindow();
+                    },
+                    cancel: function () {
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                        wx.closeWindow();
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareQQ({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareWeibo({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareQZone({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+            },1000);
+
+
+        })
+    </script>
+</head>
+<body>
+<div class="background_img"><img src="http://file.myline.cc/kangzhan/index.jpg" width="100%" height="100%"/></div>
+<div class="xbtn"><a href="{:U('dati')}"><img src="http://file.myline.cc/kangzhan/start_btn.png" width="100%" height="100%"/></a></div>
+
+<div id="over" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 40px">
+                    <span>感谢您的参与！本活动已经结束！欢迎持续关注“捉影",更多精彩等着你哦！</span>
+                </div>
+            </div>
+            <!--<div class="modal-footer" style="padding: 0">-->
+                <!--<a class="btn btn-primary btn-block btn-lg" href="#" onclick="$('#over').modal('hide');share()" style="border-radius: 0px 0px 5px 5px">向好友发起挑战</a>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<div id="share" style="display: none;"><img src="http://file.myline.cc/kangzhan/share_text_img.png" width="100%"/></div>
+<script>
+    function stopPropagation(e) {
+        e = e || window.event;
+        if(e.stopPropagation) { //W3C阻止冒泡方法
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true; //IE阻止冒泡方法
+        }
+    }
+    function share(e)
+    {
+        stopPropagation(e);
+        $("#share").show();
+    }
+    $(function(){
+//        var has = '<?php echo $has;?>';
+//        if(has)
+//        {
+            $(".xbtn").hide();
+            $('.modal').on('show.bs.modal', function(){
+                var $this = $(this);
+                var $modal_dialog = $this.find('.modal-dialog');
+                $this.css('display', 'block');
+
+                $('.modal-footer').css('opacity', '1');
+                $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+            });
+            $('#over').modal({
+                'backdrop': 'static',
+                'show': true
+            });
+//        }
+
+
+        $(document).click(function(){
+            $("#share").hide();
+            $('.modal').on('show.bs.modal', function(){
+                var $this = $(this);
+                var $modal_dialog = $this.find('.modal-dialog');
+                $this.css('display', 'block');
+
+                $('.modal-footer').css('opacity', '1');
+                $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+            });
+            $('#over').modal({
+                'backdrop': 'static',
+                'show': true
+            });
+        });
+
+    })
+</script>
+</body>
+</html>

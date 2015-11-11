@@ -1,0 +1,10 @@
+handle:
+  - rewrite: if(!is_dir() && !is_file() && path~"^(.*)$") goto "index.php/$1"
+cron:
+  - description: 每隔5分钟调度一次,现在用在一些过期的处理上
+    url: /api/cron/schedule5
+    schedule: "*/5 * * * *"
+ cron:
+  - description: 每天18点调度一次,用于从豆瓣上面获取新的热映电影
+    url: /api/cron/intheatermovie
+    schedule: "0 4 * * *"    

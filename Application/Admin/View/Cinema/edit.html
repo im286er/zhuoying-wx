@@ -1,0 +1,102 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title cf">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="tab-wrap">
+
+        <div class="tab-content">
+            <form action="{:U()}" method="post" class="form-horizontal">
+                <!-- 基本 -->
+                <div class="form-item">
+                    <label class="item-label">影院名称<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-large" name="cname" value="{$info.cname|default=''}">
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label class="item-label">地址<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-large" name="address" value="{$info.address|default=''}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">评分<span class="check-tips">（影院评分，1-10之间的浮点数）</span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-small" name="ratingstar" value="{$info.ratingstar|default=''}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">电话1<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-small" name="tel1" value="{$info.tel1}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">电话2<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-small" name="tel2" value="{$info.tel2}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">门店简介<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-large" name="synopsis" value="{$info.synopsis|default=''}">
+                    </div>
+                </div>
+
+
+                <div class="form-item" style="margin-top: 20px">
+                    <input type="hidden" name="id" value="{$info.id|default=''}">
+                    <button class="btn submit-btn ajax-post" id="submit1" type="submit"
+                            target-form="form-horizontal">确 定
+                    </button>
+                    <button class="btn btn-return" onclick="javascript:location.href='{:U('index')}';return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+        ';
+    </php>
+
+    <link href="__STATIC__/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="__STATIC__/EasyUI/themes/icon.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+        Think.setValue("pstate", {$info.pstate|default=0});
+
+        $(function () {
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+
+            showTab();
+        })
+
+    </script>
+</block>

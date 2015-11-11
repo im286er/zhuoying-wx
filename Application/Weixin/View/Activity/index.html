@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>{$activity['title']}</title>
+    <link href="__CSS__/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__CSS__/index.css" />
+    <link rel="stylesheet" href="__CSS__/layout.css" />
+
+    <link rel="stylesheet" href="__CSS__/index/index.css" />
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false,
+            appId: '{$package["appid"]}',
+            timestamp: {$package["timestamp"]|default=0},
+            nonceStr: '{$package["nonceStr"]}', 
+            signature: '{$package["signature"]}',
+            jsApiList: [
+                'chooseImage',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'uploadImage',
+                'hideMenuItems',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'closeWindow',
+                'getLocation',
+                'showMenuItems'
+            ]
+        });
+
+        wx.ready(function() {
+            var title = "你的好友邀请你参加捉影的电影活动【{$activity['title']}】";
+            var desc = "快来参加【{$activity['title']}】，还有{$activity['upper'] - $activity['anumber']}个名额，再不下手就晚了。";
+            var link = "http://weixin.myline.cc/weixin/activitys/{$activity['id']}";
+            var imgUrl = 'http://file.myline.cc/zhuoying-logo-100x100.png';
+
+            wx.showOptionMenu();
+
+            wx.onMenuShareTimeline({
+                title: title,
+                link: link,
+                imgUrl: imgUrl,
+                success: function () {
+                    sendCoupons();
+                },
+                cancel: function () {
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: title,
+                desc: desc,
+                link: link,
+                imgUrl: imgUrl,
+                success: function () {
+                    sendCoupons();
+                },
+                cancel: function () {
+                }
+            });
+
+            wx.onMenuShareQQ({
+                title: title,
+                desc: desc,
+                link: link,
+                imgUrl: imgUrl,
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+
+            wx.onMenuShareWeibo({
+                title: title,
+                desc: desc,
+                link: link,
+                imgUrl: imgUrl,
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+
+            wx.onMenuShareQZone({
+                title: title,
+                desc: desc,
+                link: link,
+                imgUrl: imgUrl,
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+        });
+
+        function sendCoupons() {
+
+            var user_id = "{$activity['uid']}";
+            if (user_id == '10012') {
+                var aid = $("#pay_aid").val();
+                var openid = $("#pay_openid").val();
+                var unionid = $("#pay_unionid").val();
+
+                $.ajax({
+                    url:"{:U('sendCoupons')}",
+                    type:'POST',
+                    dataType:'json',
+                    async:false,
+                    data: {aid:aid, openid:openid, unionid:unionid},
+                    success : function(result) {
+                        if (result.status == 'true') {
+
+                            var subscribe = $('#subscribe').val();
+                            if (subscribe == '1') {
+                                wx.closeWindow();
+                            }
+                            else {
+                                location.href = "http://weixin.myline.cc/weixin/user/coupons?aid={$activity['id']}";
+                            }
+                        }
+                        else {
+                            mui.toast(result.errcode);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+
+    <style>
+        .mui-icon {
+            font-size: 30px;
+            margin-top: 10px;
+            margin-left:2%;
+        }
+        .mui-btn-block{
+            margin-bottom: 0px;
+            padding: 0.938rem 0;
+            /*position: fixed;*/
+            /*bottom: 0px;*/
+            /*left: 0px;*/
+            border-radius: 0px;
+            font-weight: bold;
+        }
+        .mui-btn-blue{
+            border: 0;
+            background-color: #FF5715;
+        }
+        .pa-content{
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            min-height: 60px;
+            margin-top: 15px;
+            color:#5b5b5b;
+            line-height: 34px;
+        }
+        .icons-css{
+            width: 40%;
+            height: 40%;
+            position: relative;
+            top: -2%;
+        }
+        .icons-css-right{
+             width: 9%;
+             height: 9%;
+             position: relative;
+             top: 2%;
+        }
+        .font-css{
+            font-size: 12px;
+            margin-top: -3px;
+        }
+        .font-css-right{
+            margin-top: -1px;
+            position: absolute;
+            padding-left:4px;
+        }
+        .mui-content-padded {
+            margin:0px;
+            background-color: #F0F0F0;
+        }
+        .pahead{
+            height: 18px;
+            width: 20px;
+            padding-top: 2px;
+        }
+        .activity-add-users ul {
+            list-style: none;
+            margin-left:-9%;
+        }
+        .activity-add-users ul li {
+            display: inline-block;
+            vertical-align: top;
+            width: 19%;
+            margin: 0;
+        }
+        .activity-user-img {
+            background-repeat: no-repeat;
+            height: 40px;
+            width: 40px;
+            background-size: 100% auto;  
+            border-radius: 100%;
+        }
+        .activity-user-font {
+            font-size: 15px;
+            margin-left:-1%;
+        }
+        .activity-add-users-img {
+            background-repeat: no-repeat;
+            height: 47px;
+            width: 47px;
+            background-size: 100% 100%;
+            margin: 0 auto;
+            border-radius: 100%;
+            margin-top: 0px;
+        }
+        .more-button{
+            margin-top: 84px;
+        }
+        .modify-phone{
+            border: 1px solid #FF5715;
+            color: #FF5715;
+            height: 36px;
+            width: 120px;
+            text-align: center;
+            border-radius: 4px;
+            padding-top: 7px;
+            font-weight: 500;
+            font-size: 14px;
+            margin: 0 auto;
+        }
+        .inner-font-img{
+            width: 76px;
+            height: 26px;
+            z-index: 10;
+            position: relative;
+            top: -37px;
+            color: #ffffff;
+            text-align: center;
+            padding-top: 3px;
+            font-size: 14px;
+            background-color: rgba(0,0,0,0.7);
+            opacity: 0.8;
+            box-shadow: 0 0 4px #5B5B5B;
+            margin-bottom: 0px;
+            padding-left: 2px;
+        }
+        .price-left{
+            position: absolute;
+            bottom: 25px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            height: 27px;
+            min-width: 92px;
+            padding-top: 3px;
+            padding-left: 6px;
+            box-shadow: 0 0 4px #5B5B5B;
+        }
+
+        .mui-popover{
+            margin-top: 10%;
+            width: 80%;
+            height: 40%;
+            border-radius: 0px;
+        }
+        .mui-popover .mui-popover-arrow:after {
+            width: 0px;
+            height: 0px;
+        }
+        .mui-input-group .mui-input-row {
+            height: 70px;
+        }
+        .headimg{
+            width: 100%;
+            height: 100%;
+            margin: 2% auto;
+        }
+        .backgroundShodow{
+            -webkit-filter: blur(2px);
+        }
+        .mui-content{
+            background-color: #B0B0B0;
+        }
+        </style>
+</head>
+
+<body id="main">
+  
+    <div class="mui-scroll-wrapper">
+        <div class="mui-scroll">
+           <div id="site_images_slider" class="mui-slider">
+                <div id="siteImage_slider_group" class="mui-slider-group" style="min-height: 220px;">
+                    <volist name="activity['content']" id="vo">
+                        <div class="mui-slider-item mui-slider-item-duplicate">
+                           <img src="{$vo.picture}" class="activity-list-item-2-1">
+                        </div>
+                    </volist>
+                </div>
+                <div style="position: absolute;right: 10px;bottom: 10px;color: white;" id="site_image_index">1/{$activity['content']|count}</div>
+                <div class="price-left row-span-12">
+                    <span class="row-span-6 fs1" style="padding-bottom: 15px;">RMB</span>
+                    <span class="row-span-6 fs1-2 nopadding" id="money">{$activity['money']|format_money}</span>
+                </div>
+            </div>
+            <form class="mui-input-group mui-content-padded" id="act_info_form">
+                <div class="col row-span-12 nopadding" style="background-color: #FFFFFF;">
+                    <div id='content-text' class="row-span-2 pa-content">{$activity['title']|format_content=15}</div>
+                    <div class="row-span-5 nopadding nomargin">
+                        <div class="col row-span-12 center-span nomargin nopadding">
+                            <div class="row-span-4 nopadding nomargin">
+                                <img id='senduserimg' style="border-radius: 100%; width:90px;height: 90px;margin-top:5px;border:solid 3px #ffffff;box-shadow: 0 0 8px #5B5B5B;" src="{$activity['avatar']|default='__IMG__/user/user.png'}" />
+                            </div>
+                            <div class="row-span-2 nopadding" style="color:#5b5b5b;margin-top:8px;">
+                                <span style="color:#B0B0B0">组织者：</span>
+                                <span style="color:#5b5b5b;" id='sendusername'>{$activity['nickname']}</span>
+                            </div>
+                            <div class="row-span-2 nopadding" style="margin-top:13px">
+                                <img class="pahead" src="__IMG__/activity/heart.png" />
+                                <img class="pahead" src="__IMG__/activity/heart.png" />
+                                <img class="pahead" src="__IMG__/activity/heart.png" />
+                                <!--<img class="pahead" src="__IMG__/activity/heart.png" />
+                                <img class="pahead" src="__IMG__/activity/heart.png" />
+                                -->
+                            </div>
+                            <div class="row-span-2 nopadding" style="margin-top:8px;">
+                                <a href="tel:{$activity['phone']}" id="callphone" class="mui-btn">
+                                    给他电话
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-span-5" style="background-color:#FFFFFF;height: 155px;color:#5b5b5b;margin-top:-5px;">
+                        <div class="row col-span-12 nopadding nomargin">
+                            <div id="tomovie" class="col-span-3 nopadding ">
+                                <div class="col row-span-12 nopadding nomargin">
+                                    <div class="row-span-6">
+                                        <img class="icons-css" style="width:53%;" src="__IMG__/activity/title_movie.png"/>
+                                    </div>
+                                    <div id='moviemname' class="hidden"></div>
+                                    <div id='mname' class="row-span-6 font-css">{$activity['movie_title']|format_content=10}</div>
+                                </div>
+                            </div>
+                            <div class="col-span-3 nopadding">
+                                <div class="col row-span-12 nopadding nomargin">
+                                    <div class="row-span-6">
+                                        <img class="icons-css" style="width:53%;" src="__IMG__/activity/title_time.png"/>
+                                    </div>
+                                    <div id='time' class="row-span-6 font-css">
+                                        {$activity['starttime']|date="m月d日
+                                        <br />
+                                        H:i",###}
+                                        至
+                                        {$activity['endtime']|date="m月d日
+                                        <br />
+                                        H:i",###}
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tomap" class="col-span-3 nopadding" style="width:34%;height: 34%;">
+                                <div class="col row-span-12 nopadding nomargin">
+                                    <div class="row-span-6">
+                                        <img class="icons-css" style="width:53%;" src="__IMG__/activity/title_address.png"/>
+                                    </div>
+                                    <div id="address" class="row-span-6 font-css">{$activity['address']|format_content=8}</div>
+                                </div>
+                            </div>
+                            <div class="col-span-3 nopadding">
+                                <div id='downperson' class="col row-span-12 nopadding nomargin">
+                                    <div class="row-span-6">
+                                        <img class="icons-css" style="width: 53%;" src="__IMG__/activity/title_men.png"/>
+                                    </div>
+                                    <div id='personnum' class="row-span-6 font-css">
+                                        余{$activity['upper'] - $activity['anumber']}位
+                                        <br/>
+                                        共{$activity['upper']}位
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div style="color:#5b5b5b;text-align: center;font-size: 17px;padding: 10px;margin-top:15px;">活动介绍</div>
+                <div id="activityIntro" style="color:#5b5b5b;font-size: 14px;margin: 2px 3%;padding-bottom: 20px;min-height: 60px;border-bottom-width: 100%;line-height: 27px; border-bottom: 1px solid #cccccc;margin-top:10px;">{$activity['intro']}</div>
+                <!--<div id='map' class="nopadding" style="height: 240px;background: #009BFF;    border-bottom: 1px solid darkgray;"></div>
+            -->
+            <div style="margin-top: 15px;">
+                <div id="addpersonId" style="color:#5b5b5b;text-align: center;font-size: 17px;padding: 5px;">
+                    <empty name="join_users">
+                        目前还未有人报名参加！
+                        <else />
+                        他们都参加了！<if condition="$join_users_count gt 9">(最近10人)</if>
+                    </empty>
+                </div>
+                <div class="activity-add-users">
+                    <ul id="list">
+                        <volist name="join_users" id="vo">
+                            <li>
+                                <div class="col row-span-12 center-span">
+                                    <div class="row-span-8 activity-add-users-img" style=" border:solid 1.5px #ffffff;box-shadow: 0 0 6px #5B5B5B;background-image: url({$vo.avatar|default='__IMG__/user/user.png'});"></div>
+                                    <span style="font-family: '微软雅黑';margin-top:6px;">{$vo.nickname}</span>
+                                    <div class="hidden">{$vo.id}</div>
+                                </div>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+               <!--  <div class="row col-span-12 more-button center-span">
+                    <notempty name="join_users">
+                        <div id="show-all-button" style="text-align: center;" class="modify-phone nopadding">
+                            <span>查看全部</span>
+                        </div>
+                    </notempty>
+                </div> -->
+            </div>
+            <notempty name="same_activitys">
+            <div id='activitystitle' style="color:#5b5b5b;text-align: center;font-size: 17px;padding: 10px;margin: 15px auto;">相似活动</div>
+
+            <div id="activitys">
+                <volist name="same_activitys" id="vo">
+                    <div style="height: 130px;width: 100%;" class="row similarActivity">
+                        <div class="hidden aid">{$vo.aid}</div>
+                        <div class="hidden title">{$vo.title}</div>
+                        <div class="col-span-5" style="background: url({$vo.picture});background-size: 100% 100%;"></div>
+                        <div class="col-span-7 row start-span white" style="padding-top:10px;padding-left:10px;height:120px">
+                            <div class="col-span-12 nopadding fs1-2" style="text-align: left;color:#b0b0b0;margin-top: -6px;font-size: 1rem">
+                                <span >{$vo.title}</span>
+                            </div>
+                            <div class="col-span-12 nopadding fs0-8" style="text-align: left;color:#b0b0b0;">
+                                <img class="icons-css-right" src="__IMG__/activity/icon_movie.png"/>
+                                <span class="font-css-right">{$vo.mname}</span>
+                            </div>
+                            <div class="col-span-12 nopadding fs0-8" style="text-align: left;color:#b0b0b0;">
+                                <img class="icons-css-right" src="__IMG__/activity/icon_time.png"/>
+                                <span  class="font-css-right">{$vo.time}</span>
+                            </div>
+                            <div class="col-span-12 nopadding fs0-8" style="text-align: left;color:#b0b0b0;">
+                                <img class="icons-css-right" src="__IMG__/activity/icon_address.png"/>
+                                <span class="font-css-right">{$vo.address}</span>
+                            </div>
+                        </div>
+                        <div class="inner-font-img">
+                            <span style="font-size: 12px;">RMB</span>
+                            <span style="font-size: 15px;">{$vo.money}</span>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+             </notempty>
+            </form>
+
+        
+            <button id="btnPay" style="z-index: 998;" class="mui-btn mui-btn-blue mui-btn-block">{$button_title}</button>
+            <input type="hidden" name="subscribe" id="subscribe" value="{$subscribe}">
+            <input type="hidden" name="aid" id="pay_aid" value="{$activity['id']}">
+            <input type="hidden" name="openid" id="pay_openid" value="{$wxData['openid']}">
+            <input type="hidden" name="unionid" id="pay_unionid" value="{$wxData['unionid']}">
+        </div>
+    </div>
+
+    
+<div id="share" style="display: none;z-index: 999;position: absolute;height: 100%;background-color:rgba(0, 0, 0, 0.8);"><img src="__IMG__/share.png" width="100%"/></div>
+
+<!--模块列表 end-->
+<!--框架载入start-->
+<script src="__JS__/mui.min.js"></script>
+<script src="//cdn.myline.cc/nanqi/mui/1.8.0/js/mui.view.js"></script>
+<script src="__JS__/sea.js "></script>
+<script src="__STATIC__/jquery-1.10.2.min.js"></script>
+<!--框架载入end-->
+
+<!--业务逻辑start-->
+<script type="text/javascript" charset="utf-8">
+            seajs.config({
+                base: "__JS__",
+                alias: {
+                    "catalog": 'controller/movie/catalog',
+                    "template": "template",
+                    "common": "util/common",
+                    "views": "config/views",
+                    "navigate": "util/navigate",
+                    "lazyload": "lazyload",
+                    "user": "config/user",
+                    "net": "util/net",
+                    "server": "config/server",
+                    "pullToRefresh": "pullToRefresh",
+                    "convert": "util/convert"
+                }
+            });
+            seajs.use([
+                "catalog",
+                "template",
+                "common",
+                "views",
+                "navigate",
+                "user",
+                "net",
+                "server",
+                "pullToRefresh",
+                "lazyload",
+                "convert"
+            ], function(app, template, common, views, navigate, user, net, server, pullToRefresh, lazyload, convert) {
+                /** 页面相关功能  start**/
+                var fun = (function(fun) {
+                    return fun;　　
+                })(fun || {});
+
+                
+                /** 页面相关功能逻辑  end**/
+                /** 页面主逻辑 start **/
+                //mui初始化
+                mui.init();
+              
+                //初始化单页的区域滚动
+                mui('.mui-scroll-wrapper').scroll({
+                    indicators: true //是否显示滚动条
+                });
+
+                document.querySelector('.mui-slider').addEventListener('slide', function(event) {
+                    var i = event.detail.slideNumber + 1;
+                    document.getElementById("site_image_index").innerText = i.toString() + "/{$activity['content']|count}";
+                });
+
+                document.getElementById("tomap").addEventListener('tap', function(e) {
+                    location.href = "http://api.map.baidu.com/marker?location={$activity['latitude']},{$activity['longitude']}&title={$activity['sitename']}&content={$activity['address']}&output=html";
+                });
+
+                document.getElementById("tomovie").addEventListener('tap', function(e) {
+                    var mid = "{$activity['mid']}";
+                    var title = "{$activity['movie_title']}";
+
+                    var city = user.getUserData(user.city);
+                    var uid = user.getUserData(user.userid);
+
+                    location.href = '/Weixin/wishes/' + mid + '?title=' + title + '&city=' + city + '&uid=' + uid;
+                });
+
+                document.getElementById('downperson').addEventListener('tap', function() {
+                    mui.scrollTo(document.getElementById('addpersonId').offsetTop, 1)
+                });
+            });
+        </script>
+<!--业务逻辑end-->
+</body>
+
+</html>
+
+<!-- 微信支付 -->
+<script type="text/javascript">
+
+    $(function(){
+        var button_enable = '{$button_enable}';
+        if (button_enable == '0') {
+            $('#btnPay').attr("disabled", true);
+            $('#btnPay').css("background", "#D0D0D0");
+        }
+
+        var is_finish = '{$is_finish}';
+        if (is_finish == '1') {
+            $('#btnPay').click(function(){
+                location.href = "http://weixin.myline.cc/weixin/user/coupons?aid={$activity['id']}"
+            });
+        }
+        else if (is_finish == '2') {
+            $('#btnPay').click(function(){
+                location.href = "http://weixin.myline.cc/weixin/user/qrcode"
+            });
+        }
+        else {
+            $('#btnPay').click(function(){
+
+                $('#btnPay').attr("disabled", true);
+
+                var money = {$activity['money']};
+                if (money == 0) {
+                    var aid = $("#pay_aid").val();
+                    var openid = $("#pay_openid").val();
+                    var uid = "{$uid}";
+                    $.ajax({
+                        url:"{:U('join')}",
+                        type:'POST',
+                        dataType:'json',
+                        async:false,
+                        data: {aid:aid, openid:openid, uid:uid},
+                        success : function(result) {
+                            if (result.status == 'true') {
+                                WeixinJSBridge.invoke('closeWindow',{},function(res){});
+                            }
+                            else {
+                                $('#btnPay').attr("disabled", false);
+                                mui.toast(result.errcode);
+                            }
+                        }
+                    });
+
+                    return;
+                }
+                if (typeof WeixinJSBridge == "undefined"){
+                    if( document.addEventListener ){
+                        document.addEventListener('WeixinJSBridgeReady', callPay, false);
+                    }else if (document.attachEvent){
+                        document.attachEvent('WeixinJSBridgeReady', callPay);
+                        document.attachEvent('onWeixinJSBridgeReady', callPay);
+                    }
+                }else{
+                    callPay();
+                }
+            });
+        }
+        
+    });
+
+    //调用微信JS api 支付
+    function jsApiCall(para) {
+        var parameter = JSON.parse(para);
+        WeixinJSBridge.invoke('getBrandWCPayRequest', parameter, function(res){
+            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                wx.showOptionMenu();
+                var user_id = "{$activity['uid']}";
+                if (user_id == '10012') {
+                    $('#share').show();
+                }
+                else {
+                    var subscribe = $('#subscribe').val();
+                    if (subscribe == '0') {
+                        location.href = "http://weixin.myline.cc/weixin/user/qrcode";
+                    }
+                }
+            }
+            else if (res.err_msg != 'get_brand_wcpay_request:cancel') {
+                alert(JSON.stringify(res.err_msg));
+            }
+
+            $('#btnPay').attr("disabled", false);
+        });
+    }
+
+    function callPay() {
+        var aid = $("#pay_aid").val();
+        var openid = $("#pay_openid").val();
+        var unionid = $("#pay_unionid").val();
+        $.ajax({
+            url:"{:U('getPayParameters')}",
+            type:'POST',
+            dataType:'json',
+            async:false,
+            data: {aid:aid, openid:openid, unionid:unionid},
+            success : function(result) {
+                if (result.status == 'true') {
+                    jsApiCall(result.data);
+                }
+                else {
+                    $('#btnPay').attr("disabled", false);
+                    mui.toast(result.errcode);
+                }
+            }
+        });
+    }
+
+</script>

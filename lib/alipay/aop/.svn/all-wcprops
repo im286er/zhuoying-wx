@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop
+END
+SignData.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/SignData.php
+END
+AopClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/AopClient.php
+END
+AlipayMobilePublicMultiMediaClient.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/AlipayMobilePublicMultiMediaClient.php
+END
+AlipayMobilePublicMultiMediaExecute.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/AlipayMobilePublicMultiMediaExecute.php
+END

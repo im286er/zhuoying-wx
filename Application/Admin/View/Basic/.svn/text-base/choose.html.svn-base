@@ -1,0 +1,78 @@
+<block name="body">
+    <div>
+        <!-------------------------------详细信息----------------------------------->
+        <table id="List" iconcls="icon-edit"></table>
+    </div>
+
+    <div style="margin-top: 10px">
+        <input type="button" value="选择" style="width: 100px;height: 30px; cursor: hand; float: right" onclick="choose()"/>
+    </div>
+</block>
+
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <link href="__STATIC__/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="__STATIC__/EasyUI/themes/icon.css" rel="stylesheet" />
+
+    <script src="__STATIC__/EasyUI/jquery-1.8.0.min.js"></script>
+    <script src="__STATIC__/EasyUI/jquery.easyui.min.js?"></script>
+    <script src="__STATIC__/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //当页面首次刷新的时候执行的事件
+            initTable();
+        });
+
+        function choose() {
+            var rows = $("#List").datagrid("getChecked");
+            if (rows.length > 0) {
+
+                //遍历出用户选择的数据的信息
+                var list = "";   //1,2,3,4,5
+                for (var i = 0; i < rows.length; i++) {
+                    list += rows[i].valname + " / ";
+                }
+                //最后去掉最后的那一个,
+                list = list.substring(0, list.length - 3);
+
+                parent.$('#divChooseBasic').window('close');
+                parent.setBasicValue('{$type}', list);
+            }
+        }
+
+        //实现对DataGird控件的绑定操作
+        function initTable(queryData) {
+            $('#List').datagrid({   //定位到Table标签，Table标签的ID是test
+                url: '{:U("Basic/getList?type=".$type)}',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                height: 338,
+                nowrap: true,
+                autoRowHeight: false,
+                striped: true,
+                collapsible: false,
+                pagination: false,
+                rownumbers: true,
+                //sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                queryParams: queryData,  //异步查询的参数
+                frozenColumns: [[
+                    { title: 'id', field: 'id', width: 0, checkbox: true }, //主键
+                    { title: '名称', field: 'valname', width: 150, sortable: true },
+                ]]
+//                toolbar: [{
+//                    id: 'btnReload',
+//                    text: '刷新',
+//                    iconCls: 'icon-reload',
+//                    handler: function () {
+//                        //实现刷新栏目中的数据
+//                        $("#List").datagrid("reload");
+//                    }
+//                }]
+            });
+        }
+
+    </script>
+</block>

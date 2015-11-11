@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdn.myline.cc/nanqi/bootstrap-notify.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/style.css" />
+    <title>红包补发通告</title>
+    <style>
+        .wenzi{
+            width:76%;
+            height: 35%;
+            display: block;
+            position:absolute;
+            padding:5px;
+            top: 20%;
+            left:12%;
+        }
+        .wenzi .timu{
+            width:100%;
+            height: 25%;
+            display: block;
+            position:absolute;
+            top: 0;
+            left:0;
+        }
+        .wenzi .daan{
+            width:80%;
+            height: 70%;
+            display: block;
+            position:absolute;
+            bottom: 0;
+            left:10%;
+            line-height: 35px;
+            font-size:18px;
+        }
+        .wenzi .timu p{
+            line-height: 35px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .xbtn{
+            width:30%;
+            height: 8%;
+            display: block;
+            position:absolute;
+            bottom: 20%;
+            left:38%;
+        }
+
+    </style>
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+
+</head>
+<body>
+<div class="background_img"><img src="http://file.myline.cc/kangzhan/bg.jpg" width="100%" height="100%"/></div>
+<div class="xbtn"><a  onclick="send()"><img src="__IMG__/kangzhan/hongbao.png" width="100%" height="100%"/></a></div>
+<div class="zhuti">
+
+    <!-- 第一题-->
+    <div class="wenzi" id="t1">
+        <div class="timu">
+            <p>红包补发通告</p>
+        </div>
+        <div class="daan">
+            <p>在抗战知识答题抢红包活动中因系统原因未能成功领取红包的用户，可以通过点击下方的“领取红包”按钮，重新领取一次。</p>
+        </div>
+    </div>
+
+</div>
+<input type="hidden" id="openid" name="openid" value="{$openid}"/>
+
+<div id="over" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 40px">
+                    <span id="bufa">感谢您的参与！红包已经发送到您的微信账号，请注意查收！欢迎持续关注“捉影",更多精彩等着你哦！</span>
+                </div>
+            </div>
+            <!--<div class="modal-footer" style="padding: 0">-->
+            <!--<a class="btn btn-primary btn-block btn-lg" href="#" onclick="$('#over').modal('hide');share()" style="border-radius: 0px 0px 5px 5px">向好友发起挑战</a>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function(){
+        var has = '<?php echo $has ?>';
+        var bufa = '<?php echo $bufa ?>';
+        if(has) {
+            $('.modal').on('show.bs.modal', function () {
+                var $this = $(this);
+                var $modal_dialog = $this.find('.modal-dialog');
+                $this.css('display', 'block');
+
+                $('.modal-footer').css('opacity', '1');
+                $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height()) / 2 - 10))});
+            });
+            $('#over').modal({
+                'backdrop': 'static',
+                'show': true
+            });
+        }
+        if(bufa)
+        {
+            $("#bufa").html('');
+            $("#bufa").html('感谢您的参与！您不符合我们的补发条件哦！欢迎关注我们的“捉影",更多精彩等着你！');
+            $('.modal').on('show.bs.modal', function () {
+                var $this = $(this);
+                var $modal_dialog = $this.find('.modal-dialog');
+                $this.css('display', 'block');
+
+                $('.modal-footer').css('opacity', '1');
+                $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height()) / 2 - 10))});
+            });
+            $('#over').modal({
+                'backdrop': 'static',
+                'show': true
+            });
+        }
+
+    })
+
+    function send(sid)
+    {
+        var openid = $("#openid").val();
+        $.ajax({
+            url:"{:U('send')}",
+            type:'POST',
+            dataType:'json',
+            async:false,
+            data:{id:sid,openid:openid},
+            success : function(re) {
+                if (re.status==1) {
+                    $('.modal').on('show.bs.modal', function(){
+                        var $this = $(this);
+                        var $modal_dialog = $this.find('.modal-dialog');
+                        $this.css('display', 'block');
+
+                        $('.modal-footer').css('opacity', '1');
+                        $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+                    });
+                    $('#over').modal({
+                        'backdrop': 'static',
+                        'show': true
+                    });
+                }
+                else if(re.status==2) {
+                    $("#bufa").html('');
+                    $("#bufa").html(re.errmsg);
+                    $('.modal').on('show.bs.modal', function () {
+                        var $this = $(this);
+                        var $modal_dialog = $this.find('.modal-dialog');
+                        $this.css('display', 'block');
+
+                        $('.modal-footer').css('opacity', '1');
+                        $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height()) / 2 - 10))});
+                    });
+                    $('#over').modal({
+                        'backdrop': 'static',
+                        'show': true
+                    });
+
+                }
+                else{
+                    alert(re.errmsg);
+                }
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

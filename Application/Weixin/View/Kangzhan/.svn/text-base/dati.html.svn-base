@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdn.myline.cc/nanqi/bootstrap-notify.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/style.css" />
+    <title>答题抢红包</title>
+    <style>
+        .wenzi{
+            width:76%;
+            height: 35%;
+            display: block;
+            position:absolute;
+            padding:5px;
+            top: 20%;
+            left:12%;
+        }
+        .wenzi .timu{
+            width:100%;
+            height: 25%;
+            display: block;
+            position:absolute;
+            top: 0;
+            left:0;
+        }
+        .wenzi .daan{
+            width:80%;
+            height: 70%;
+            display: block;
+            position:absolute;
+            bottom: 0;
+            left:10%;
+        }
+        .wenzi .timu p{
+            line-height: 25px;
+            font-size: 16px;
+        }
+        .wenzi .daan li{
+            text-align: center;
+            width:100%;
+            padding-top: 7%;
+            height: 25%;
+            display: block;
+            list-style-type: none;
+            line-height: 25%;
+            font-size: 18px;
+        }
+        .pic
+        {
+            width:76%;
+            height: 28%;
+            display: block;
+            position:absolute;
+            bottom: 15%;
+            left:12%;
+        }
+        .ok{
+            width:50%;
+            height:30%;
+            display: block;
+            position:absolute;
+            top: 30%;
+            left:25%;
+        }
+        .error{
+            width:50%;
+            height:30%;
+            display: block;
+            position:absolute;
+            top: 30%;
+            left:25%;
+        }
+    </style>
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false,
+            appId: '{$package["appid"]}',
+            timestamp: {$package["timestamp"]},
+            nonceStr: '{$package["nonceStr"]}',
+            signature: '{$package["signature"]}',
+            jsApiList: [
+                'hideOptionMenu',
+                'showOptionMenu',
+                'hideMenuItems',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'closeWindow',
+                'showMenuItems'
+            ]
+        });
+        $(function(){
+//            wx.showOptionMenu();
+
+
+            var title = '向刘烨、赵丽颖发起挑战，抗日知识答题！答完抢红包！！';
+            var desc = '拥抱和平！拥抱捉影！答题抢红包！';
+            var link = 'http://weixin.myline.cc/Weixin/kangzhan';
+            var imgUrl = 'http://file.myline.cc/kangzhan/kangzhan_cover.jpg';
+            setTimeout(function(){
+                wx.onMenuShareTimeline({
+                    title: title,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                        wx.closeWindow();
+                    },
+                    cancel: function () {
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                        wx.closeWindow();
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareQQ({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareWeibo({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareQZone({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+            },1000);
+
+
+        })
+    </script>
+</head>
+<body>
+<div class="background_img"><img src="http://file.myline.cc/kangzhan/bg.jpg" width="100%" height="100%"/></div>
+<div class="zhuti">
+
+    <!-- 第一题-->
+    <div class="wenzi" id="t1">
+        <div class="timu">
+            <p>1、日本政府被迫宣布无条件投降是在哪一年？</p>
+        </div>
+        <div class="daan">
+            <li onclick="ok('1',this)"><input type="radio" name="ok" value="1"/> A、1945年</li>
+            <li onclick="err('1',this)"><input type="radio" name="ok" value="2"/> B、1946年</li>
+            <li onclick="err('1',this)"><input type="radio" name="ok" value="3"/> C、1947年</li>
+            <li onclick="err('1',this)"><input type="radio" name="ok" value="4"/> D、1948年</li>
+        </div>
+    </div>
+    <div class="pic" id="p1">
+        <img src="http://file.myline.cc/kangzhan/t1.png" width="100%" height="100%"/>
+    </div>
+
+    <!-- 第二题-->
+    <div class="wenzi" id="t2" style="display: none;">
+        <div class="timu">
+            <p>2、由彭德怀指挥八路军在敌后战场发动的大规模战役是？</p>
+        </div>
+        <div class="daan">
+            <li onclick="err('2',this)"><input type="radio" name="ok" value="1"/> A、淞沪会战 </li>
+            <li onclick="err('2',this)"><input type="radio" name="ok" value="2" /> B、太原会战</li>
+            <li onclick="err('2',this)"><input type="radio" name="ok" value="3"/> C、徐州会战</li>
+            <li onclick="ok('2',this)"><input type="radio" name="ok" value="4"/> D、百团大战</li>
+        </div>
+    </div>
+    <div class="pic" id="p2" style="display: none;">
+        <img src="http://file.myline.cc/kangzhan/t2.png" width="100%" height="100%"/>
+    </div>
+
+
+    <!-- 第三题-->
+    <div class="wenzi" id="t3" style="display: none;">
+        <div class="timu">
+            <p>3、标志着中国人民局部抗日战争开始和全面抗日战争开始的历史事件分别是？</p>
+        </div>
+        <div class="daan">
+            <li onclick="err('3',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="1"/> A、九一八事变、西安事变 </li>
+            <li onclick="err('3',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="2"/> B、西安事变、七七事变&nbsp;&nbsp;&nbsp;&nbsp; </li>
+            <li onclick="ok('3',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="3" /> C、九一八事变、七七事变</li>
+            <li onclick="err('3',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="4" /> D、七七事变、八一三事变</li>
+        </div>
+    </div>
+    <div class="pic" id="p3" style="display: none;">
+        <img src="http://file.myline.cc/kangzhan/t3.png" width="100%" height="100%"/>
+    </div>
+
+
+    <!-- 第四题-->
+    <div class="wenzi" id="t4" style="display: none;">
+        <div class="timu">
+            <p>4、.在抗日战争中，国民政府取得重大胜利的战役是?</p>
+        </div>
+        <div class="daan">
+            <li onclick="err('4',this)"><input type="radio" name="ok" value="1"/> A、淞沪会战&nbsp;&nbsp;&nbsp;&nbsp; </li>
+            <li onclick="err('4',this)"><input type="radio" name="ok" value="2"/> B、徐州会战&nbsp;&nbsp;&nbsp;&nbsp; </li>
+            <li onclick="ok('4',this)"><input type="radio" name="ok" value="3"/> C、台儿庄战役</li>
+            <li onclick="err('4',this)"><input type="radio" name="ok" value="4"/> D、百团大战&nbsp;&nbsp;&nbsp;&nbsp; </li>
+        </div>
+    </div>
+    <div class="pic" id="p4" style="display: none;">
+        <img src="http://file.myline.cc/kangzhan/t4.png" width="100%" height="100%"/>
+    </div>
+
+
+    <!-- 第五题-->
+    <div class="wenzi" id="t5" style="display: none;">
+        <div class="timu">
+            <p>5、下列选项中，谁不是抗日民族英雄？</p>
+        </div>
+        <div class="daan">
+            <li onclick="err('5',this)"><input type="radio" name="ok" value="1" /> A、戚继光 </li>
+            <li onclick="err('5',this)"><input type="radio" name="ok" value="2" /> B、杨靖宇</li>
+            <li onclick="err('5',this)"><input type="radio" name="ok" value="3" /> C、刘胡兰</li>
+            <li onclick="ok('5',this)"><input type="radio" name="ok" value="4"/> D、白求恩</li>
+        </div>
+    </div>
+    <div class="pic" id="p5" style="display: none;">
+        <img src="http://file.myline.cc/kangzhan/t5.png" width="100%" height="100%"/>
+    </div>
+
+
+    <!-- 第六题-->
+    <div class="wenzi" id="t6" style="display: none;">
+        <div class="timu">
+            <p>6、中国共产党提出和平解决西安事变的根本出发点是？</p>
+        </div>
+        <div class="daan">
+            <li onclick="err('6',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="1"/> A、使国民党内部矛盾加剧</li>
+            <li onclick="err('6',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="2"/> B、改善国共两党的关系&nbsp;&nbsp;&nbsp;&nbsp; </li>
+            <li onclick="ok('6',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="3"/> C、从中国全民族利益出发</li>
+            <li onclick="err('6',this)" style="margin-left:-20px;font-size: 14px;"><input type="radio" name="ok" value="4"/> D、缓和国民党内部矛盾&nbsp;&nbsp;&nbsp;&nbsp; </li>
+        </div>
+    </div>
+    <div class="pic" id="p6" style="display: none;">
+        <img src="http://file.myline.cc/kangzhan/t6.png" width="100%" height="100%"/>
+    </div>
+
+</div>
+<div class="ok" style="display: none;"><img src="http://file.myline.cc/kangzhan/ok.png" width="100%" height="100%"/></div>
+<div class="error"  style="display: none;"><img src="http://file.myline.cc/kangzhan/error.png" width="100%" height="100%"/></div>
+<script>
+
+    var total = 0;
+    function ok(flg,obj)
+    {
+        total++;
+        flg++;
+
+        $(obj).find('input').attr('checked','checked');
+        $('.ok').fadeIn(200);
+        setTimeout(function(){
+            $('.ok').fadeOut(200);
+        },500)
+
+        if(flg>6)
+        {
+            setTimeout(function(){
+                window.location.href="__URL__/red/num/"+total;
+            },1000)
+        }
+        else
+        {
+            setTimeout(function(){
+                $(".wenzi").hide();
+                $(".pic").hide();
+                $("#t"+flg).show();
+                $("#p"+flg).show();
+            },1000)
+        }
+
+    }
+    function err(flg,obj)
+    {
+        flg++;
+        $(obj).find('input').attr('checked','checked');
+        $('.error').fadeIn(200);
+        setTimeout(function(){
+            $('.error').fadeOut(200);
+        },500)
+
+        if(flg>6)
+        {
+            setTimeout(function(){
+                window.location.href="__URL__/red/num/"+total;
+            },1000)
+        }
+        else
+        {
+            setTimeout(function(){
+                $(".wenzi").hide();
+                $(".pic").hide();
+                $("#t"+flg).show();
+                $("#p"+flg).show();
+            },1000)
+
+        }
+    }
+
+
+</script>
+</body>
+</html>

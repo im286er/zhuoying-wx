@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/style.css" />
+
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+</head>
+<body>
+<div class="background_img"><img src="__IMG__/background_03_img.jpg" width="100%" height="100%"/></div>
+<div class="text_rule"><img src="__IMG__/rule_text_btn.png" width="100%" height="100%"/></div>
+<div class="zhezhao_rule">
+    <div id="text_py">
+        <p>关注<span style="font-size: 24px;color:#a7e0fd;font-family: '黑体';">“捉影”</span></p>
+        <p>将该链接分享至朋友圈或发送给朋友，邀请<span style="font-size: 24px;color:#a7e0fd;"> 77 </span>位好友为你们送上祝福，每送上一个祝福，你和TA的距离就会更近一步，顺利完成任务</p>
+        <p>即可获得当季热门<span style="font-size: 24px;color:#a7e0fd;">电影票 <span style="font-size: 36px;color:#fad6ef;">2</span> 张</span></p>
+    </div>
+</div>
+<div onclick="history.go(-1)" style="width:60px;height:30px;display:block;position:absolute;left:22%;bottom:12px;font-size: 24px;color:#0066cc;font-family: '黑体';font-weight:900;">返回</div>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>答题抢红包</title>
+    <meta name="keywords" content="答题抢红包 捉影 微信 红包 抗战" />
+    <meta name="description" content="答题抢红包" />
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__JS__/kangzhan/jQueryRotate.2.2.js"></script>
+    <script type="text/javascript" src="__JS__/kangzhan/jquery.easing.min.js"></script>
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__JS__/kangzhan/zp.css" />
+    <style>
+        #disk{background:url(/Public/Weixin/images/kangzhan/wenzhangku.gif) no-repeat;
+            background-size: 280px,280px;
+            margin-left:20px;
+        }
+        #share{
+            width:100%;
+            height:100%;
+            display: block;
+            position: fixed;
+            top:0;
+            left:0;
+            background: rgba(100,100,100,0.6);
+            z-index: 9;
+        }
+    </style>
+
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false,
+            appId: '{$package["appid"]}',
+            timestamp: {$package["timestamp"]},
+            nonceStr: '{$package["nonceStr"]}',
+            signature: '{$package["signature"]}',
+            jsApiList: [
+                'hideOptionMenu',
+                'showOptionMenu',
+                'hideMenuItems',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'closeWindow',
+                'showMenuItems'
+            ]
+        });
+        $(function(){
+//            wx.showOptionMenu();
+
+
+            var title = '向刘烨、赵丽颖发起挑战，抗日知识答题！答完抢红包！！';
+            var desc = '拥抱和平！拥抱捉影！答题抢红包！';
+            var link = 'http://weixin.myline.cc/Weixin/kangzhan';
+            var imgUrl = 'http://file.myline.cc/kangzhan/kangzhan_cover.jpg';
+            setTimeout(function(){
+                wx.onMenuShareTimeline({
+                    title: title,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                        wx.closeWindow();
+                    },
+                    cancel: function () {
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                        wx.closeWindow();
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareQQ({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareWeibo({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+
+                wx.onMenuShareQZone({
+                    title: title,
+                    desc: desc,
+                    link: link,
+                    imgUrl: imgUrl,
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+            },2000);
+
+
+        })
+    </script>
+
+    <script type="text/javascript">
+        var info=new Array()
+        info[0]="感谢参与"
+        info[1]="1.00元"
+        info[2]="5.00元"
+        info[3]="50.00元"
+        info[4]="1.50元"
+        info[5]="10.00元"
+        info[6]="3.00元"
+        info[7]="4.00元"
+        info[8]="15.00元"
+        info[9]="100.00元"
+        info[10]="2.00元"
+        info[11]="70.00元"
+
+
+        function choujiang(){
+            var id='<?php echo $id;?>';
+
+            $.post("{:U('math')}", { id: id},function(data){
+                var a = data*30+15;
+                $("#startbtn").rotate({
+                    duration:3000,
+                    angle: 0,
+                    animateTo:1440+a,
+                    easing: $.easing.easeOutSine,
+                    callback: function(){
+                        if(data==1)
+                        {
+                            var infos="恭喜你，获得由西安慢连公司提供的红包"+info[data]+"。";
+                            $(document).attr('title',infos+"答题抢红包");
+                            var infos="<font color=orange><b>【抽奖结果】</b></font><br />"+infos;
+                        }
+                        else
+                        {
+                            var infos="感谢你的参与！请关注我们'捉影',更多精彩等着你哦！";
+                            $(document).attr('title',infos+"答题抢红包");
+                            var infos="<font color=orange><b>【抽奖结果】</b></font><br />"+infos;
+                            $("#beizhu").hide();
+                            $("#show").html('');
+                            $("#show").html('<button onClick="share()">向好友发起挑战</button>')
+                        }
+                        $("#tip").html(infos);
+                        $("#info").modal('show');
+                    }
+                });
+
+            });
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+
+
+<div id="main">
+    <h1>答对{$num}题，{$title}<br>
+        开始抢红包吧！
+    </h1>
+
+
+    <div class="demo">
+        <div id="disk"></div>
+        <div id="start"><img src="http://file.myline.cc/kangzhan/start.png" id="startbtn" onClick="choujiang()"></div>
+    </div>
+
+    <!--<div class="shuru">请输入您的名字：<input value="" id="name"></div>-->
+
+</div>
+<input type="hidden" id="openid" name="openid" value="{$openid}"/>
+
+<!--<div id="info" style="display:none;">-->
+    <!--<div id="tip"></div>-->
+
+    <!--<div class="retry">-->
+        <!--<if condition="$issub eq 1">-->
+            <!--<div id="show"><button onClick="send({$id})">领取红包</button></div>-->
+            <!--<else/>-->
+            <!--<p id="beizhu">您还没有关注我们，请先关注"捉影",关注后，立马就会收到红包哦！</p>-->
+            <!--<button onClick="location.href='http://mp.weixin.qq.com/s?__biz=MzAxOTUwMTE0MQ==&mid=210139866&idx=1&sn=eebd7789519178310cd98eae8b25b277#rd'">关注我们</button>-->
+        <!--</if>-->
+
+    <!--</div>-->
+
+<!--</div>-->
+
+
+<div id="footad">
+</div>
+
+
+<!--<div class="more_test_list" id="more_test">-->
+<!--<dt><h2>↓ 更多好玩测试 ↓</h2></dt>-->
+<!--<dd><a href="./huihuang/"><li>测测你一生中最辉煌的年龄</li></a><a href="./nianxin/"><li>测测年薪多少才配得上你？</li></a><a href="./kaiche/"><li>测你五年内会开什么车</li></a><a href="./tiansheng/"><li>测测你天生是什么命</li></a><a href="./qianshi/"><li>测测你前世是什么人</li></a><a href="./chuanyue/"><li>穿越回古代你会是谁？</li></a><a href="./ceo/"><li>测你会成为哪家公司总裁。</li></a><a href="./qianshi/"><li>测测你前世是什么人</li></a></dd>-->
+<!--</div>-->
+
+<footer style="margin-top:30px; font-size:10px; color:#666; text-align:center;">
+    此活动最终解释权归西安慢连所有!
+</footer>
+
+<!--<textarea id="adhtml" style="display:none">-->
+<!---->
+<!--<button onClick="location.href='http://mp.weixin.qq.com/s?__biz=MjM5ODMzMjk5Nw==&mid=200442232&idx=1&sn=bb981cf0ec10bc9bf28f24179744f511&from=singlemessage&isappinstalled=0#rd'">关注我们</button>-->
+<!--<button onClick="location.href='http://game2.id87.com/'">智力游戏</button>-->
+<!--</textarea>-->
+
+
+<script>
+    infos=$("#adhtml").val();
+    $("#footad").append(infos);
+</script>
+<div style="display:none">
+    <script language="javascript" type="text/javascript" src="http://js.users.51.la/15858550.js"></script>
+</div>
+
+<div id="info" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 40px">
+                    <div id="tip"></div>
+
+                    <div class="retry">
+                        <if condition="$issub neq 1">
+                            <p id="beizhu">您还没有关注我们，请先关注"捉影",关注后，立马就会收到红包哦！</p>
+                        </if>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <if condition="$issub eq 1">
+                    <div id="show"><button onClick="send({$id})" class="btn btn-primary btn-block btn-lg" style="border-radius: 0px 0px 5px 5px">领取红包</button></div>
+                    <else/>
+                    <button onClick="location.href='http://mp.weixin.qq.com/s?__biz=MzAxOTUwMTE0MQ==&mid=210139866&idx=1&sn=eebd7789519178310cd98eae8b25b277#rd'"  class="btn btn-primary btn-block btn-lg" style="border-radius: 0px 0px 5px 5px">关注我们</button>
+                </if>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="over" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 40px">
+                    <span>感谢您的参与！红包已经发送到您的微信账号，请注意查收。<br>欢迎持续关注“捉影",更多精彩等着你哦！</span>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a class="btn btn-primary btn-block btn-lg" href="#" onclick="$('#over').modal('hide');share()" style="border-radius: 0px 0px 5px 5px">向好友发起挑战</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="has" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body1" style="padding: 20px 40px">
+                    <span>感谢参与此次活动！<br>欢迎持续关注“捉影",更多精彩等着你哦！</span>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a class="btn btn-primary btn-block btn-lg" href="#" onclick="$('#has').modal('hide');share()" style="border-radius: 0px 0px 5px 5px">向好友发起挑战</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="share" style="display: none;"><img src="http://file.myline.cc/kangzhan/share_text_img.png" width="100%"/></div>
+</body>
+<script>
+    $(function(){
+        $('.modal').on('show.bs.modal', function(){
+            var $this = $(this);
+            var $modal_dialog = $this.find('.modal-dialog');
+            $this.css('display', 'block');
+
+            $('.modal-footer').css('opacity', '1');
+            $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+        });
+    })
+</script>
+<script>
+    function stopPropagation(e) {
+        e = e || window.event;
+        if(e.stopPropagation) { //W3C阻止冒泡方法
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true; //IE阻止冒泡方法
+        }
+    }
+    function share(e)
+    {
+        stopPropagation(e);
+        $("#share").show();
+    }
+    function send(sid){
+        var openid = $("#openid").val();
+        $.ajax({
+            url:"{:U('send')}",
+            type:'POST',
+            dataType:'json',
+            async:false,
+            data:{id:sid,openid:openid},
+            success : function(re) {
+                if (re.status) {
+                    $("#info").modal('hide');
+                    $('.modal').on('show.bs.modal', function(){
+                        var $this = $(this);
+                        var $modal_dialog = $this.find('.modal-dialog');
+                        $this.css('display', 'block');
+
+                        $('.modal-footer').css('opacity', '1');
+                        $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+                    });
+                    $('#over').modal({
+                        'backdrop': 'static',
+                        'show': true
+                    });
+                    $("#show").html('');
+                    $("#show").html('<button onClick="share()">向好友发起挑战</button>')
+                }
+                else {
+                    alert(re.errmsg);
+                }
+            }
+        });
+    }
+
+    $(function(){
+        var has = '<?php echo $has;?>';
+        if(has)
+        {
+            $("#info").modal('hide');
+            $('.modal').on('show.bs.modal', function(){
+                var $this = $(this);
+                var $modal_dialog = $this.find('.modal-dialog');
+                $this.css('display', 'block');
+
+                $('.modal-footer').css('opacity', '1');
+                $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+            });
+            $('#has').modal({
+                'backdrop': 'static',
+                'show': true
+            });
+
+            $("#start").html('');
+            $("#start").html('<img src="http://file.myline.cc/kangzhan/start.png" id="startbtn">');
+
+            $("#start").on('click',function(){
+                $('.modal').on('show.bs.modal', function(){
+                    var $this = $(this);
+                    var $modal_dialog = $this.find('.modal-dialog');
+                    $this.css('display', 'block');
+
+                    $('.modal-footer').css('opacity', '1');
+                    $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+                });
+                $('#has').modal({
+                    'backdrop': 'static',
+                    'show': true
+                });
+            })
+        }
+
+        $(document).click(function(){
+            $("#share").hide();
+
+        });
+    })
+
+</script>
+</html>

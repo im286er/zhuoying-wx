@@ -1,0 +1,1787 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>心愿池</title>
+		<link href="__CSS__/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__CSS__/index.css?d=1" />
+		<link rel="stylesheet" href="__CSS__/layout.css" />
+		<link rel="stylesheet" href="__CSS__/index/index.css" />
+
+		<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	    <script type="text/javascript">
+	        wx.config({
+	            debug: false,
+	            appId: '{$package["appid"]}',
+	            timestamp: {$package["timestamp"]|default=0},
+	            nonceStr: '{$package["nonceStr"]}', 
+	            signature: '{$package["signature"]}',
+	            jsApiList: [
+	                'chooseImage',
+	                'hideOptionMenu',
+	                'showOptionMenu',
+	                'uploadImage',
+	                'hideMenuItems',
+	                'onMenuShareTimeline',
+	                'onMenuShareAppMessage',
+	                'onMenuShareQQ',
+	                'onMenuShareWeibo',
+	                'onMenuShareQZone',
+	                'closeWindow',
+	                'getLocation',
+	                'showMenuItems'
+	            ]
+	        });
+
+	        city_change = null;
+
+	        function renderReverse(res) {
+	        	if (res.status == 0) {
+	        		var city = res.result.addressComponent.city;
+	        		city = city.substr(0, city.length - 1);
+
+	        		city_change && city_change(city);
+	        	}
+	        }
+	    </script>
+		<style>
+			a {
+				color: gray;
+			}
+			a.mui-active {
+				/*background: red;*/
+				
+				color: gray;
+			}
+			.mui-bar .mui-bar-tab {
+				height: 20px !important;
+				background: red !important;
+				padding-top: 20px !important;
+			}
+			.mui-bar-tab .mui-tab-item {
+				background: white;
+			}
+			.mui-bar-tab .mui-tab-item.mui-active {
+				background: #f2f2f2;
+			}
+			.mui-tab-label {
+				font-size: 9px !important;
+				line-height: 22px !important;
+			}
+			.mui-icon {
+				width: 30px !important;
+				height: 24px !important;
+				background-repeat: no-repeat !important;
+				background-size: 100% 100% !important;
+				/*top: 7px !important;*/
+			}
+			.mui-tab-item .activity {
+				background: url(__IMG__/app/activity_uncheck.png);
+			}
+			.mui-tab-item.mui-active>.activity {
+				background: url(__IMG__/app/activity_check.png);
+			}
+			.mui-tab-item .nearby {
+				background: url(__IMG__/app/nearby_uncheck.png);
+			}
+			.mui-tab-item.mui-active>.nearby {
+				background: url(__IMG__/app/nearby_check.png);
+			}
+			.mui-tab-item .wish {
+				background: url(__IMG__/app/wish_uncheck.png);
+			}
+			.mui-tab-item.mui-active>.wish {
+				background: url(__IMG__/app/wish_check.png);
+			}
+			.mui-tab-item .user {
+				background: url(__IMG__/app/user_uncheck.png);
+			}
+			.mui-tab-item.mui-active>.user {
+				background: url(__IMG__/app/user_check.png);
+			}
+			.mui-tab-item.mui-active>.mui-tab-label {
+				color: coral;
+			}
+		</style>
+
+		<style type="text/css">
+		.movie_span {
+			background-color: #f01b39;
+			color: white;
+			margin: 5px 5px 0 5px;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			border-radius: 3px;
+		}
+		.movie_title {
+			position: absolute;
+			top: 150px;
+			width: 100%;
+			color: white;
+			text-shadow: 2px 2px 2px #000000;
+		}
+		#empty_my_wish span {
+			text-align: center;
+		}
+		#empty_my_wish a {
+			display: inline-block;
+			border-radius: 2px;
+			border: 0;
+			color: white;
+			background-color: #b63502;
+			padding: 0 0 3px 0;
+			line-height: 25px;
+			font-size: 14px;
+		}
+		#empty_my_wish a span {
+			display: block;
+			padding: 0 12px 0 12px;
+			background-color: #E9511D;
+			border-radius: 2px 2px 0 0;
+		}
+		.mui-table-view-cell:after {
+			height: 0;
+		}
+		.mui-table-view-cell.mui-active {
+			background: transparent !important;
+		}
+		.wrapper_background {
+			background: url(__IMG__/movie/filter.jpg);
+			background-size: 100% 100%;
+			background-position: bottom;
+			background-repeat: no-repeat;
+		}
+		#empty_my_wish {
+			height: 100%;
+			width: 100%;
+			background: url(__IMG__/movie/my_wish_bg.jpg);
+			background-size: 100% 100%;
+			background-position: bottom;
+			background-repeat: no-repeat;
+		}
+		.find_act_status_icon {
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			right: 16px;
+			top: 16px;
+			background-size: 100% auto;
+		}
+		.inline_span {
+			color: #5a5a5a;
+			display: inline-block;
+			text-align: center;
+			width: 98%;
+			overflow: hidden;
+			white-space: normal;
+			text-overflow: ellipsis;
+		}
+		.host_btn {
+			display: inline-block;
+			height: 20px;
+			line-height: 20px;
+			padding: 0;
+			color: white;
+			background-color: #009BFF;
+			border: 0;
+			padding: 0 3px;
+		}
+		.join_btn {
+			margin: 0 3px;
+			display: inline-block;
+			height: 20px;
+			line-height: 20px;
+			padding: 0;
+			color: white;
+			background-color: #009BFF;
+			border: 0;
+			padding: 0 3px;
+		}
+		.span_in_span {
+			color: #e9511d;
+			font-size: 1rem;
+			display: inline-block;
+			padding: 0 3px;
+			border-radius: 3px;
+			height: 16px;
+			line-height: 16px;
+		}
+		.my_word_div {
+			display: inline-block;
+			background: url(__IMG__/movie/my_word.png);
+			background-size: 100% 80%;
+			background-position: center;
+			background-repeat: no-repeat;
+			padding-top: 17px;
+			padding-bottom: 8px !important;
+		}
+		.avatar_div {
+			border: 1px solid white;
+			-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+			height: 40px;
+			width: 40px;
+			border-radius: 40px;
+			overflow: hidden;
+			background-position: center;
+			background-size: 100% auto;
+		}
+		.light_word_div {
+			display: inline-block;
+			background: url(__IMG__/movie/find_act.png);
+			background-size: 100% 80%;
+			background-position: center;
+			background-repeat: no-repeat;
+			padding: 0 !important;
+			padding-top: 17px !important;
+			padding-bottom: 10px !important;
+		}
+		.light_div {
+			height: 60px;
+			width: 40px;
+			background: url(__IMG__/movie/light.png);
+			background-position: center;
+			background-size: 100% auto;
+		}
+		.total_div {
+			padding-top: 10px;
+			width: 100%;
+			background-color: #f0f0f0;
+			border-radius: 4px;
+			-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+			padding-bottom: 10px;
+		}
+		.all_top_div {
+			height: 30px;
+			width: 100%;
+			background-image: url(__IMG__/movie/result_top.png);
+			background-size: 100% 100%;
+		}
+		.all_inline_span {
+			font-size: 0.9rem;
+			color: #5a5a5a;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			display: inline-block;
+			white-space: nowrap;
+			width: 90%;
+		}
+		.all_middle_div {
+			height: 200px;
+			margin: 0 auto !important;
+			width: 88%;
+			margin-top: -8px !important;
+			overflow: hidden;
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-color: darkgray;
+		}
+		.all_middle_div img {
+			position: absolute;
+			left: 35px;
+			bottom: 55px;
+		}
+		.all_bottom_div {
+			text-align: center;
+			margin-top: -8px !important;
+			height: 30px;
+			width: 100%;
+			background-image: url(__IMG__/movie/result_under.png);
+			background-size: 100% 100%;
+		}
+		.shadow_div {
+			height: 5px;
+			margin: 0 auto !important;
+			margin-top: 20px !important;
+			width: 96%;
+			background-color: rgba(0, 0, 0, 0.3);
+			border-radius: 100%;
+			padding: 0 10px;
+			-webkit-filter: blur(3px);
+		}
+		.all_middle_word_div {
+			display: inline-flex;
+			width: 100%;
+			background-color: rgba(0, 0, 0, 0.4);
+			height: 30px;
+			vertical-align: bottom;
+		}
+	</style>
+
+	<style type="text/css">
+		.movie_span {
+			background-color: #f01b39;
+			color: white;
+			margin: 5px 5px 0 5px;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			border-radius: 3px;
+		}
+		.movie_title {
+			position: absolute;
+			top: 150px;
+			width: 100%;
+			color: white;
+			text-shadow: 2px 2px 2px #000000;
+		}
+		.mui-table-view:before {
+			height: 0 !important;
+		}
+		.mui-table-view:after {
+			height: 0 !important;
+		}
+		.total_div {
+			padding-top: 10px;
+			width: 100%;
+			background-color: #f0f0f0;
+			border-radius: 4px;
+			-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+			padding-bottom: 10px;
+		}
+		.all_top_div {
+			height: 30px;
+			width: 100%;
+			background-image: url(__IMG__/movie/result_top.png);
+			background-size: 100% 100%;
+		}
+		.all_inline_span {
+			font-size: 0.9rem;
+			color: #5a5a5a;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			display: inline-block;
+			white-space: nowrap;
+			width: 90%;
+		}
+		.all_middle_div {
+			height: 200px;
+			margin: 0 auto !important;
+			width: 88%;
+			margin-top: -8px !important;
+			overflow: hidden;
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-color: darkgray;
+		}
+		.all_middle_div img {
+			position: absolute;
+			left: 35px;
+			bottom: 55px;
+		}
+		.all_bottom_div {
+			text-align: center;
+			margin-top: -8px !important;
+			height: 30px;
+			width: 100%;
+			background-image: url(__IMG__/movie/result_under.png);
+			background-size: 100% 100%;
+		}
+		.shadow_div {
+			height: 5px;
+			margin: 0 auto !important;
+			margin-top: 20px !important;
+			width: 96%;
+			background-color: rgba(0, 0, 0, 0.3);
+			border-radius: 100%;
+			padding: 0 10px;
+			-webkit-filter: blur(3px);
+		}
+		.all_middle_word_div {
+			display: inline-flex;
+			width: 100%;
+			background-color: rgba(0, 0, 0, 0.4);
+			height: 30px;
+			vertical-align: bottom;
+		}
+		/*.mui-pull-bottom-tips {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			background-color: transparent;
+		}
+		.mui-pull-bottom-tips span {
+			color: #5a5a5a;
+		}*/
+	</style>
+	</head>
+
+	<body id="main">
+		<!--页面主结构开始-->
+		<div id="main-view" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar" style="z-index:999">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+
+		<div id="wish-page" class="mui-page">
+			<div class="mui-page-content">
+				<div class="mui-navbar-inner mui-bar mui-bar-nav">
+					<button id='city-button' type="button" class="mui-left mui-btn mui-btn-link mui-btn-nav mui-pull-left">
+						<img class="city" style="height: 18px;padding:0 5px 0 15px;flex: 0 0 auto;" src="__IMG__/app/city_icon.png" />
+						<label id="current-city" class="city" style="color: #565656;flex: 0 0 auto;padding:0px;">...</label>
+					</button>
+					<h1 class="mui-center mui-title">心愿池</h1>
+					<button id="search-button" class="mui-btn mui-btn-link mui-pull-right">
+						<span class="mui-icon mui-icon-search" style="color: orangered;margin-right: 10px;"></span>
+					</button>
+				</div>
+				<div class="mui-content mui-fullscreen">
+					<div id="slider" class="mui-slider" style="height: 100%;">
+						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<a class="mui-control-item mui-active" href="#item1mobile">
+								我的心愿
+							</a>
+							<a class="mui-control-item" href="#item2mobile">
+								大家的心愿
+							</a>
+						</div>
+						<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+						<div class="mui-slider-group">
+							<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+								<div id="scroll1" class="mui-scroll-wrapper wrapper_background">
+									<div class="mui-scroll" style="min-height: 100%;">
+										<ul class="mui-table-view" id="my_wish_content" style="background: transparent;margin-bottom: 45px;">
+
+										</ul>
+									</div>
+									<div id="empty_my_wish" class="col hidden" style="position: absolute;z-index: 999;">
+										<div style="height: 35%;"></div>
+										<div class="col" style="width: 80%;margin: 20px 10% 20px 10%;padding:15px 0 10px 0;background-color: white;border-radius: 3px;-webkit-box-shadow: 2px 2px 4px rgba(0,0,0,0.4);">
+											<span class="row-span-12" style="font-size: 1.3rem;">还没有心愿</span>
+											<span class="row-span-12" style="white-space: normal;padding: 10px 32px 10px 32px;color: #929292;">有想看的电影立即加入心愿吧,或者去看看大家的心愿.</span>
+											<div class="row-span-12" style="text-align: center;padding: 5px 0 10px 0;">
+												<a class="row-span-4" id="search_my_wish_btn" style="margin-right: 15px;">
+													<span>立即搜索</span>
+												</a>
+												<a class="row-span-4" id="goto_allwish_btn">
+													<span>看大家的</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="item2mobile" class="mui-slider-item mui-control-content">
+								<div id="scroll2" class="mui-scroll-wrapper">
+									<div class="mui-scroll" style="min-height: 100%;">
+										<ul class="mui-table-view mui-grid-view all_wish_class" id="all_wish_content" style="background-color: #efeff4;padding-top: 10px;margin-bottom: 45px;">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="city-page" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>主题活动
+				</button>
+				<h1 class="mui-center mui-title">定位城市</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-input-row mui-content-padded white">
+					<label>定位城市:</label>
+					<input id="location-city" class="city-item" type="text" placeholder="定位中..." readonly="true">
+				</div>
+				<div style="display: none">
+					<h4 class="mui-content-padded">最近访问</h4>
+
+					<div id="recently-city" class="box nopadding">
+						<ul class="table">
+						</ul>
+					</div>
+				</div>
+				<h4 class="mui-content-padded">热门城市</h4>
+				<div id="hot-city" class="box mui-content-padded row hot-city city-container">
+					<div class="col-span-3 city-item">北京</div>
+					<div class="col-span-3 city-item">上海</div>
+					<div class="col-span-3 city-item">天津</div>
+					<div class="col-span-3 city-item">杭州</div>
+					<div class="col-span-3 city-item">西安</div>
+					<div class="col-span-3 city-item">成都</div>
+					<div class="col-span-3 city-item">郑州</div>
+					<div class="col-span-3 city-item">厦门</div>
+					<div class="col-span-3 city-item">青岛</div>
+					<div class="col-span-3 city-item">深圳</div>
+					<div class="col-span-3 city-item">太原</div>
+					<div class="col-span-3 city-item">重庆</div>
+					<div class="col-span-3 city-item">武汉</div>
+					<div class="col-span-3 city-item">南京</div>
+					<div class="col-span-3 city-item">广州</div>
+					<div class="col-span-3 city-item">沈阳</div>
+					<div class="col-span-3 city-item">济南</div>
+					<div class="col-span-3 city-item">哈尔滨</div>
+				</div>
+				<h4 class="mui-content-padded">全部城市</h4>
+				<div id="hot-city" class="box mui-content-padded row abc" style="margin-bottom: 0 !important;">
+					<div>A</div>
+					<div>B</div>
+					<div>C</div>
+					<div>D</div>
+					<div>E</div>
+					<div>F</div>
+					<div>G</div>
+					<div>H</div>
+					<div>J</div>
+					<div>K</div>
+					<div>L</div>
+					<div>M</div>
+					<div>N</div>
+					<div>P</div>
+					<div>Q</div>
+					<div>R</div>
+					<div>S</div>
+					<div>T</div>
+					<div>W</div>
+					<div>X</div>
+					<div>Y</div>
+					<div>Z</div>
+				</div>
+				<div class="box mui-content-padded" style="margin-top: 0;">
+					<ul id="A" class="table mui-table-view">
+						<h4>A</h4>
+						<li class="city-item">鞍山</li>
+						<li class="city-item">阿拉善</li>
+						<li class="city-item">安庆</li>
+						<li class="city-item">安阳</li>
+						<!--<li class="city-item">阿坝藏族羌族</li>-->
+						<li class="city-item">安顺</li>
+						<li class="city-item">阿里</li>
+						<li class="city-item">安康</li>
+						<li class="city-item">安丘</li>
+						<li class="city-item">阿克苏</li>
+					<!--	<li class="city-item">克孜勒苏柯尔克孜</li>-->
+						<li class="city-item">阿勒泰</li>
+						<li class="city-item">澳门</li>
+						<li class="city-item">安吉</li>
+					</ul>
+					<ul id="B" class="table mui-table-view">
+						<h4>B</h4>
+						<li class="city-item">璧山</li>
+						<li class="city-item">北碚</li>
+						<li class="city-item">北京</li>
+						<li class="city-item">保定</li>
+						<li class="city-item">包头</li>
+						<li class="city-item">滨州</li>
+						<li class="city-item">蚌埠</li>
+						<li class="city-item">宝鸡</li>
+						<li class="city-item">巴彦淖尔</li>
+						<li class="city-item">本溪</li>
+						<li class="city-item">白山</li>
+						<li class="city-item">白城</li>
+						<li class="city-item">北海</li>
+						<li class="city-item">百色</li>
+						<li class="city-item">巴中</li>
+						<li class="city-item">毕节</li>
+						<li class="city-item">保山</li>
+						<li class="city-item">白银</li>
+						<li class="city-item">亳州</li>
+						<!--<li class="city-item">博尔塔拉蒙古</li>
+						<li class="city-item">巴音郭楞蒙古</li>-->
+						<li class="city-item">保亭</li>
+						<li class="city-item">白沙</li>
+					</ul>
+
+					<ul id="C" class="table mui-table-view">
+						<h4>C</h4>
+							<li class="city-item">长乐</li>
+							<li class="city-item">长寿</li>
+							<li class="city-item">长沙</li>
+							<li class="city-item">重庆</li>
+							<li class="city-item">常熟</li>
+							<li class="city-item">成都</li>
+							<li class="city-item">长春</li>
+							<li class="city-item">常州</li>
+							<li class="city-item">承德</li>
+							<li class="city-item">沧州</li>
+							<li class="city-item">长治</li>
+							<li class="city-item">赤峰</li>
+							<li class="city-item">朝阳</li>
+							<li class="city-item">滁州</li>
+							<li class="city-item">巢湖</li>
+							<li class="city-item">池州</li>
+							<li class="city-item">郴州</li>
+							<li class="city-item">潮州</li>
+							<li class="city-item">楚雄彝族</li>
+							<li class="city-item">昌都</li>
+							<li class="city-item">昌吉回族</li>
+							<li class="city-item">常德</li>
+							<li class="city-item">崇左</li>
+							<li class="city-item">慈溪</li>
+							<li class="city-item">澄迈</li>
+							<li class="city-item">昌江</li>
+							<li class="city-item">长兴</li>
+							<li class="city-item">苍南</li>
+					</ul>
+					<ul id="D" class="table mui-table-view">
+						<h4>D</h4>
+						<li class="city-item">大足</li>
+						<li class="city-item">独山子</li>
+						<li class="city-item">大连</li>
+						<li class="city-item">东莞</li>
+						<li class="city-item">大庆</li>
+						<li class="city-item">东营</li>
+						<li class="city-item">德州</li>
+						<li class="city-item">大同</li>
+						<li class="city-item">丹东</li>
+						<li class="city-item">大兴安岭</li>
+						<li class="city-item">德阳</li>
+						<li class="city-item">达州</li>
+						<li class="city-item">大理白族</li>
+						<li class="city-item">迪庆藏族</li>
+						<li class="city-item">定西</li>
+						<!--<li class="city-item">德宏傣族景颇族</li>-->
+						<li class="city-item">儋州</li>
+						<li class="city-item">东方</li>
+						<li class="city-item">定安</li>
+						<li class="city-item">德清</li>
+						<li class="city-item">东阳</li>
+					</ul>
+					<ul id="E" class="table mui-table-view">
+						<h4>E</h4>
+						<li class="city-item">鄂尔多斯</li>
+						<li class="city-item">鄂州</li>
+						<li class="city-item">恩施</li>
+					</ul>
+					<ul id="F" class="table mui-table-view">
+						<h4>F</h4>
+							<li class="city-item">涪陵</li>
+							<li class="city-item">佛山</li>
+							<li class="city-item">福州</li>
+							<li class="city-item">抚顺</li>
+							<li class="city-item">阜新</li>
+							<li class="city-item">阜阳</li>
+							<li class="city-item">抚州</li>
+							<li class="city-item">防城港</li>
+							<li class="city-item">凤凰</li>
+							<li class="city-item">阜康</li>
+					</ul>
+					<ul id="G" class="table mui-table-view">
+						<h4>G</h4>
+						<li class="city-item">广汉</li>
+						<li class="city-item">广州</li>
+						<li class="city-item">桂林</li>
+						<li class="city-item">贵阳</li>
+						<li class="city-item">赣州</li>
+						<li class="city-item">贵港</li>
+						<li class="city-item">甘南藏族</li>
+						<li class="city-item">果洛藏族</li>
+						<li class="city-item">固原</li>
+						<li class="city-item">广元</li>
+						<li class="city-item">广安</li>
+						<li class="city-item">甘孜藏族</li>
+					</ul>
+					<ul id="H" class="table mui-table-view">
+						<h4>H</h4>
+						<li class="city-item">杭州</li>
+						<li class="city-item">合肥</li>
+						<li class="city-item">哈尔滨</li>
+						<li class="city-item">呼和浩特</li>
+						<li class="city-item">海口</li>
+						<li class="city-item">惠州</li>
+						<li class="city-item">邯郸</li>
+						<li class="city-item">湖州</li>
+						<li class="city-item">鹤岗</li>
+						<li class="city-item">淮安</li>
+						<li class="city-item">衡水</li>
+						<li class="city-item">呼伦贝尔</li>
+						<li class="city-item">葫芦岛</li>
+						<li class="city-item">黑河</li>
+						<li class="city-item">淮南</li>
+						<li class="city-item">淮北</li>
+						<li class="city-item">鹤壁</li>
+						<li class="city-item">衡阳</li>
+						<li class="city-item">怀化</li>
+						<li class="city-item">河源</li>
+						<li class="city-item">贺州</li>
+						<li class="city-item">河池</li>
+						<!--<li class="city-item">红河哈尼族彝族</li>-->
+						<li class="city-item">汉中</li>
+						<li class="city-item">海东</li>
+						<li class="city-item">海北藏族</li>
+						<li class="city-item">黄南藏族</li>
+						<!--<li class="city-item">海西蒙古族藏族</li>-->
+						<li class="city-item">哈密</li>
+						<li class="city-item">菏泽</li>
+						<li class="city-item">黄山</li>
+						<li class="city-item">海南藏族</li>
+						<li class="city-item">和田</li>
+						<li class="city-item">黄冈</li>
+						<li class="city-item">海宁</li>
+						<li class="city-item">合川</li>
+					</ul>
+					<ul id="J" class="table mui-table-view">
+						<h4>J</h4>
+							<li class="city-item">江油</li>
+							<li class="city-item">江阴</li>
+							<li class="city-item">济南</li>
+							<li class="city-item">嘉兴</li>
+							<li class="city-item">金华</li>
+							<li class="city-item">江门</li>
+							<li class="city-item">济宁</li>
+							<li class="city-item">吉林</li>
+							<li class="city-item">晋城</li>
+							<li class="city-item">晋中</li>
+							<li class="city-item">锦州</li>
+							<li class="city-item">鸡西</li>
+							<li class="city-item">佳木斯</li>
+							<li class="city-item">晋江</li>
+							<li class="city-item">吉安</li>
+							<li class="city-item">焦作</li>
+							<li class="city-item">济源</li>
+							<li class="city-item">荆门</li>
+							<li class="city-item">荆州</li>
+							<li class="city-item">揭阳</li>
+							<li class="city-item">嘉峪关</li>
+							<li class="city-item">金昌</li>
+							<li class="city-item">酒泉</li>
+							<li class="city-item">景德镇</li>
+							<li class="city-item">九江</li>
+							<li class="city-item">九寨沟</li>
+							<li class="city-item">江津</li>
+					</ul>
+					<ul id="K" class="table mui-table-view">
+						<h4>K</h4>
+						<li class="city-item">库尔勒</li>
+						<li class="city-item">昆明</li>
+						<li class="city-item">昆山</li>
+						<li class="city-item">开封</li>
+						<li class="city-item">克拉玛依</li>
+						<li class="city-item">喀什</li>
+						<li class="city-item">开县</li>
+						<li class="city-item">奎屯</li>
+					</ul>
+					<ul id="L" class="table mui-table-view">
+						<h4>L</h4>
+						<li class="city-item">阆中</li>
+						<li class="city-item">兰州</li>
+						<li class="city-item">临沂</li>
+						<li class="city-item">洛阳</li>
+						<li class="city-item">连云港</li>
+						<li class="city-item">聊城</li>
+						<li class="city-item">廊坊</li>
+						<li class="city-item">柳州</li>
+						<li class="city-item">临汾</li>
+						<li class="city-item">吕梁</li>
+						<li class="city-item">辽阳</li>
+						<li class="city-item">辽源</li>
+						<li class="city-item">丽水</li>
+						<li class="city-item">六安</li>
+						<li class="city-item">龙岩</li>
+						<li class="city-item">莱芜</li>
+						<li class="city-item">漯河</li>
+						<li class="city-item">娄底</li>
+						<li class="city-item">泸州</li>
+						<li class="city-item">凉山彝族</li>
+						<li class="city-item">六盘水</li>
+						<li class="city-item">丽江</li>
+						<li class="city-item">临沧</li>
+						<li class="city-item">拉萨</li>
+						<li class="city-item">临夏回族</li>
+						<li class="city-item">来宾</li>
+						<li class="city-item">陇南</li>
+						<li class="city-item">乐山</li>
+						<li class="city-item">临高</li>
+						<li class="city-item">龙胜</li>
+						<li class="city-item">乐东</li>
+						<li class="city-item">陵水</li>
+						<li class="city-item">兰溪</li>
+						<li class="city-item">临夏</li>
+						<li class="city-item">浏阳</li>
+					</ul>
+					<ul id="M" class="table mui-table-view">
+						<h4>M</h4>
+						<li class="city-item">绵竹</li>
+						<li class="city-item">茂名</li>
+						<li class="city-item">牡丹江</li>
+						<li class="city-item">马鞍山</li>
+						<li class="city-item">梅州</li>
+						<li class="city-item">绵阳</li>
+						<li class="city-item">眉山</li>
+						<li class="city-item">满洲里</li>
+						<li class="city-item">明光</li>
+					</ul>
+					<ul id="N" class="table mui-table-view">
+						<h4>N</h4>
+						<li class="city-item">南部</li>
+						<li class="city-item">南京</li>
+						<li class="city-item">宁波</li>
+						<li class="city-item">南昌</li>
+						<li class="city-item">南宁</li>
+						<li class="city-item">南通</li>
+						<li class="city-item">南阳</li>
+						<li class="city-item">南平</li>
+						<li class="city-item">宁德</li>
+						<li class="city-item">南充</li>
+						<li class="city-item">怒江傈僳族</li>
+						<li class="city-item">那曲</li>
+						<li class="city-item">林芝</li>
+						<li class="city-item">内江</li>
+						<li class="city-item">南川</li>
+					</ul>
+					<ul id="P" class="table mui-table-view">
+						<h4>P</h4>
+						<li class="city-item">平潭</li>
+						<li class="city-item">莆田</li>
+						<li class="city-item">盘锦</li>
+						<li class="city-item">平顶山</li>
+						<li class="city-item">濮阳</li>
+						<li class="city-item">攀枝花</li>
+						<li class="city-item">平凉</li>
+						<li class="city-item">萍乡</li>
+						<li class="city-item">普洱</li>
+						<li class="city-item">平湖</li>
+						<li class="city-item">平阳</li>
+					</ul>
+					<ul id="Q" class="table mui-table-view">
+						<h4>Q</h4>
+						<li class="city-item">黔江</li>
+						<li class="city-item">青岛</li>
+						<li class="city-item">泉州</li>
+						<li class="city-item">秦皇岛</li>
+						<li class="city-item">齐齐哈尔</li>
+						<li class="city-item">七台河</li>
+						<li class="city-item">清远</li>
+						<li class="city-item">钦州</li>
+						<!--<li class="city-item">黔西南布依族苗族</li>
+						<li class="city-item">黔南布依族苗族</li>-->
+						<li class="city-item">曲靖</li>
+						<li class="city-item">庆阳</li>
+						<!--<li class="city-item">黔东南苗族侗族</li>-->
+						<li class="city-item">衢州</li>
+						<li class="city-item">琼海</li>
+						<li class="city-item">曲阜</li>
+						<li class="city-item">琼中</li>
+						<li class="city-item">綦江</li>
+					</ul>
+					<ul id="R" class="table mui-table-view">
+						<h4>R</h4>
+						<li class="city-item">日照</li>
+						<li class="city-item">日喀则</li>
+						<li class="city-item">瑞安</li>
+					</ul>
+					<ul id="S" class="table mui-table-view">
+						<h4>S</h4>
+						<li class="city-item">什邡</li>
+						<li class="city-item">上海</li>
+						<li class="city-item">深圳</li>
+						<li class="city-item">苏州</li>
+						<li class="city-item">沈阳</li>
+						<li class="city-item">三亚</li>
+						<li class="city-item">汕头</li>
+						<li class="city-item">石家庄</li>
+						<li class="city-item">绍兴</li>
+						<li class="city-item">朔州</li>
+						<li class="city-item">四平</li>
+						<li class="city-item">双鸭山</li>
+						<li class="city-item">绥化</li>
+						<li class="city-item">宿迁</li>
+						<li class="city-item">宿州</li>
+						<li class="city-item">三明</li>
+						<li class="city-item">石狮</li>
+						<li class="city-item">上饶</li>
+						<li class="city-item">三门峡</li>
+						<li class="city-item">商丘</li>
+						<li class="city-item">十堰</li>
+						<li class="city-item">随州</li>
+						<li class="city-item">邵阳</li>
+						<li class="city-item">韶关</li>
+						<li class="city-item">汕尾</li>
+						<li class="city-item">遂宁</li>
+						<li class="city-item">山南</li>
+						<li class="city-item">石嘴山</li>
+						<li class="city-item">商洛</li>
+						<li class="city-item">松原</li>
+						<li class="city-item">石河子</li>
+					</ul>
+					<ul id="T" class="table mui-table-view">
+						<h4>T</h4>
+						<li class="city-item">滕州</li>
+						<li class="city-item">铜梁</li>
+						<li class="city-item">天津</li>
+						<li class="city-item">太原</li>
+						<li class="city-item">唐山</li>
+						<li class="city-item">台州</li>
+						<li class="city-item">泰州</li>
+						<li class="city-item">泰安</li>
+						<li class="city-item">通辽</li>
+						<li class="city-item">铁岭</li>
+						<li class="city-item">通化</li>
+						<li class="city-item">铜陵</li>
+						<li class="city-item">铜仁</li>
+						<li class="city-item">铜川</li>
+						<li class="city-item">天水</li>
+						<li class="city-item">吐鲁番</li>
+						<li class="city-item">塔城</li>
+						<li class="city-item">塘沽</li>
+						<li class="city-item">屯昌</li>
+						<li class="city-item">太仓</li>
+						<li class="city-item">天长</li>
+					</ul>
+					<ul id="W" class="table mui-table-view">
+						<h4>W</h4>
+						<li class="city-item">乌苏</li>
+						<li class="city-item">武汉</li>
+						<li class="city-item">吴江</li>
+						<li class="city-item">无锡</li>
+						<li class="city-item">温州</li>
+						<li class="city-item">威海</li>
+						<li class="city-item">潍坊</li>
+						<li class="city-item">芜湖</li>
+						<li class="city-item">乌海</li>
+						<li class="city-item">乌兰察布</li>
+						<li class="city-item">梧州</li>
+						<!--<li class="city-item">文山壮族苗族</li>-->
+						<li class="city-item">渭南</li>
+						<li class="city-item">武威</li>
+						<li class="city-item">吴忠</li>
+						<li class="city-item">乌鲁木齐</li>
+						<li class="city-item">五指山</li>
+						<li class="city-item">文昌</li>
+						<li class="city-item">万宁</li>
+						<li class="city-item">武夷山</li>
+						<li class="city-item">婺源</li>
+						<li class="city-item">万州</li>
+					</ul>
+					<ul id="X" class="table mui-table-view">
+						<h4>X</h4>
+						<li class="city-item">西安</li>
+						<li class="city-item">西宁</li>
+						<li class="city-item">厦门</li>
+						<li class="city-item">徐州</li>
+						<li class="city-item">湘潭</li>
+						<li class="city-item">许昌</li>
+						<li class="city-item">咸阳</li>
+						<li class="city-item">邢台</li>
+						<li class="city-item">忻州</li>
+						<li class="city-item">兴安</li>
+						<li class="city-item">锡林郭勒</li>
+						<li class="city-item">宣城</li>
+						<li class="city-item">新余</li>
+						<li class="city-item">新乡</li>
+						<li class="city-item">信阳</li>
+						<li class="city-item">襄阳</li>
+						<li class="city-item">咸宁</li>
+						<!--<li class="city-item">湘西土家族苗族</li>
+						<li class="city-item">西双版纳傣族</li>-->
+						<li class="city-item">香港</li>
+						<li class="city-item">象山</li>
+					</ul>
+					<ul id="Y" class="table mui-table-view">
+						<h4>Y</h4>
+						<li class="city-item">杨陵</li>
+						<li class="city-item">银川</li>
+						<li class="city-item">烟台</li>
+						<li class="city-item">盐城</li>
+						<li class="city-item">扬州</li>
+						<li class="city-item">宜昌</li>
+						<li class="city-item">岳阳</li>
+						<li class="city-item">兖州</li>
+						<li class="city-item">阳泉</li>
+						<li class="city-item">运城</li>
+						<li class="city-item">营口</li>
+						<li class="city-item">延边朝鲜族</li>
+						<li class="city-item">伊春</li>
+						<li class="city-item">鹰潭</li>
+						<li class="city-item">宜春</li>
+						<li class="city-item">益阳</li>
+						<li class="city-item">永州</li>
+						<li class="city-item">阳江</li>
+						<li class="city-item">云浮</li>
+						<li class="city-item">玉林</li>
+						<li class="city-item">宜宾</li>
+						<li class="city-item">玉溪</li>
+						<li class="city-item">延安</li>
+						<li class="city-item">榆林</li>
+						<li class="city-item">玉树藏族</li>
+						<li class="city-item">伊犁哈萨克</li>
+						<li class="city-item">雅安</li>
+						<li class="city-item">义乌</li>
+						<li class="city-item">阳朔</li>
+						<li class="city-item">仪征</li>
+						<li class="city-item">宜兴</li>
+						<li class="city-item">乐清</li>
+						<li class="city-item">余姚</li>
+						<li class="city-item">永康</li>
+						<li class="city-item">永川</li>
+					</ul>
+					<ul id="Z" class="table mui-table-view">
+						<h4>Z</h4>
+						<li class="city-item">郑州</li>
+						<li class="city-item">中山</li>
+						<li class="city-item">舟山</li>
+						<li class="city-item">镇江</li>
+						<li class="city-item">淄博</li>
+						<li class="city-item">漳州</li>
+						<li class="city-item">株洲</li>
+						<li class="city-item">湛江</li>
+						<li class="city-item">枣庄</li>
+						<li class="city-item">张家口</li>
+						<li class="city-item">涿州</li>
+						<li class="city-item">周口</li>
+						<li class="city-item">驻马店</li>
+						<li class="city-item">珠海</li>
+						<li class="city-item">肇庆</li>
+						<li class="city-item">自贡</li>
+						<li class="city-item">遵义</li>
+						<li class="city-item">昭通</li>
+						<li class="city-item">张掖</li>
+						<li class="city-item">张家界</li>
+						<li class="city-item">中卫</li>
+						<li class="city-item">资阳</li>
+						<li class="city-item">张家港</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="search-page" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+					心愿池
+				</button>
+				<h1 class="mui-center mui-title">电影搜索</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-input-row mui-search margin-10">
+					<input id="search-input" type="search" class="mui-input-clear" placeholder=" 想看什么? " style="background-color: white;">		
+					<div id="pullrefresh" class="mui-scroll" style="position: relative;">
+						<ul id="search_result" class="mui-table-view mui-grid-view all_wish_class" style="background-color: #efeff4;"></ul>
+					</div>
+					<div class="hidden" id="empty_search_item" style="width: 100%;text-align: center;padding: 0 5%;">没有找到您想看的电影...搜搜别的吧~</div>
+				</div>
+			</div>
+		</div>
+		<!--模块列表 start-->
+		<!--模块列表 end-->
+		<!--框架载入start-->
+		<script src="__JS__/mui.min.js?d=1"></script>
+		<script src="//cdn.myline.cc/nanqi/mui/1.8.0/js/mui.view.js"></script>
+		<script src="__JS__/sea.js "></script>
+		<script src="__STATIC__/jquery-1.10.2.min.js"></script>
+		<!--框架载入end-->
+		<script id="my_wish_item" type="text/html">
+			{{each list as value index}}
+			<li class="mui-table-view-cell nopadding my_wish_item_1">
+				<div class="hidden mid">{{value.id}}</div>
+				<div class="hidden title">{{value.title}}</div>
+				<div style="background-color: transparent;width: 100%;padding: 20px;">
+					{{ if value.findstatus==0}}
+					<div class="find_act_status_icon" style="background-image: url(__IMG__/movie/finding.png);"></div>
+					{{ /if}} {{ if value.findstatus==-1}}
+					<div class="find_act_status_icon" style="background-image: url(__IMG__/movie/notfind.png);"></div>
+					{{ /if}} {{ if value.findstatus==1}}
+					<div class="find_act_status_icon" style="background-image: url(__IMG__/movie/find_ok.png);"></div>
+					{{ /if}}
+					<div class="row total_div">
+						<div class="row col-span-12" style="width: 100%;">
+							<div class="col-span-2">
+								<div class="avatar_div" style="background:url({{value.avatar}});background-size: cover;"></div>
+							</div>
+							<div class="col-span-8 my_word_div">
+								<span class="inline_span" style="text-align: left;padding-left: 5px;">神灯,我想看&nbsp<span style="color: orangered;font-size: 1rem;">{{value.title}}</span>&nbsp。</span>
+							</div>
+							<div class="col-span-2"></div>
+						</div>
+
+						<div class="row col-span-12" style="width: 100%;">
+							<div class="col-span-1" style="padding: 0 !important;"></div>
+							<div class="col-span-9 light_word_div">
+								{{ if value.findstatus==0}}
+								<span class="inline_span">神灯已收到,正在搜罗中...</span> 
+								{{ /if}} 
+								<!-- {{ if value.findstatus==-1}}
+								<span class="inline_span">没找到啊,<button class="host_btn">举办</button>一个!
+									<div class="hidden id">{{value.id}}</div>
+									<div class="hidden title">{{value.title}}</div>
+								</span> 
+								{{ /if}}  -->
+								{{ if value.findstatus==1}}
+								<span class="inline_span" style="text-align: center;">神灯找到<span class="span_in_span">{{value.activity_total_count}}</span>个活动,快去
+								<button class="join_btn" style="background-color: #009BFF;">参加</button>吧!
+								<div class="hidden id">{{value.id}}</div>
+								<div class="hidden title">{{value.title}}</div>
+							</span> {{ /if}}    
+							</div>
+							<div class="col-span-2" style="padding: 0 !important;">
+								<div class="light_div"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			{{/each}}
+		</script>
+
+		<script id="all_wish_item" type="text/html">
+			{{each list as value index}}
+			<li class="mui-table-view-cell mui-media mui-col-xs-6 padding-5 all_wish_item_1" style="margin-bottom: 15px;">
+				<div class="hidden mid">{{value.id}}</div>
+				<div class="hidden title">{{value.title}}</div>
+				<div class="col" style="width: 100%;height: 100%;">
+					<div class="col middle-span top-span all_top_div">
+						<span class="all_inline_span">{{value.title}}</span>
+					</div>
+					<div class="col end-span middle-span all_middle_div" style="background-image: url({{value.large_images}});">
+						<div class="hidden id">{{value.id}}</div>
+						<div class="hidden count">{{value.wish_total_count}}</div>
+						{{ if value.iswish==1}} {{ if (value.wish_total_count>0&&value.wish_total_count
+						<200)}} <img class="have_wish" src="__IMG__/movie/heart3.png" style="height: 35px;width: auto;">
+							{{ /if}} {{ if (value.wish_total_count>200&&value.wish_total_count
+							<800)}} <img class="have_wish" src="__IMG__/movie/heart4.png" style="height: 35px;width: auto;">
+								{{ /if}} {{ if value.wish_total_count>800}}
+								<img class="have_wish" src="__IMG__/movie/heart1.png" style="height: 40px;width: auto;"> {{ /if}} {{ /if}} {{ if value.iswish==0}}
+								<img class="addwish_btn" src="__IMG__/movie/heart2.png" style="height: 35px;width: auto;"> {{ /if}}
+								<div class="nopadding middle-span center-span all_middle_word_div">
+									<span class="nopadding" style="display: inline-block;vertical-align: bottom;color: white;padding-left: 30px;">{{value.wish_total_count}}<span style="font-size: 0.7rem;line-height: 19px;">&nbsp人想看</span></span>
+								</div>
+					</div>
+					<div class="row middle-span center-span all_bottom_div">
+						<span style="color: orangered;text-align: right;padding-right: 0;padding-top: 8px;">{{value.activity_total_count}}</span>
+						<span style="text-align: left;padding-left: 0;font-size: 0.9rem;color: #5a5a5a;padding-top: 8px;">&nbsp个活动举办中</span>
+					</div>
+					<div class="col shadow_div" style=""></div>
+				</div>
+			</li>
+			{{/each}}
+		</script>
+
+		<script id="result_item" type="text/html">
+			{{each list as value i}}
+			<li class="mui-table-view-cell mui-media mui-col-xs-6 padding-5 all_wish_item_1" style="margin-bottom: 15px;">
+				<div class="hidden mid">{{value.id}}</div>
+				<div class="hidden title">{{value.title}}</div>
+				<div class="col" style="width: 100%;height: 100%;">
+					<div class="col middle-span top-span all_top_div">
+						<span class="all_inline_span">{{value.title}}</span>
+					</div>
+					<div class="col end-span middle-span all_middle_div" style="background-image: url({{value.large_images}});">
+						<div class="hidden id">{{value.id}}</div>
+						<div class="hidden count">{{value.wish_total_count}}</div>
+						{{ if value.iswish==1}} {{ if (value.wish_total_count>0&&value.wish_total_count
+						<200)}} <img class="have_wish" src="__IMG__/movie/heart3.png" style="height: 35px;width: auto;">
+							{{ /if}} {{ if (value.wish_total_count>200&&value.wish_total_count
+							<800)}} <img class="have_wish" src="__IMG__/movie/heart4.png" style="height: 35px;width: auto;">
+								{{ /if}} {{ if value.wish_total_count>800}}
+								<img class="have_wish" src="__IMG__/movie/heart1.png" style="height: 40px;width: auto;"> {{ /if}} {{ /if}} {{ if value.iswish==0}}
+								<img class="addwish_btn" src="__IMG__/movie/heart2.png" style="height: 35px;width: auto;"> {{ /if}}
+								<div class="nopadding middle-span center-span all_middle_word_div">
+									<span class="nopadding" style="display: inline-flex;color: white;padding-left: 30px;">{{value.wish_total_count}}<span style="font-size: 0.7rem;vertical-align: middle;">&nbsp人想看</span></span>
+								</div>
+					</div>
+					<div class="row middle-span center-span all_bottom_div">
+						<span style="color: orangered;text-align: right;padding-right: 0;padding-top: 8px;">{{value.activity_total_count}}</span>
+						<span style="text-align: left;padding-left: 0;font-size: 0.9rem;color: #5a5a5a;padding-top: 8px;">&nbsp个活动举办中</span>
+					</div>
+					<div class="col shadow_div" style=""></div>
+				</div>
+			</li>
+			{{/each}}
+		</script>
+
+		<script id="result_none" type="text/html">
+			<li class="mui-table-view-cell" style="color:lightgray;">
+				暂无搜索结果
+			</li>
+		</script>
+
+		<!--业务逻辑start-->
+		<script type="text/javascript" charset="utf-8">
+			seajs.config({
+				base: "__JS__",
+				alias: {
+					'template': 'template',
+					'net': 'util/net',
+					'server': 'config/server',
+					'common': 'util/common',
+					"lazyload": "lazyload",
+					"user": "config/user",
+					"views": "config/views",
+					"navigate": "util/navigate",
+					"pullToRefresh": "pullToRefresh",
+				}
+			});
+			seajs.use([
+				"template",
+				"net",
+				"server",
+				"common",
+				"lazyload",
+				"user",
+				"views",
+				"navigate",
+				"pullToRefresh"
+			], function(template, net, server, common, lazyload, user, views, navigate, pullToRefresh) {
+				var lazyLoadApi1;
+				var lazyLoadApi2;
+				var all_wish_id_list = [];
+				/*var pulldown = 0;
+				var pulldowncell;*/
+				var my_cell = null;
+				var my_pullup;
+				var my_pageIndex = 1;
+				var my_flag = 0;
+				var my_everpull = 0;
+				var all_cell = null;
+				var all_pullup;
+				var all_pageIndex = 1;
+				var all_flag = 0;
+				var all_everpull = 0;
+
+				var page_activity;
+				var pullup = 0;
+				var pageIndex = 1;
+				var pull_flag = 0;
+				/** 页面相关属性和逻辑  start**/
+				var fun = (function(fun) {　
+					fun.getMyWishList = function() {
+						var uid = user.getUserData(user.userid);
+						if (!uid) {
+							document.getElementById("empty_my_wish").classList.remove("hidden");
+							document.getElementById("my_wish_content").classList.add("hidden");
+							return;
+						}
+						var city = user.getUserData(user.city);
+						net.send({
+							server: server.wish.getwishlist,
+							params: {
+								uid: uid,
+								isall: 0,
+								city: city,
+								pageIndex: my_pageIndex,
+								pageSize: 8
+							},
+							success: fun.UpdateMyWishList,
+							callback: function() {}
+						})
+					};
+					fun.getAllWishList = function() {
+						var uid = user.getUserData(user.userid);
+						var city = user.getUserData(user.city);
+						net.send({
+							server: server.wish.getwishlist,
+							params: {
+								uid: uid,
+								isall: 1,
+								city: city,
+								pageIndex: all_pageIndex,
+								pageSize: 8
+							},
+							success: fun.UpdateAllWishList,
+							callback: function() {}
+						})
+					};
+					fun.UpdateMyWishList = function(data) {
+						if (data.length == 0 && my_flag != 1 && my_everpull != 1) {
+							document.getElementById("empty_my_wish").classList.remove("hidden");
+							document.getElementById("my_wish_content").classList.add("hidden");
+							document.getElementById("scroll1").querySelector(".mui-pull-bottom-tips").classList.add("hidden");
+							return;
+						} else {
+							document.getElementById("empty_my_wish").classList.add("hidden");
+							document.getElementById("my_wish_content").classList.remove("hidden");
+							document.getElementById("scroll1").querySelector(".mui-pull-bottom-tips").classList.remove("hidden");
+						}
+						if (user.getUserData(user.avatar) == "" || user.getUserData(user.avatar) == null) {
+							for (var i = 0; i < data.length; i++) {
+								data[i].avatar = "__IMG__/user/user.png";
+							}
+						} else {
+							for (var i = 0; i < data.length; i++) {
+								data[i].avatar = user.getUserData(user.avatar);
+							}
+						}
+						if (data.length < 8) {
+							my_flag = 1;
+							document.getElementById("scroll1").querySelector(".mui-pull-loading").innerText = "没有了哦...";
+						}
+						var html = template('my_wish_item', {
+							list: data
+						});
+						mui.each(mui("#my_wish_content .my_wish_item_1"), function(index, item) {
+							document.getElementById("my_wish_content").removeChild(item);
+						});
+						var items = common.parseDom(html);
+						var ul = document.getElementById("my_wish_content")
+						mui.each(items, function(index, item) {
+							ul.appendChild(item);
+						});
+						if (my_pullup) {
+							my_pullup = 0;
+							my_cell.endPullUpToRefresh(my_flag);
+						}
+						//lazyLoadApi1.refresh(true);
+						/*if (pulldown) {
+							notify.toast("刷新成功!");
+							pulldown = 0;
+							pulldowncell.endPullDownToRefresh();
+						}*/
+					};
+					fun.UpdateAllWishList = function(data) {
+						if (data.length < 8) {
+							all_flag = 1;
+						}
+						for (var i = 0; i < data.length; i++) {
+							if (i == data.length) {
+								break;
+							} 
+							var id = data[i].id;
+							if (fun.in_array(id)) {
+								data.splice(i, 1); 
+								i--;
+							} else {
+								all_wish_id_list.push(id);
+							} 
+						}
+						var html = template('all_wish_item', {
+							list: data
+						});
+						/*mui.each(mui("#all_wish_content .all_wish_item_1"), function(index, item) {
+							document.getElementById("all_wish_content").removeChild(item);
+						});*/
+						var items = common.parseDom(html);
+						var ul = document.getElementById("all_wish_content")
+						mui.each(items, function(index, item) {
+							ul.appendChild(item);
+						});
+						if (all_pullup) {
+							all_pullup = 0;
+							all_cell.endPullUpToRefresh(all_flag);
+						}
+						//lazyLoadApi2.refresh(true);
+						/*if (pulldown) {
+							notify.toast("刷新成功!");
+							pulldown = 0;
+							pulldowncell.endPullDownToRefresh();
+						}*/
+					};
+					/**
+					 * 打开详情
+					 */
+					fun.openDetail = function(e) {
+						if (e.target.tagName == "BUTTON" || e.target.offsetParent.tagName == "BUTTON") {
+							return;
+						}
+						if (e.target.tagName == "IMG" || e.target.offsetParent.tagName == "IMG") {
+							return;
+						}
+						var mid = this.querySelector(".mid").innerHTML;
+						var title = this.querySelector(".title").innerHTML;
+
+						var city = user.getUserData(user.city);
+						var uid = user.getUserData(user.userid);
+
+						location.href = '/Weixin/wishes/' + mid + '?title=' + title + '&city=' + city + '&uid=' + uid;
+					};
+					fun.listenPullDown = function() {
+						var mylist = mui("#scroll1 .mui-scroll")[0];
+						var alllist = mui("#scroll2 .mui-scroll")[0];
+						mui(mylist).pullToRefresh({
+							/*down: {
+								callback: function() {
+									fun.getMyWishList();
+									pulldown = 1;
+									pulldowncell = this;
+									setTimeout(function() {
+										if (pulldown) {
+											notify.toast("刷新失败,网络好像出问题了...");
+											pulldown = 0;
+											pulldowncell.endPullDownToRefresh();
+										}
+									}, 10000);
+								}
+							}*/
+							up: {
+								contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore: '没有了哦...',
+								callback: function() {
+									my_everpull = 1;
+									if (my_flag == 1) {
+										this.endPullUpToRefresh(my_flag);
+										return;
+									}
+									if (my_pullup) {
+										return;
+									} else {
+										my_pullup = 1;
+									}
+									var self = this;
+									my_cell = this;
+									my_pageIndex++;
+									fun.getMyWishList();
+									/*setTimeout(function() {
+										self.endPullUpToRefresh(my_flag);
+									}, 1000);*/
+								}
+							}
+						});
+						mui(alllist).pullToRefresh({
+							/*down: {
+								callback: function() {
+									fun.getAllWishList();
+									pulldown = 1;
+									pulldowncell = this;
+									setTimeout(function() {
+										if (pulldown) {
+											notify.toast("刷新失败,网络好像出问题了...");
+											pulldown = 0;
+											pulldowncell.endPullDownToRefresh();
+										}
+									}, 10000);
+								}
+							}*/
+							up: {
+								contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+								contentnomore: '没有了哦...',
+								callback: function() {
+									all_everpull = 1;
+									if (all_pullup) {
+										return;
+									} else {
+										all_pullup = 1;
+									}
+									var self = this;
+									all_cell = this;
+									all_pageIndex++;
+									fun.getAllWishList();
+									/*setTimeout(function() {
+										self.endPullUpToRefresh(all_flag);
+									}, 1000);*/
+								}
+							}
+						});
+					};
+					fun.afterAddWish = function(img, count) {
+						img.className = "have_wish";
+						if (count > 0 && count < 200) {
+							img.src = "__IMG__/movie/heart3.png";
+						} else if (count > 200 && count < 800) {
+							img.src = "__IMG__/movie/heart4.png";
+						} else if (count > 800) {
+							img.src = "__IMG__/movie/heart1.png";
+						}
+						my_flag = 0;
+						my_pageIndex = 1;
+						mui.each(mui("#my_wish_content .my_wish_item_1"), function(index, item) {
+							document.getElementById("my_wish_content").removeChild(item);
+						});
+						if (my_cell != null) {
+							my_cell.refresh(true);
+						}
+						fun.getMyWishList();
+						mui("#scroll1").scroll().scrollTo(0, 0, 200);
+					};
+					fun.refreshParams = function() {
+						my_cell = null;
+						my_pullup = 0;
+						my_pageIndex = 1;
+						my_flag = 0;
+						my_everpull = 0;
+						all_cell = null;
+						all_pullup = 0;
+						all_pageIndex = 1;
+						all_flag = 0;
+						all_everpull = 0;
+						all_wish_id_list = [];
+					};
+					fun.refreshItems = function() {
+						mui.each(mui("#my_wish_content .my_wish_item_1"), function(index, item) {
+							document.getElementById("my_wish_content").removeChild(item);
+						});
+						mui.each(mui("#all_wish_content .all_wish_item_1"), function(index, item) {
+							document.getElementById("all_wish_content").removeChild(item);
+						});
+						mui("#scroll1").scroll().scrollTo(0, 0, 200);
+						mui("#scroll2").scroll().scrollTo(0, 0, 200);
+					};
+					fun.in_array = function(e) {
+						for (var i = 0; i < all_wish_id_list.length; i++) {
+							if (e == all_wish_id_list[i]) {
+								return true;
+							}
+						}
+						return false;
+					}
+
+					fun.selectABC = function() {
+						var id = this.innerText;
+						var item = document.getElementById(id);
+						window.item = item;
+						if (item) {
+							mui.scrollTo(item.offsetTop, 100);
+						}
+					};
+					fun.selcetCity = function() {
+						var city = this.innerHTML||this.value;
+						
+						city_change && city_change(city);
+						
+						mui.back();
+					};
+					fun.positionCity = function  () {
+						localcity = user.getUserData(user.localcity); //用户所在城市
+						document.querySelector('.city-item').value=localcity;
+					};
+
+					/**
+					 * 进行电影搜索
+					 * @param {Object} str
+					 */
+					fun.search = function(str) {
+						console.log(pageIndex);
+						var city = user.getUserData(user.city);
+						var uid = user.getUserData(user.userid);
+						net.send({
+							server: server.movie.getMovieList,
+							params: {
+								title: str,
+								uid: uid,
+								city: city,
+								pageSize: 8,
+								pageIndex: pageIndex
+							},
+							success: fun.updateRestult,
+							failure: fun.failResult,
+							callback: function() {
+							}
+						})
+					};
+					/**
+					 * 更新搜索结果
+					 * @param {Object} data
+					 */
+					fun.updateRestult = function(data) {
+						console.log(data);
+						if (data.length == 0 && pull_flag != 1) {
+							document.getElementById("empty_search_item").classList.remove("hidden");
+							//document.getElementsByClassName("mui-pull-bottom-pocket").classList.add("hidden");
+						} else {
+							document.getElementById("empty_search_item").classList.add("hidden");
+							//document.getElementsByClassName("mui-pull-bottom-pocket").classList.remove("hidden");
+						}
+						if (!data) {
+							fun.failResult();
+							return;
+						}
+						if (data.length < 8) {
+							pull_flag = 1;
+						}
+						var html = template('result_item', {
+							list: data
+						});
+						/*mui.each(mui("#search_result .all_wish_item_1"), function(index, item) {
+							document.getElementById("search_result").removeChild(item);
+						});*/
+						var items = common.parseDom(html);
+						var ul = document.getElementById("search_result")
+						mui.each(items, function(index, item) {
+							ul.appendChild(item);
+						});
+						if (pullup) {
+							pullup = 0;
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(pull_flag);
+						}
+					};
+					fun.failResult = function() {
+						var html = template('result_none', {});
+						document.getElementById("search_result").innerHTML = html;
+					};
+					/**
+					 * 清空搜索结果
+					 */
+					fun.clearResult = function() {
+						//						fun.loadHistory();
+						mui.each(mui("#search_result .all_wish_item_1"), function(index, item) {
+							document.getElementById("search_result").removeChild(item);
+						});
+					};
+					
+					return fun;　　
+				})(fun || {});
+				/** 页面相关属性和逻辑  end**/
+				/** 页面主逻辑 start **/
+				user.setUserData(user.userid, "{$user['id']}");
+				user.setUserData(user.avatar, "{$user['avatar']}");
+				user.setUserData(user.username, "{$user['nickname']}");
+
+				wx.ready(function () {
+					wx.getLocation({
+					    type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+					    success: function (res) {
+					        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+					        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+					        var speed = res.speed; // 速度，以米/每秒计
+					        var accuracy = res.accuracy; // 位置精度
+
+					        var script = document.createElement("script");  
+							script.src = 'http://api.map.baidu.com/geocoder/v2/?ak=5024db5cbf5ee86ce222dcf71bd5e11e&location=' + latitude + ',' + longitude + '&output=json&pois=0&coordtype=wgs84ll&callback=renderReverse';
+							document.body.appendChild(script);  
+					    }
+					});
+				});
+
+				
+
+				city_change = function(city) {
+					        	
+					var origin = user.getUserData(user.city);
+
+					if (city != origin) {
+						user.setUserData(user.city, city);
+
+						document.getElementById("current-city").innerHTML = city;
+						document.getElementById("location-city").value = city;
+						
+						fun.refreshParams();
+						fun.refreshItems();
+						fun.getMyWishList();
+						fun.getAllWishList();
+					}
+		        };
+
+				//初始化单页view
+				var viewApi = mui('#main-view').view({
+					defaultPage: '#wish-page'
+				});
+				//初始化单页的区域滚动
+				mui('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+
+				var view = viewApi.view;
+				(function($) {
+					//处理view的后退与webview后退
+					var oldBack = $.back;
+					$.back = function() {
+						if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+							viewApi.back();
+						} else { //执行webview后退
+							oldBack();
+						}
+					};
+				})(mui);
+
+				view.addEventListener('pageBeforeShow', function(e) {
+					if (e.detail.page.id == 'wish-page') {
+						mui('#search-button')[0].classList.remove('hidden');
+					}
+					else {
+						mui('#search-button')[0].classList.add('hidden');
+					}
+				});
+
+				mui.init();
+
+				document.getElementById("current-city").innerHTML = user.getUserData(user.city);
+		        fun.getMyWishList();
+				fun.getAllWishList();
+
+				mui(".abc").on("tap", "div", fun.selectABC);
+				mui("#city-page").on("tap", ".city-item", fun.selcetCity);
+
+				document.getElementById("city-button").addEventListener('tap', function(e) {
+					$('#location-city').val(user.getUserData(user.city));
+					viewApi.go('#city-page');
+				})
+				//击查找搜索框，查找电影
+				document.getElementById("search-button").addEventListener('tap', function(e) {
+					viewApi.go('#search-page');
+				})
+
+				var timeId = 0;
+				document.getElementById("search-input").addEventListener("input", function(e) {
+					var str = e.target.value.trim();
+					if (!!str) {
+						if (timeId) {
+							clearTimeout(timeId);
+							timeId = 0;
+						}
+						timeId = setTimeout(function() {
+							fun.search(str);
+						}, 500);
+					} else {
+						clearTimeout(timeId);
+						fun.clearResult();
+					}
+				});
+
+				mui('.mui-scroll-wrapper').scroll({
+					indicators: false //是否显示滚动条
+				});
+				fun.listenPullDown();
+				lazyLoadApi1 = mui('#my_wish_content').imageLazyload({
+					autoDestroy: false
+				});
+				lazyLoadApi2 = mui('#all_wish_content').imageLazyload({
+					autoDestroy: false
+				});
+				document.getElementById("search_my_wish_btn").addEventListener("tap", function() {
+					viewApi.go('#search-page');
+				});
+				document.getElementById("goto_allwish_btn").addEventListener("tap", function() {
+					mui("#slider").slider().gotoItem(1);
+				});
+				navigate.whenUpdate(function() {
+					fun.getMyWishList();
+					fun.getAllWishList();
+				});
+				
+				mui("ul").on("tap", "li", fun.openDetail);
+				mui("#search_result").on("tap", "li", fun.openSearchDetail);
+				
+				mui("#my_wish_content").on("tap", ".join_btn", function() {
+					var mid = this.parentElement.querySelector(".id").innerText;
+					var title = this.parentElement.querySelector(".title").innerText;
+					
+					var city = user.getUserData(user.city);
+					var uid = user.getUserData(user.userid);
+
+					location.href = '/Weixin/wishes/' + mid + '?title=' + title + '&city=' + city + '&uid=' + uid;
+				});
+				mui(".all_wish_class").on("tap", ".addwish_btn", function() {
+					var img = this;
+					var id = this.parentElement.querySelector(".id").innerText;
+					var count = this.parentElement.querySelector(".count").innerText;
+					var uid = user.getUserData(user.userid);
+					if (!uid) {
+						mui.toast("您还没登陆,暂时不能添加心愿!");
+						return;
+					}
+					net.send({
+						server: server.wish.addwish,
+						params: {
+							mid: id,
+							uid: uid
+						},
+						success: function() {
+							fun.afterAddWish(img, count);
+							mui.toast("添加心愿成功!");
+						},
+						failure: function(data) {
+							mui.toast(data);
+						}
+					})
+				});
+				mui(".all_wish_class").on("tap", ".have_wish", function() {
+					mui.toast("您已经有这个心愿了哦!");
+				});
+				/** 页面主逻辑 end **/
+			});
+		</script>
+		<!--业务逻辑end-->
+	</body>
+
+</html>

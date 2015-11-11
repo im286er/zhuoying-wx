@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/zhuodianying/!svn/ver/754/1/Application/Weixin/Controller
+END
+KangzhanController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/KangzhanController.class.php
+END
+RedpacketController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/RedpacketController.class.php
+END
+MenuController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/623/1/Application/Weixin/Controller/MenuController.class.php
+END
+NativeController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Controller/NativeController.class.php
+END
+IndexController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/IndexController.class.php
+END
+HomeController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/675/1/Application/Weixin/Controller/HomeController.class.php
+END
+QixiController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/QixiController.class.php
+END
+TemplateController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/TemplateController.class.php
+END
+ActivityController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/754/1/Application/Weixin/Controller/ActivityController.class.php
+END
+SorryController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/SorryController.class.php
+END
+UserController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/754/1/Application/Weixin/Controller/UserController.class.php
+END
+MovieController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/623/1/Application/Weixin/Controller/MovieController.class.php
+END
+PartyController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/PartyController.class.php
+END
+TestController.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Controller/TestController.class.php
+END

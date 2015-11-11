@@ -1,0 +1,34 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>新增自动回复</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">关键字<span class="check-tips">（收到此消息回复）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="key" name="key" value="{$info.key|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">回复内容<span class="check-tips">（收到关键字回复的内容）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" id="reply" name="reply" value="{$info.reply|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $(function() {
+            //初始化选中用户名输入框
+            $("#key").focus();
+        })
+    </script>
+</block>

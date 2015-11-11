@@ -1,0 +1,95 @@
+<block name="body">
+    <div>
+        <!-------------------------------搜索框----------------------------------->
+        <div class="search-form fr cf">
+            <div class="sleft">
+                <input type="text" name="title" class="search-input" value="{:I('cname')}" placeholder="请输入影院名称或者ID">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('choose')}"><i class="btn-search"></i></a>
+            </div>
+        </div>
+
+        <!-------------------------------详细信息----------------------------------->
+        <table id="List" style="width: 500px" title="选择影院" iconcls="icon-edit"></table>
+    </div>
+</block>
+
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <link href="__STATIC__/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="__STATIC__/EasyUI/themes/icon.css" rel="stylesheet" />
+
+    <script src="__STATIC__/EasyUI/jquery-1.8.0.min.js"></script>
+    <script src="__STATIC__/EasyUI/jquery.easyui.min.js?"></script>
+    <script src="__STATIC__/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+
+        $(function () {
+            //当页面首次刷新的时候执行的事件
+            initTable();
+        });
+
+        //实现对DataGird控件的绑定操作
+        function initTable(queryData) {
+            $('#List').datagrid({   //定位到Table标签，Table标签的ID是test
+                url: '{:U("Cinema/getList")}',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                title: '影院列表',  //标识
+                iconCls: 'icon-save',
+                height: 358,
+                nowrap: true,
+                autoRowHeight: false,
+                striped: true,
+                collapsible: false,
+                pagination: true,
+                rownumbers: true,
+                //sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                queryParams: queryData,  //异步查询的参数
+                frozenColumns: [[
+                    { title: 'id', field: 'id', width: 0, checkbox: true }, //主键
+                    { title: '影院名称', field: 'cname', width: 100, sortable: true },
+                    { title: '评分', field: 'ratingstar', width: 100, sortable: true },
+                    { title: '电话1', field: 'tel1', width: 120, sortable: true },
+                    { title: '电话2', field: 'tel2', width: 90, sortable: true },
+                ]],
+                onDblClickRow: function(rowIndex, rowData) {
+                    //实现弹出修改信息的页面
+                    showUpdateDialog(rowData);
+                },
+                toolbar: [{
+                    id: 'btnReload',
+                    text: '刷新',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        //实现刷新栏目中的数据
+                        $("#List").datagrid("reload");
+                    }
+                }]
+            });
+        }
+
+    </script>
+</block>

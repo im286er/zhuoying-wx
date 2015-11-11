@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/zhuodianying/!svn/ver/272/1/lib/getui/igetui/utils
+END
+HttpManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/zhuodianying/!svn/ver/221/1/lib/getui/igetui/utils/HttpManager.php
+END
+GTConfig.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/zhuodianying/!svn/ver/221/1/lib/getui/igetui/utils/GTConfig.php
+END
+ApnsUtils.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/zhuodianying/!svn/ver/221/1/lib/getui/igetui/utils/ApnsUtils.php
+END
+LangUtils.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/zhuodianying/!svn/ver/221/1/lib/getui/igetui/utils/LangUtils.php
+END
+LogUtils.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/zhuodianying/!svn/ver/272/1/lib/getui/igetui/utils/LogUtils.php
+END
+ApiUrlRespectUtils.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/zhuodianying/!svn/ver/221/1/lib/getui/igetui/utils/ApiUrlRespectUtils.php
+END

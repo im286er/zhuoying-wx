@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdn.myline.cc/nanqi/bootstrap-notify.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/style.css" />
+    <style>
+        @keyframes heartchange {
+            0%   {width: 14%;
+                height: 8%;
+                left:40%;
+                top:16%;}
+            50%  { width: 10%;
+                height: 6%;
+                left:42%;
+                top:18%;}
+            100% {width: 14%;
+                height: 8%;
+                left:40%;
+                top:16%;}
+        }
+        @-moz-keyframes heartchange {
+            0%   {width: 14%;
+                height: 8%;
+                left:40%;
+                top:16%;}
+            50%  { width: 10%;
+                height: 6%;
+                left:42%;
+                top:18%;}
+            100% {width: 14%;
+                height: 8%;
+                left:40%;
+                top:16%;}
+        }
+        @-webkit-keyframes heartchange {
+            0%   {width: 14%;
+                height: 8%;
+                left:40%;
+                top:16%;}
+            50%  { width: 10%;
+                height: 6%;
+                left:42%;
+                top:18%;}
+            100% {width: 14%;
+                height: 8%;
+                left:40%;
+                top:16%;}
+        }
+
+        .modal-body {
+            color: #337ab7;
+            height: 200px;
+            background-image: url(__IMG__/cloud_background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #activity-name {
+            font-size:18px;
+            -webkit-text-fill-color: rgb(149, 206, 252);
+            -webkit-text-stroke: 1px #337ab7;
+        }
+        #btn_ok {
+            -webkit-text-fill-color: rgb(149, 206, 252);
+            -webkit-text-stroke: 1px #337ab7;
+        }
+        #btn_ticket{
+            width: 24%;
+            height: 8%;
+            display: block;
+            position:absolute;
+            right:8%;
+            bottom:5%;
+        }
+
+    </style>
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+</head>
+<body>
+<div class="background_img"><img src="__IMG__/background_06_img.png" width="100%" height="100%"/></div>
+<div id="heart_ok"><img src="__IMG__/heart_01_img.png" width="100%" height="100%"/></div>
+<div id="cloud_down"><img src="__IMG__/cloud_copy.png" width="100%" height="100%"/></div>
+<div style="width:80%;height:25%;display: block;position:absolute;left:10%;top:52%;text-align: center;font-size: 18px;color:#fff;">
+    <span id="msg_title" style="font-size: 24px;">谢谢亲们的祝福</span>
+    <br/>
+    <span id="msg_content">我已成功获得2张电影票！</span><a style="color: #0088ff" href="{:U('Qixi/zhufu?activityid='.$activity['id'])}">查看好友祝福</a>
+</div>
+<if condition='$activity["blessing"] gt 76'>
+    <a id="btn_finish" style="text-decoration: none;"><div id="btn_ok">我也要参加</div></a>
+</if>
+
+<div id="ticketDialog" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 10px;margin:0 auto;text-align: center;">
+                    <h3>领票信息</h3>
+                    <form id="form" action="" method="post">
+                        <input type="hidden" name="activityid" value="{$activity['id']}">
+                        <input type="hidden" name="openid" value="{$userinfo['openid']}">
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" placeholder="请输入手机号">                    
+                        <br />
+                        <input type="text" id="city" name="city" class="form-control" placeholder="请输入你所在城市">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a class="btn btn-primary btn-block btn-lg" href="#" onclick="subform(this)" style="border-radius: 0px 0px 5px 5px">提 交</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="over" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 40px">
+                    <span>本活动已经结束，感谢大家的参与！欢迎持续关注“捉影",更多精彩等着你哦！</span>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a class="btn btn-primary btn-block btn-lg" href="{:U('Qixi/zhufu?activityid='.$activity['id'])}" style="border-radius: 0px 0px 5px 5px">查看好友祝福</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--领票信息提交成功后的弹出框-->
+<div id="ok" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display:none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body2" style="padding: 10px;margin:0 auto;text-align: center;font-size: 16px;color:#034d86;">
+                    <h4 style="width:100%;height:40px;display: block;text-align: center;">提交成功</h4>
+                    <p>
+                        捉影小魔仙已收到您的领票信息，会在<span style="font-size:24px;">48</span>小时内跟你联系。捉影小魔仙祝你七夕愉快！
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a class="btn btn-primary btn-block btn-lg" href="#" onclick="$('#ok').modal('hide')" style="border-radius: 0px 0px 5px 5px">关 闭</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <audio autoplay="autoplay" loop="loop" src="http://7xl34f.media1.z0.glb.clouddn.com/bjmusic.mp3"></audio>
+</div>
+<a id="btn_ticket" class="btn btn-link">领取电影票</a>
+<script  src="__JS__/move.js"></script>
+<script>
+    move('#heart_ok').animate('heartchange', {
+        duration: '3s',
+        'iteration-count': 'infinite'
+    }).end();
+    $(function(){
+        $('.modal').on('show.bs.modal', function(){
+            var $this = $(this);
+            var $modal_dialog = $this.find('.modal-dialog');
+            $this.css('display', 'block');
+
+            $('.modal-footer').css('opacity', '1');
+            $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+        });
+        $('#over').modal({
+            'backdrop': 'static',
+            'show': true
+        });
+    })
+
+//    $(function(){
+//        //注册显示时事件,用于垂直居中
+//        var $this = $("#ticketDialog");
+//        var $modal_dialog = $this.find('.modal-dialog');
+//        $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - 240) / 2) });
+//
+//        var isLaunch = '{$userinfo["openid"] == $activity["open_id"]}';
+//
+//        if (isLaunch) {
+//            var blessing = '{$activity["blessing"]}';
+//            $('#msg_title').text('恭喜你！');
+//            $('#msg_content').text('成功集齐' + blessing + '个祝福，您已获得' + (blessing <= 77 ? 1 : 2) + '张当期电影票！');
+//            $('#btn_finish').html('<div id="btn_ok">我要去丽江</div>');
+//            $('#btn_finish').click(function() {
+//                var time='<?php echo time();?>';
+//                alert(time);
+//                if(time>='1440068827')
+//                {
+//                    alert("感谢参与！");
+//                }
+//                else
+//                {
+//                    $.notify('请于七夕节当晚七点零七分后点此链接抽丽江双人游大奖。', { allow_dismiss: false, delay: 3000});
+//                }
+//
+//            });
+//
+//            var status = '{$activity["status"]}';
+//
+//            if (status == '1') {
+//
+//                $("#btn_ticket").click(function(){
+//                    $('#ticketDialog').modal({
+//                        'show': true
+//                    });
+//                });
+//            }
+//            else {
+//                $('#cloud_down').hide();
+//                $('#btn_ticket').hide();
+//            }
+//        }
+//        else {
+//            $('#cloud_down').hide();
+//            $('#btn_ticket').hide();
+//            $('#btn_finish').attr('href', '{:U("launch")}');
+//        }
+//    })
+//
+//    function subform() {
+//
+//        var flag = true;
+//        if($.trim($("#phone_number").val())=='')
+//        {
+//            alert("手机号不能为空!");
+//            $("#phone_number").focus();
+//            flag=false;
+//            return ;
+//        }
+//        if (!$("#phone_number").val().match(/^1[3|4|5|7|8][0-9]\d{8}$/))
+//        {
+//            alert("手机格式输入有误！");
+//            return false;
+//        }
+//        if($.trim($("#city").val())=='')
+//        {
+//            alert("城市不能为空!");
+//            $("#city").focus();
+//            flag=false;
+//            return ;
+//        }
+//
+//        if(flag) {
+//            var formData=$("#form").serialize();
+//            $.ajax({
+//                type: "POST",
+//                url: "{:U('Qixi/finish')}",
+//                data:formData,
+//                success: function(result){
+//
+//                    if (result.success) {
+//                        $('#cloud_down').hide();
+//                        $('#btn_ticket').hide();
+//                        $('#ticketDialog').modal('hide');
+//                        var $this = $("#ok");
+//                        var modal = $this.find('.modal-dialog');
+//                        modal.css({'margin-top': Math.max(0, ($(window).height() - 240) / 2) });
+//                        $('#ok').modal('show');
+//                    }
+//                    else {
+//                        $.notify(result.errmsg, { element: '#ticketDialog', allow_dismiss: false, delay: 1000});
+//                    }
+////                    window.location.href="{:U('launch')}";
+//                }
+//            });
+//        }
+//
+//    }
+</script>
+</body>
+</html>

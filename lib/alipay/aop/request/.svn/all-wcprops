@@ -1,0 +1,1301 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request
+END
+AlipayMobileStdPublicExpressUserQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileStdPublicExpressUserQueryRequest.php
+END
+AlipayUserTradeSearchRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserTradeSearchRequest.php
+END
+AlipayPointOrderGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPointOrderGetRequest.php
+END
+AlipaySystemOauthTokenRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySystemOauthTokenRequest.php
+END
+AlipayMobilePublicShortlinkCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicShortlinkCreateRequest.php
+END
+AlipayMobilePublicQrcodeCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicQrcodeCreateRequest.php
+END
+AlipayMobilePublicLabelUserDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelUserDeleteRequest.php
+END
+AlipayOfflineMarketItemCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketItemCreateRequest.php
+END
+AlipayFlashsalesStockSyncUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayFlashsalesStockSyncUpdateRequest.php
+END
+AlipayPassTplUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassTplUpdateRequest.php
+END
+AlipayMobilePublicTemplateMessageDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicTemplateMessageDeleteRequest.php
+END
+AlipayMobilePublicInfoModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicInfoModifyRequest.php
+END
+AlipayMicropayOrderConfirmpayurlGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMicropayOrderConfirmpayurlGetRequest.php
+END
+AlipayPassTplContentAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassTplContentAddRequest.php
+END
+AlipayAssetAccountGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAssetAccountGetRequest.php
+END
+AlipayZdatafrontDatatransferedSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdatafrontDatatransferedSendRequest.php
+END
+AlipayEcapiprodDrawndnPaymentscheduleGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDrawndnPaymentscheduleGetRequest.php
+END
+AlipayOfflineMarketItemStateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketItemStateRequest.php
+END
+AlipayPassSyncUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassSyncUpdateRequest.php
+END
+AlipayMobileBeaconDeviceAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileBeaconDeviceAddRequest.php
+END
+AlipayMobilePublicGisGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicGisGetRequest.php
+END
+AlipaySiteprobeDeviceInfoDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeDeviceInfoDeleteRequest.php
+END
+AlipayZdatafrontCommonQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdatafrontCommonQueryRequest.php
+END
+AlipayTrustUserScoreGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserScoreGetRequest.php
+END
+AlipayEbppBillSearchRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppBillSearchRequest.php
+END
+AlipayMicropayOrderGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMicropayOrderGetRequest.php
+END
+AlipayEbppPdeductBillPayStatusRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppPdeductBillPayStatusRequest.php
+END
+AlipayOperatorMobileBindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOperatorMobileBindRequest.php
+END
+AlipaySiteprobeShopPublicBindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeShopPublicBindRequest.php
+END
+AlipayMobileBeaconDeviceQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileBeaconDeviceQueryRequest.php
+END
+AlipayMobilePublicAppinfoUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicAppinfoUpdateRequest.php
+END
+AlipayMobileBksigntokenVerifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileBksigntokenVerifyRequest.php
+END
+AlipayOfflineMaterialImageDownloadRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMaterialImageDownloadRequest.php
+END
+AlipayEcapiprodDrawndnRepaymentrecordQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDrawndnRepaymentrecordQueryRequest.php
+END
+AlipayPointBalanceGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPointBalanceGetRequest.php
+END
+AlipayZdataassetsFcdatalabZdatamergetaskRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdataassetsFcdatalabZdatamergetaskRequest.php
+END
+AlipayOfflineMarketShopAlbumUnbindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopAlbumUnbindRequest.php
+END
+AlipaySiteprobeDeviceInfoAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeDeviceInfoAddRequest.php
+END
+AlipaySiteprobeShopInfoGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeShopInfoGetRequest.php
+END
+AlipayEbppBillPayRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppBillPayRequest.php
+END
+AlipayTradeCancelRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTradeCancelRequest.php
+END
+AlipayBossProdArrangementOfflineQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayBossProdArrangementOfflineQueryRequest.php
+END
+AlipayEcapiprodDrawndnLendingrecordQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDrawndnLendingrecordQueryRequest.php
+END
+AlipayAcquireCreateandpayRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAcquireCreateandpayRequest.php
+END
+AlipayOfflineMarketItemModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketItemModifyRequest.php
+END
+AlipayMobilePublicLabelUserAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelUserAddRequest.php
+END
+AlipayAppTokenGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAppTokenGetRequest.php
+END
+AlipayTrustUserTokenGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserTokenGetRequest.php
+END
+AlipayExscUserFirstfundinpourGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayExscUserFirstfundinpourGetRequest.php
+END
+AlipayAcquirePrecreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAcquirePrecreateRequest.php
+END
+AlipayOfflineMarketShopAlbumCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopAlbumCreateRequest.php
+END
+AlipayMobileCodeCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileCodeCreateRequest.php
+END
+AlipayTransferThirdpartyBillCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTransferThirdpartyBillCreateRequest.php
+END
+AlipayZmscoreZrankGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZmscoreZrankGetRequest.php
+END
+AlipayEcapiprodDataPutRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDataPutRequest.php
+END
+AlipayAssetAccountBindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAssetAccountBindRequest.php
+END
+AlipaySiteprobeDeviceInfoUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeDeviceInfoUpdateRequest.php
+END
+AlipayUserAccountGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserAccountGetRequest.php
+END
+AlipayMobilePublicAccountAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicAccountAddRequest.php
+END
+AlipayEbppMerchantConfigGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppMerchantConfigGetRequest.php
+END
+AlipayWapUserAlipayinsideAuthapiRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayWapUserAlipayinsideAuthapiRequest.php
+END
+AlipayMarketingCdpAdvertiseOperateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCdpAdvertiseOperateRequest.php
+END
+AlipayUserAccountUseridBatchqueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserAccountUseridBatchqueryRequest.php
+END
+AirCardConfirmWithPolicyTestTestRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AirCardConfirmWithPolicyTestTestRequest.php
+END
+AlipayAcquireCancelRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAcquireCancelRequest.php
+END
+AlipayMobileStdPublicFollowListRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileStdPublicFollowListRequest.php
+END
+AlipayEbppBillAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppBillAddRequest.php
+END
+AlipayPassInstanceAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassInstanceAddRequest.php
+END
+AlipayMobilePublicAccountDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicAccountDeleteRequest.php
+END
+AlipayMobilePublicInfoQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicInfoQueryRequest.php
+END
+AlipayMobilePublicAccountQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicAccountQueryRequest.php
+END
+AlipayMemberCouponQuerylistRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMemberCouponQuerylistRequest.php
+END
+AlipayMobilePublicMessageCustomSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessageCustomSendRequest.php
+END
+AlipayPassVerifyQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassVerifyQueryRequest.php
+END
+AlipayEcapiprodDrawndnContractGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDrawndnContractGetRequest.php
+END
+AlipayMicropayOrderUnfreezeRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMicropayOrderUnfreezeRequest.php
+END
+AlipaySiteprobeWifiConnectRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeWifiConnectRequest.php
+END
+AlipayPassCodeVerifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassCodeVerifyRequest.php
+END
+AlipayZdataassetsEasyserviceRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdataassetsEasyserviceRequest.php
+END
+AlipayTradePrecreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTradePrecreateRequest.php
+END
+AlipayMobilePublicLabelQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelQueryRequest.php
+END
+AlipayStockPortfolioSingleAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayStockPortfolioSingleAddRequest.php
+END
+AlipayOpenPublicThirdCustomerServiceRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOpenPublicThirdCustomerServiceRequest.php
+END
+AlipayMobileSecuinfosInformationReceiveRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileSecuinfosInformationReceiveRequest.php
+END
+AlipayMobilePublicMockListsmlistApiRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMockListsmlistApiRequest.php
+END
+AlipayOfflineMarketShopCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopCreateRequest.php
+END
+AlipayMarketingCdpAdvertiseQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCdpAdvertiseQueryRequest.php
+END
+AlipayMobileBeaconDeviceModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileBeaconDeviceModifyRequest.php
+END
+AlipayOfflineMarketShopAlbumModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopAlbumModifyRequest.php
+END
+AlipayPassCodeAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassCodeAddRequest.php
+END
+AlipayPcreditHuabeiPromoQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPcreditHuabeiPromoQueryRequest.php
+END
+AlipayMobilePublicMenuUserQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuUserQueryRequest.php
+END
+AlipayMicropayOrderFreezeRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMicropayOrderFreezeRequest.php
+END
+AlipayPcreditUserLevelGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPcreditUserLevelGetRequest.php
+END
+AlipayUserAccountSearchRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserAccountSearchRequest.php
+END
+AlipayMdataTagGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMdataTagGetRequest.php
+END
+AlipayEcapiprodDrawndnDrawndnlistQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDrawndnDrawndnlistQueryRequest.php
+END
+AlipayPassTplContentUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassTplContentUpdateRequest.php
+END
+AlipaySiteprobeShopInfoDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeShopInfoDeleteRequest.php
+END
+AlipayMobilePublicAccountResetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicAccountResetRequest.php
+END
+AlipayMemberCardQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMemberCardQueryRequest.php
+END
+AlipaySecurityInfoAnalysisRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySecurityInfoAnalysisRequest.php
+END
+AlipayTrustUserRiskSummaryGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserRiskSummaryGetRequest.php
+END
+AlipayZdataassetsMetadataRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdataassetsMetadataRequest.php
+END
+AlipayMarketingCdpRecommendQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCdpRecommendQueryRequest.php
+END
+AlipaySiteprobeDeviceInfoGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeDeviceInfoGetRequest.php
+END
+AlipayMemberConsumeNotifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMemberConsumeNotifyRequest.php
+END
+AlipayMobileStdPublicMessageCustomSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileStdPublicMessageCustomSendRequest.php
+END
+AlipayUserAccountFreezeGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserAccountFreezeGetRequest.php
+END
+AlipayMobilePublicTemplateMessageQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicTemplateMessageQueryRequest.php
+END
+AlipayMobilePublicMenuUserUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuUserUpdateRequest.php
+END
+AlipayMobileDeviceinfoDynamicinfoAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileDeviceinfoDynamicinfoAddRequest.php
+END
+AlipayOfflineMarketShopAlbumBindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopAlbumBindRequest.php
+END
+AlipayPassInstanceUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassInstanceUpdateRequest.php
+END
+AlipayEcapiprodCreditGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodCreditGetRequest.php
+END
+AlipayPromorulecenterRuleAnalyzeRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPromorulecenterRuleAnalyzeRequest.php
+END
+AlipayMarketingCdpAdvertiseCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCdpAdvertiseCreateRequest.php
+END
+AlipayTradeRefundRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTradeRefundRequest.php
+END
+AlipayMobilePublicMenuAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuAddRequest.php
+END
+AlipayPassTemplateUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassTemplateUpdateRequest.php
+END
+AlipayOfflineMarketShopBatchqueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopBatchqueryRequest.php
+END
+AlipayOfflineMarketShopPublicBindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopPublicBindRequest.php
+END
+AlipayUserContractGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserContractGetRequest.php
+END
+AlipayMobilePublicMenuDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuDeleteRequest.php
+END
+AlipaySiteprobeDeviceInfoSearchRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeDeviceInfoSearchRequest.php
+END
+AlipayMobilePublicLabelAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelAddRequest.php
+END
+AlipayTrustUserZminfoPairGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserZminfoPairGetRequest.php
+END
+AlipayMobilePublicMenuQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuQueryRequest.php
+END
+AlipayMobileBeaconDeviceDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileBeaconDeviceDeleteRequest.php
+END
+AlipayMemberCardOpenRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMemberCardOpenRequest.php
+END
+AlipayOfflineMarketShopAlbumDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopAlbumDeleteRequest.php
+END
+AlipayMicropayOrderDirectPayRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMicropayOrderDirectPayRequest.php
+END
+AlipayPointBudgetGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPointBudgetGetRequest.php
+END
+AlipayExscUserCurrentsignGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayExscUserCurrentsignGetRequest.php
+END
+AlipayMarketingCampaignActivityOfflineCreateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCampaignActivityOfflineCreateRequest.php
+END
+AlipayMarketingCampaignActivityOfflineTriggerRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCampaignActivityOfflineTriggerRequest.php
+END
+AlipayOfflineMarketProductUsedetailRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketProductUsedetailRequest.php
+END
+AlipayOfflineMarketShopModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopModifyRequest.php
+END
+AlipayEbppBillBatchPayurlGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppBillBatchPayurlGetRequest.php
+END
+AlipaySiteprobeWifiUnconnectRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeWifiUnconnectRequest.php
+END
+AlipayMobilePublicMessageTotalSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessageTotalSendRequest.php
+END
+AlipayEbppBillGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppBillGetRequest.php
+END
+AlipayExscUserFirstsignGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayExscUserFirstsignGetRequest.php
+END
+AlipayAssetAccountUnbindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAssetAccountUnbindRequest.php
+END
+AlipayAcquireRefundRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAcquireRefundRequest.php
+END
+AlipayMobilePublicMessagespecifyPushRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessagespecifyPushRequest.php
+END
+AlipayPointOrderAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPointOrderAddRequest.php
+END
+AlipayPassTplAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassTplAddRequest.php
+END
+AlipayDataServiceOpenAnalyzeRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayDataServiceOpenAnalyzeRequest.php
+END
+AlipayMobileRecommendGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileRecommendGetRequest.php
+END
+AlipaySiteprobeShopInfoUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeShopInfoUpdateRequest.php
+END
+AlipaySiteprobeUserInfoGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeUserInfoGetRequest.php
+END
+AlipayTradePayRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTradePayRequest.php
+END
+AlipayMobilePublicMessagePushRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessagePushRequest.php
+END
+AlipayPassTemplateAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassTemplateAddRequest.php
+END
+AlipayOfflineMaterialImageModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMaterialImageModifyRequest.php
+END
+AlipayMobilePublicMessagebatchPushRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessagebatchPushRequest.php
+END
+AlipayMemberCardDeletecardRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMemberCardDeletecardRequest.php
+END
+AlipayOfflineMarketProductBatchqueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketProductBatchqueryRequest.php
+END
+AlipayAcquireQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAcquireQueryRequest.php
+END
+AlipayOfflineMarketShopPublicUnbindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopPublicUnbindRequest.php
+END
+AlipayZdataserviceUnidataQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdataserviceUnidataQueryRequest.php
+END
+AlipayMobilePublicMessageLabelSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessageLabelSendRequest.php
+END
+AlipayMobilePublicFollowListRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicFollowListRequest.php
+END
+AlipayOpenAuthTokenAppRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOpenAuthTokenAppRequest.php
+END
+AlipaySiteprobeShopPublicUnbindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeShopPublicUnbindRequest.php
+END
+AlipayEbppBillPayurlGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEbppBillPayurlGetRequest.php
+END
+AlipayTrustUserStandardVerifyGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserStandardVerifyGetRequest.php
+END
+AlipayMappprodAccountBindingSyncRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMappprodAccountBindingSyncRequest.php
+END
+AlipayMarketingCdpAdvertiseModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMarketingCdpAdvertiseModifyRequest.php
+END
+AlipayMobileCodeQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileCodeQueryRequest.php
+END
+AlipayMobilePublicLabelDeleteRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelDeleteRequest.php
+END
+AlipayEcapiprodDrawndnFeerecordQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcapiprodDrawndnFeerecordQueryRequest.php
+END
+AlipaySecurityRiskDetectRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySecurityRiskDetectRequest.php
+END
+AlipayZdatafrontDatatransferedFileuploadRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayZdatafrontDatatransferedFileuploadRequest.php
+END
+AlipayOfflineMaterialImageQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMaterialImageQueryRequest.php
+END
+AlipayMobilePublicLabelUserQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelUserQueryRequest.php
+END
+AlipayMobileStdPublicMenuQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileStdPublicMenuQueryRequest.php
+END
+AlipayMobilePublicMenuUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuUpdateRequest.php
+END
+AlipaySiteprobeInstoreUserRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeInstoreUserRequest.php
+END
+AlipayMobilePublicTemplateMessageGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicTemplateMessageGetRequest.php
+END
+AlipayMobileShakeUserQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileShakeUserQueryRequest.php
+END
+AlipayEcardEduPublicBindRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayEcardEduPublicBindRequest.php
+END
+AlipayStockPortfolioAllGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayStockPortfolioAllGetRequest.php
+END
+AlipayMpointprodBenefitDetailGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMpointprodBenefitDetailGetRequest.php
+END
+AlipaySiteprobeShopInfoAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipaySiteprobeShopInfoAddRequest.php
+END
+AlipayPassSyncAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassSyncAddRequest.php
+END
+AlipayTrustUserAuthSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserAuthSendRequest.php
+END
+AlipayTrustUserReportGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserReportGetRequest.php
+END
+AlipayUserUserinfoShareRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserUserinfoShareRequest.php
+END
+AlipayMicropayOrderFreezepayurlGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMicropayOrderFreezepayurlGetRequest.php
+END
+AlipayUserGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserGetRequest.php
+END
+AlipayMobilePublicTemplateMessageModifyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicTemplateMessageModifyRequest.php
+END
+AlipayAcquireCloseRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayAcquireCloseRequest.php
+END
+AlipayPassFileAddRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPassFileAddRequest.php
+END
+AlipayMerchantTicketUseRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMerchantTicketUseRequest.php
+END
+AlipayPlatformOpenidGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPlatformOpenidGetRequest.php
+END
+AlipayTradeQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTradeQueryRequest.php
+END
+AlipayOfflineMarketShopAlbumQueryRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopAlbumQueryRequest.php
+END
+AlipayMobilePublicMessageSingleSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMessageSingleSendRequest.php
+END
+AlipayDataBillDownloadurlGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayDataBillDownloadurlGetRequest.php
+END
+AlipayOfflineMarketShopQuerydetailRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketShopQuerydetailRequest.php
+END
+AlipayMobilePublicMenuGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicMenuGetRequest.php
+END
+AlipayMobileBeaconMessageSendRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobileBeaconMessageSendRequest.php
+END
+AlipayOfflineMarketProductQuerydetailRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMarketProductQuerydetailRequest.php
+END
+AlipayPlatformUseridGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayPlatformUseridGetRequest.php
+END
+AlipayMobilePublicContactFollowListRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicContactFollowListRequest.php
+END
+MonitorHeartbeatSynRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/MonitorHeartbeatSynRequest.php
+END
+AlipayUserMemberCardUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserMemberCardUpdateRequest.php
+END
+AlipayMemberCouponQuerydetailRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMemberCouponQuerydetailRequest.php
+END
+AlipayOpenPublicMultimediaDownloadProxyRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOpenPublicMultimediaDownloadProxyRequest.php
+END
+AlipayTrustUserRiskidentifyGetRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayTrustUserRiskidentifyGetRequest.php
+END
+AlipayMobilePublicLabelUpdateRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicLabelUpdateRequest.php
+END
+AlipayOfflineMaterialImageUploadRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayOfflineMaterialImageUploadRequest.php
+END
+AlipayMobilePublicStdMockListsmlistApiRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayMobilePublicStdMockListsmlistApiRequest.php
+END
+AlipayUserTestRequest.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/zhuodianying/!svn/ver/758/1/lib/alipay/aop/request/AlipayUserTestRequest.php
+END

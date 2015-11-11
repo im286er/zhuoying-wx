@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title>电影中心</title>
+        <link rel="stylesheet" type="text/css" href="__CSS__/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/layout.css" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/index.css" />
+        <style>
+            .mui-control-item {
+                background: #f0f0f0;
+            }
+            .mui-scroll-wrapper {
+                background: #DDDDDD;
+            }
+            .movie_info_line>div:nth-child(1) {
+                flex: 0 0 80px;
+                text-align: right;
+            }
+            .movie_info_line>div:nth-child(2) {
+                flex: 1 1 0;
+                text-align: left;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+            .movie_info_line>div:nth-child(2) {
+                flex: 1 1 0;
+                text-align: left;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+            .movie_info_line:last-child {
+                border-bottom: 0;
+                border-radius: 20px;
+            }
+            .col>* {
+                padding: 0;
+                margin: 0;
+            }
+            button:active {
+                background: red;
+            }
+            button.mui-active {
+                background: red;
+            }
+            .mui-table-view-cell:after {
+                height: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">电影中心</h1>
+        </header>
+        <div class="mui-content  mui-fullscreen">
+            <div id="slider" class="mui-slider" style="height: 100%;">
+                <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                    <a class="mui-control-item" href="#movie-info">
+                        电影信息
+                    </a>
+                    <a class="mui-control-item" href="#movie-activity">
+                        电影活动
+                    </a>
+                    <!--<a class="mui-control-item" href="#movie-wish">
+                        心愿
+                    </a>-->
+                    <a class="mui-control-item" href="#movie-talk">
+                        评论
+                    </a>
+                </div>
+                <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+                <div class="mui-slider-group">
+                    <div id="movie-info" class="mui-slider-item mui-control-content mui-active" style="border-bottom: none">
+                        <div class="mui-scroll-wrapper">
+                            <div id="movie_info_content" class="mui-scroll">
+                            </div>
+                            <button id="like_btn" class="fs1" style="width: 100%;z-index: 99;position: absolute;bottom: 0;border: none;height: 50px;background:#E9511D;color: white;margin: 0;border-radius: 0;">
+                                我也喜欢
+                            </button>
+                        </div>
+                    </div>
+                    <div id="movie-activity" class="mui-slider-item mui-control-content">
+                        <div class="mui-scroll-wrapper">
+                            <div id="movie_activity_content" class="mui-scroll">
+                                <ul id="movie_activity_ul" class="mui-table-view" style="width: 100%;">
+
+                                </ul>
+                                <div id="empty_act_item" class="hidden fs1" style="color:#5a5a5a;width: 100%;text-align: center;padding: 5%;">这个电影还没有活动哦!!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="movie-wish" class="mui-slider-item mui-control-content">
+                        <div class="mui-scroll-wrapper">
+                            <div id="movie_wish_content" class="mui-scroll">
+
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div id="movie-talk" class="mui-slider-item mui-control-content" style="border-bottom: none">
+                        <div class="mui-scroll-wrapper" style="margin-bottom: 50px;">
+                            <div id="movie_talk_content" class="mui-scroll">
+                                <ul id="movie_talk_ul" class="mui-table-view" style="width: 100%;background-color: #DDDDDD;">
+
+                                </ul>
+                                <div id="empty_comment_item" class="hidden fs1" style="color:#5a5a5a;width: 100%;text-align: center;padding: 5%;">还没有评论快来添加吧!!</div>
+                            </div>
+                        </div>
+                        <a href="#comment-popover" id="talk_btn" class="fs1" style="width: 100%;z-index: 99;position: absolute;left: 0;bottom: 0;border: none;height: 50px;background:#2d78f4;color: white;margin: 0;border-radius: 0;text-align: center;line-height: 50px;">
+                            我来说说
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="comment-popover" class="mui-popover">
+            <!--页面主体内容-->
+            <input id="comment_title" class="no-radius no-border" type="text" style="width: 100%;margin-top: 10%;" maxlength="18" placeholder="您主要想问大家些什么呢?" />
+            <textarea id="comment_content" class="no-radius no-border" type="text" style="width: 100%;margin-top: 20px;" rows="8" placeholder="那么详细描述一下吧~"></textarea>
+            <button id="submit" style="width: 100%;margin: 30px 0;">提交评论</button>
+        </div>
+
+        <!--模版列表 start-->
+        <script id="movie_info" type="text/html">
+            <div class="mui-content-padded" style="background: #DDDDDD;">
+                <div style="padding: 0;">
+                    <img src="{{info.large_images}}" />
+                </div>
+                <div class="white" style="padding: 10px;">
+                    <div class="row center-span middle-span">
+                        <div class="col-span-12 nopadding fs1-2 color-primary">{{info.title}}</div>
+                        <div class="col-span-12 nopadding fs0-8">{{info.original_title}}</div>
+                    </div>
+                    <div class="row middle-span padding-10 center-span">
+                        <div class="row col-span-6 center-span">{{info.genres}}</div>
+                        <div class="row col-span-6 center-span">{{info.countries}}/{{info.year}}</div>
+                    </div>
+                    <div class="row">
+                        <div id="summary" style="word-break: break-all;white-space: normal;text-overflow: ellipsis;overflow:hidden;height: 4.5rem;text-align: left;">{{info.summary}}</div>
+                        <div id="more_summary" class="row col-span-12 center-span middle-span">
+                            <img src="__IMG__/app/icon_back.png" style="-webkit-transform:rotate(-90deg);width: 20px;padding: 0 5px;margin-top: 5px;" />
+                        </div>
+                    </div>
+                    <!--<div class="row movie_info_line">
+                        <div>导演:</div>
+                        <div>{{info.directors}}</div>
+                    </div>
+                    <div class="row movie_info_line">
+                        <div>类型:</div>
+                        <div>{{info.genres}}</div>
+                    </div>
+                    <div class="row movie_info_line">
+                        <div>地区:</div>
+                        <div>{{info.countries}}</div>
+                    </div>
+                    <div class="row movie_info_line">
+                        <div>主演:</div>
+                        <div style="word-wrap: break-word;">{{info.casts}}</div>
+                    </div>
+                    <div class="row movie_info_line">
+                        <div>年代:</div>
+                        <div>{{info.year}}</div>
+                    </div>
+                    <div class="row movie_info_line">
+                        <div>简介:</div>
+                        <div>{{info.summary}}</div>
+                    </div>-->
+                </div>
+                <div style="margin-top: 10px;padding: 10px;margin-bottom: 60px;" class="white">
+                    <div class="row">
+                        <div class="col-span-12 fs1-2 color-primary row center-span">主要影星</div>
+                        <div class="col-span-12" style="height: 100px;white-space: normal;word-break: break-all;text-align: left;text-overflow: ellipsis;overflow:hidden">{{info.casts}}</div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <!--模版列表 start-->
+        <script id="activity_item" type="text/html">
+            {{each list as value index}}
+            <li class="mui-table-view-cell" style="margin: 0 0 2px 0;background-size: 100% 100%;padding: 0;">
+                <div class="hidden aid">{{value.aid}}</div>
+                <div class="hidden title">{{value.title}}</div>
+                <div class="hidden latitude">{{value.latitude}}</div>
+                <div class="hidden longitude">{{value.longitude}}</div>
+                <div style="height: 180px;width: 100%;padding: 0;" class="row">
+                    <div style="position:absolute;top: 130px;background: rgba(10,10,10,0.6);z-index:20;color: white;height: 30px;line-height: 30px;padding: 0 5px 0 5px;" class="row-span-12">
+                        <span class="row-span-5 fs1-2 nopadding">{{value.money | convert_money}}</span>
+                        <span class="row-span-5 fs0-8">元/人</span>
+                    </div>
+                    <div style="position:absolute;top: 150px;right:20px;height: 60px;width: 60px;border-radius: 40px;background: url({{value.avatar}});background-position: center;background-size: 100% auto;border: 2px solid white;-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);z-index: 10;">
+                    </div>
+                </div>
+                <div style="position: absolute;top: 0;height: 180px;width: 100%;overflow: hidden;">
+                    <img src="{{value.picture}}" style="width: 100%;height: auto;">
+                </div>
+                <div class="col row-span-12" style="padding-top: 5px;">
+                    <div class="row row-span-12 nopadding" style="display: inline-block;">
+                        <span class="mui-icon mui-icon-home nopadding"></span>
+                        <span class="fs1-2 nopadding" style="padding-bottom: 0;color: #E9511D;display: inline-block;vertical-align: bottom;text-overflow: ellipsis;overflow: hidden;width: 40%;white-space: nowrap;text-align: left;">{{value.title}}</span>
+                    </div>
+                    <div class="row row-span-12 nopadding">
+                        <div class="nopadding">
+                            <span class="mui-icon mui-icon-home nopadding"></span>
+                            <span class="fs1 nopadding" style="padding-bottom: 0;padding-top: 0;">{{value.movie_name}}</span>
+                        </div>
+                        <div class="nopadding">
+                            <span class="mui-icon mui-icon-home nopadding" style="padding-left: 20px;"></span>
+                            <span class="fs1 nopadding" style="padding-bottom: 0;padding-top: 0;">{{value.starttime | dateFormat:'MM月dd日 hh:mm'}}</span>
+                        </div>
+                    </div>
+                    <div class="row row-span-12 nopadding" style="vertical-align: bottom;display: inline-block;">
+                        <span class="mui-icon mui-icon-home nopadding"></span>
+                        <span class="fs0-8 nopadding" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 75% !important;vertical-align: bottom;display: inline-block;text-align: left;">{{value.address}}</span>
+                    </div>
+                </div>
+
+            </li>
+            {{/each}}
+        </script>
+
+        <style>
+            .talk_avatar_div {
+                height: 40px;
+                width: 40px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+                border: 1px solid white;
+                -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5);
+                border-radius: 50px;
+            }
+            .talk_item {
+                margin: 5px 0 5px 0;
+                border: 1px solid #D3D3D3;
+                border-left: 0;
+                border-right: 0;
+                background-color: white;
+            }
+        </style>
+
+        <!--模版列表 start-->
+        <script id="talk_item" type="text/html">
+            {{each list as value index}}
+            <li class="mui-table-view-cell talk_item">
+                <div class="row row-span-12 nopadding">
+                    <div class="col-span-2 middle-span center-span nopadding">
+                        <div class="talk_avatar_div" style="background: url({{value.avatar}});background-size: cover;"></div>
+                    </div>
+                    <div class="col-span-8 col start-span center-span nopadding">
+                        <span class="nopadding fs1" style="text-align: left;color: orangered;">{{value.nickname}}</span>
+                    </div>
+                    <div class="col-span-2 col middle-span center-span nopadding">
+                        <span class="nopadding fs0-8" style="text-align: right;">{{value.createtime | dateFormat:"MM-dd"}}</span>
+                    </div>
+                </div>
+                <div class="row row-span-12 nopadding" style="padding:5px 0 5px 0;">
+                    <div class="col-span-2 middle-span center-span nopadding"></div>
+                    <span class="fs1 nopadding col-span-10" style="white-space: normal;text-align: left;overflow: hidden;text-overflow: ellipsis;word-break: break-all;">{{value.title}}</span>
+                </div>
+                <div class="row row-span-12 nopadding" style="padding:5px 0 0 0;">
+                    <div class="col-span-2 middle-span center-span nopadding"></div>
+                    <pre class="col-span-10 nopadding fs0-8" style="white-space: pre-wrap;text-align: left;">{{value.content}}</pre>
+                </div>
+            </li>
+            {{/each}}
+        </script>
+        <!--模版列表 end-->
+        <!--框架载入start-->
+        <script src="__JS__/mui.min.js"></script>
+        <script src="__JS__/sea.js"></script>
+        <!--框架载入end-->
+        <!--业务逻辑start-->
+        <script type="text/javascript" charset="utf-8">
+            seajs.config({
+                base: "__JS__",
+                alias: {
+                    'movieCenter': 'controller/movie/movieCenter',
+                    'server': 'config/server',
+                    'net': 'util/net',
+                    'user': 'config/user',
+                    'common': 'util/common',
+                    'convert': 'util/convert',
+                    'template': 'template',
+                    "views": "config/views",
+                }
+            });
+            seajs.use(["movieCenter", "user", "common", "template", "net", "server", "convert", "views"], function(app, user, common, template, net, server, convert, views) {
+                /**定义变量  start */
+                var title; //电影标题
+                var mid; //电影id
+                var flag = false;
+                /** 定义变量  end**/
+                /**模版方法  start */
+                /**模版方法  end**/
+                /**页面相关功能  start**/
+                var fun = (function(fun) {　
+                    fun.loadMovieTitle = function() {
+                        document.querySelector('.mui-title').innerHTML = title;
+                    };
+                    fun.loadMovieInfo = function() {
+                        app.loadMovieInfo(
+                            mid,
+                            fun.loadMovieInfoSuccess,
+                            function() {
+                            },
+                            function() {
+                            });
+                    };
+                    /**
+                     * 获取电影详情成功
+                     * @param {Object} data
+                     */
+                    fun.loadMovieInfoSuccess = function(data) {
+                        var data = {
+                            info: data
+                        };
+                        var html = template('movie_info', data);
+                        document.getElementById("movie_info_content").innerHTML = html;
+                        document.getElementById('more_summary').addEventListener("tap", function() {
+                            document.getElementById("summary").classList.add("height-auto");
+                            document.getElementById("more_summary").classList.add("hidden");
+                        });
+                    };
+                    fun.loadActivityList = function() {
+                        var city = user.getUserData(user.city);
+                        net.send({
+                            server: server.activity.getactivitybymovie,
+                            params: {
+                                city: city,
+                                mid: mid
+                            },
+                            success: fun.loadActivityListSuccess,
+                            failure: fun.loadActivityListFailure,
+                            callback: function() {
+                            }
+                        });
+                    };
+                    fun.loadActivityListFailure = function(data) {
+                        console.log(data);
+                    };
+                    fun.loadActivityListSuccess = function(data) {
+                        if (data.length == 0) {
+                            document.getElementById("empty_act_item").classList.remove("hidden");
+                        } else {
+                            document.getElementById("empty_act_item").classList.add("hidden");
+                        }
+                        var ul = document.getElementById("movie_activity_ul");
+                        ul.innerHTML = "";
+                        var data = {
+                            list: data
+                        };
+                        var html = template('activity_item', data);
+                        var items = common.parseDom(html);
+                        mui.each(items, function(index, item) {
+                            ul.appendChild(item);
+                        });
+                    };
+                    fun.loadMovieComment = function() {
+                        net.send({
+                            server: server.movie.getComment,
+                            params: {
+                                mid: mid
+                            },
+                            success: fun.loadCommentListSuccess,
+                            failure: fun.loadCommentListFailure,
+                            callback: function() {
+                            }
+                        });
+                    };
+                    fun.loadCommentListSuccess = function(data) {
+                        if (data.length == 0) {
+                            document.getElementById("empty_comment_item").classList.remove("hidden");
+                        } else {
+                            document.getElementById("empty_comment_item").classList.add("hidden");
+                        }
+                        for(var i=0;i<data.length;i++){
+                            if(data[i].avatar==""){
+                                data[i].avatar="__IMG__/user/user.png";
+                            }
+                        }
+                        var ul = document.getElementById("movie_talk_ul");
+                        var data = {
+                            list: data
+                        };
+                        mui.each(mui("#movie_talk_ul .talk_item"), function(index, item) {
+                            document.getElementById("movie_talk_ul").removeChild(item);
+                        });
+                        var html = template('talk_item', data);
+                        var items = common.parseDom(html);
+                        mui.each(items, function(index, item) {
+                            ul.appendChild(item);
+                        });
+                    };
+                    /**
+                     * 清理内容
+                     */
+                    fun.clearMovieData = function() {
+                        document.getElementById("movie_info_content").innerHTML = "";
+                    };
+                    fun.addwish = function() {
+                        net.send({
+                            server: server.wish.addwish,
+                            params: {
+                                mid: mid,
+                                uid: user.getUserData(user.userid)
+                            },
+                            success: fun.addwishSuccess,
+                            failure: fun.addwishError
+                        });
+                    };
+                    fun.addwishSuccess = function() {
+                        mui.toast("你已经成功添加一个心愿了!");
+                    };
+                    fun.addwishError = function(e) {
+                        mui.toast(e.errmsg);
+                    };
+                    fun.addComment = function(title, content) {
+                        net.send({
+                            server: server.movie.addComment,
+                            params: {
+                                mid: mid,
+                                uid: user.getUserData(user.userid),
+                                title: title,
+                                content: content
+                            },
+                            success: function() {
+                                mui.toast("评论成功!");
+                                fun.loadMovieComment();
+                            },
+                            failure: function() {
+                                mui.toast("评论失败!");
+                            }
+                        });
+                    };
+                    return fun;　　
+                })(fun || {});
+                /** 页面相关功能逻辑  end**/
+                //mui初始化
+                mui.init();
+                mui.ready(function() {
+                    /** 页面主逻辑 start **/
+                    mid = "{$mid}";
+                    title = "{$title}";
+                    var city = "{$city}";
+                    var uid = "{$uid}";
+                    user.setUserData(user.city, city);
+                    user.setUserData(user.userid, uid);
+
+                    fun.loadMovieTitle();
+                    fun.loadMovieInfo();
+                    fun.loadActivityList();
+                    fun.loadMovieComment();
+
+                    //初始化scroll控件
+                    mui(".mui-scroll-wrapper").scroll({
+                        bounce: true,
+                        indicators: false, //是否显示滚动条
+                        deceleration: mui.os.ios ? 0.003 : 0.0009
+                    });
+                    //打开详情
+                    mui("#movie_activity_ul").on("tap", ".mui-table-view-cell", function() {
+                        var aid = this.querySelector(".aid").innerText;
+                        
+                        location.href = '/Weixin/activitys/' + aid; 
+                    });
+                    //添加心愿
+                    document.getElementById("like_btn").addEventListener("tap", fun.addwish);
+
+                    document.getElementById("submit").addEventListener("tap", function() {
+                        var uid = user.getUserData(user.userid);
+                        if(!uid){
+                            mui.toast("您还没有登陆,不能评论哟~");
+                            return;
+                        }
+                        var comment_title = document.getElementById("comment_title").value;
+                        var comment_content = document.getElementById("comment_content").value;
+                        if (!!comment_title && !!comment_content) {
+                            fun.addComment(comment_title, comment_content);
+                            mui('.mui-popover').popover('hide');
+                        } else {
+                            mui.toast("好像还缺些东西,检查一下吧~");
+                        }
+                    });
+                    /** 页面主逻辑 end **/
+                });
+            });
+        </script>
+        <!--业务逻辑end-->
+    </body>
+
+</html>

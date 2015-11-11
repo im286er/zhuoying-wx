@@ -1,0 +1,46 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <div class="main-title">
+        <h2>审核组织者信息</h2>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="form-item">
+            <label for="auth-title" class="item-label">姓名</label>
+            <div class="controls">
+                <input type="text" name="uname" class="text input-large" value="{$info.uname}"/>
+            </div>
+        </div>
+        <div class="form-item">
+            <label for="auth-description" class="item-label">身份证号</label>
+            <div class="controls">
+                <input type="text" name="idcard" class="text input-large" value="{$info.idcard}"/>
+            </div>
+        </div>
+         <div class="form-item">
+            <label for="auth-description" class="item-label">身份证正面</label>
+            <div class="controls">
+                <img src="{$info.img_up}">
+            </div>
+        </div>
+         <div class="form-item">
+            <label for="auth-description" class="item-label">身份证反面</label>
+            <div class="controls">
+                <img src="{$info.img_down}">
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id}" />
+            <a href="{:U('changeHost?method=consent&id='.$info['id'].'&uid='.$info['uid'])}" class="ajax-get">通过</a>
+            <a href="{:U('changeHost?method=refusal&id='.$info['id'].'&uid='.$info['uid'])}" class="ajax-get">拒绝</a>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+<block name="script">
+<script type="text/javascript" charset="utf-8">
+    //导航高亮
+    highlight_subnav('{:U('hostList')}');
+</script>
+</block>

@@ -1,0 +1,109 @@
+<!-- 电影基础信息编辑页面 -->
+<extend name="Public/base" />
+<block name="body">
+    <div class="main-title">
+        <h2>基础信息维护</h2>
+    </div>
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <volist name="Think.config.MOVIE_BASIC_LIST" id="basic">
+
+                <li <eq name="type" value="$key">class="current"</eq>><a href="{:U('?type='.$key)}">{$basic}</a></li>
+
+            </volist>
+        </ul>
+        <div class="tab-content">
+            <form action="{:U('save')}" method="post" class="form-horizontal">
+                <div class="cf">
+                    <div class="fl">
+                        <a class="btn" href="{:U('add?type='.$type)}">新 增</a>
+                        <button class="btn ajax-post confirm" url="{:U('changeStatus?type='.$type.'&method=delete')}" target-form="ids">删 除</button>
+                    </div>
+
+                    <!-- 高级搜索 -->
+                    <div class="search-form fr cf">
+                        <div class="sleft">
+                            <input type="text" name="title" class="search-input" value="{:I('title')}" placeholder="请输入名称或者ID">
+                            <a class="sch-btn" href="javascript:;" id="search" url="{:U('index?type='.$type)}"><i class="btn-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 数据列表 -->
+                <div class="data-table table-striped">
+                    <table class="">
+                        <thead>
+                        <tr>
+                            <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                            <th class="">ID</th>
+                            <th class="">名称</th>
+                            <th class="">创建时间</th>
+                            <th class="">删除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <notempty name="_list">
+                            <volist name="_list" id="vo">
+                                <tr>
+                                    <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+                                    <td>{$vo.id} </td>
+                                    <td>{$vo.title}</td>
+                                    <td>{$vo.createtime}</td>
+                                    <td>
+                                        <a href="{:U('Movie/changeStatus?type='.$type.'method=delete&id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                                    </td>
+                                </tr>
+                            </volist>
+                            <else/>
+                            <td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+                        </notempty>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="page">
+                    {$_page}
+                </div>
+                <div class="form-item">
+                    <label class="item-label"></label>
+                    <div class="controls">
+                        <empty name="list">
+                            <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button>
+                        <else/>
+                            <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+                        </empty>
+
+                        <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+        //导航高亮
+        highlight_subnav('{:U("Basic/index")}');
+    </script>
+</block>

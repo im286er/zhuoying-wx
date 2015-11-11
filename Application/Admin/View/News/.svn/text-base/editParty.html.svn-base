@@ -1,0 +1,139 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title cf">
+        <h2>{$meta_title}</h2>
+    </div>
+    <div class="tab-wrap">
+        <ul class="tab-nav nav">
+            <empty name="info">
+                <li><a class="disabled" href="javascript:void(0);">基 本</a></li>
+                <li class="current"><a href="javascript:void(0);">活 动</a></li>
+                <li><a class="disabled" href="javascript:void(0);">电 影</a></li>
+            <else/>
+                <li><a href="{:U('edit?id='.$nid)}">基 本</a></li>
+                <li class="current"><a href="javascript:void(0);">活 动</a></li>
+                <li><a href="{:U('editMovies?nid='.$nid)}">电 影</a></li>
+            </empty>
+        </ul>
+        <div class="tab-content">
+            <form action="{:U()}" method="post" class="form-horizontal">
+                <div class="form-item">
+                    <label class="item-label">活动标题<span class="check-tips">（活动标题，显示在活动详情，购票成功会发送到用户手机上）</span></label>
+
+                    <div class="controls">
+                        <input type="hidden" name="fid" value="{$info.title|default=''}">
+                        <input type="text" class="text input-large" name="title" value="{$info.title}">
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label class="item-label">影院<span class="check-tips">（活动所在影院）</span></label>
+
+                    <div class="controls">
+                        <input type="hidden" name="cid" value="{$info.cid|default=''}">
+                        <select id="cid" class="input-large easyui-combobox" style="height: 20px; width: 220px"></select>
+                    </div>
+
+                </div>
+                <div class="form-item">
+                    <label class="item-label">票价<span class="check-tips">（活动票价）</span></label>
+
+                    <div class="controls">
+                        <input type="hidden" name="fid" value="{$info.fid|default=''}">
+                        <input type="text" class="text input-small" name="price" value="{$info.price}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">开始时间<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" name="starttime" class="text time" value="{$info.starttime|time_format}"
+                               placeholder="请选择时间">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">结束时间<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" name="endtime" class="text time" value="{$info.endtime|time_format}"
+                               placeholder="请选择时间">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">总人数<span class="check-tips">（活动参与人数）</span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-small" name="cnttotal" value="{$info.cnttotal}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="item-label">剩余名额<span class="check-tips"></span></label>
+
+                    <div class="controls">
+                        <input type="text" class="text input-small" name="cntremain" value="{$info.cntremain}">
+                    </div>
+                </div>
+
+                <div class="form-item" style="margin-top: 20px">
+                    <input type="hidden" name="nid" value="{$nid|default=''}">
+                    <empty name="info">
+                        <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">下一步</button>
+                    <else/>
+                        <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+                    </empty>
+                    <button class="btn btn-return" onclick="javascript:location.href='{:U('index')}';return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--选择电影弹出层-->
+    <div id="divChooseCinema" class="easyui-dialog" style="width:580px;height:450px;padding:10px 20px"
+         closed="true" resizable="true" modal="true" buttons="#dlg-buttons">
+        <iframe scrolling="no" id='IframeUpdate' frameborder="0" src="" style="width:100%;height:100%;padding:0"></iframe>
+    </div>
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <php>if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+        ';
+    </php>
+
+    <link href="__STATIC__/EasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="__STATIC__/EasyUI/themes/icon.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/EasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+
+            loadData();
+
+            $('#cid').combobox('setValue', '{$info.cname}');
+        })
+
+        function loadData(){
+            $('#cid').combobox({
+                url:'{:U("Cinema/getList")}',
+                valueField:'id',
+                textField:'cname'
+            });
+        }
+    </script>
+</block>

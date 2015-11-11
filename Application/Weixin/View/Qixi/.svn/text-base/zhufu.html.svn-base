@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="__CSS__/style.css" />
+
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false,
+            appId: '{$package["appid"]}',
+            timestamp: {$package["timestamp"]},
+            nonceStr: '{$package["nonceStr"]}', 
+            signature: '{$package["signature"]}',
+            jsApiList: [
+                'chooseImage',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'uploadImage',
+                'hideMenuItems',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'closeWindow',
+                'showMenuItems'
+            ]
+        });
+    </script>
+</head>
+<body>
+<div class="background_img"><img src="__IMG__/background_03_img.jpg" width="100%" height="100%"/></div>
+<div class="text_rule"><img src="__IMG__/benediction_text_img.png" width="100%" height="100%"/></div>
+<div class="zhezhao_rule">
+    <div id="text_py">
+        <notempty name="_list">
+            <volist name="_list" id="vo">
+                <p><span class="avatar_zhufu"><img src="{$vo['avatar']}" class="avatar_cir" /></span><span class="text_zhufu">{$vo['nickname']}</span></p>
+            </volist>
+        </notempty>
+        
+    </div>
+</div>
+<div onclick="gotoBlessing()" style="width:60px;height:30px;display:block;position:absolute;left:22%;bottom:12px;font-size: 24px;color:#0066cc;font-family: '黑体';font-weight:900;">返回</div>
+
+<script type="text/javascript">
+    $(function() {
+        setTimeout(function() {
+            wx.hideOptionMenu();
+        }, 0);
+    });
+
+    function gotoBlessing() {
+        window.location.href = "{:U('Qixi/blessing?activityid='.$activity['id'])}";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/zhuodianying/!svn/ver/427/1/Application/Weixin/Pay
+END
+ClientPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Pay/ClientPay.class.php
+END
+NativecallPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Pay/NativecallPay.class.php
+END
+RedpacketPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Pay/RedpacketPay.class.php
+END
+ShorturlPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Pay/ShorturlPay.class.php
+END
+UnifiedPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Pay/UnifiedPay.class.php
+END
+NativelinkPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Pay/NativelinkPay.class.php
+END
+JsapiPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/zhuodianying/!svn/ver/427/1/Application/Weixin/Pay/JsapiPay.class.php
+END
+ServerPay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/zhuodianying/!svn/ver/2/1/Application/Weixin/Pay/ServerPay.class.php
+END
+BasePay.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/zhuodianying/!svn/ver/418/1/Application/Weixin/Pay/BasePay.class.php
+END

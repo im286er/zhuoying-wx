@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="//cdn.myline.cc/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.myline.cc/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdn.myline.cc/nanqi/bootstrap-notify.min.js"></script>
+    <title>捉影七夕搭鹊桥</title> 
+    <link rel="stylesheet" href="__CSS__/style.css" />
+    <script>
+        $(function(){
+            var width = $(window).width();
+            var height = $(window).height();
+            $(".background_img").width(width);
+            $(".background_img").height(height);
+        })
+
+    </script>
+
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        wx.config({
+            debug: false,
+            appId: '{$package["appid"]}',
+            timestamp: {$package["timestamp"]},
+            nonceStr: '{$package["nonceStr"]}', 
+            signature: '{$package["signature"]}',
+            jsApiList: [
+                'chooseImage',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'uploadImage',
+                'hideMenuItems',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'closeWindow',
+                'showMenuItems'
+            ]
+        });
+    </script>
+    <style type="text/css">
+        .modal-body {
+            color: #337ab7;
+            background-image: url(__IMG__/cloud_background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .primary-word {
+            font-size:18px;
+            -webkit-text-fill-color: rgb(149, 206, 252);
+            -webkit-text-stroke: 1px #337ab7;
+        }
+        .primary-number {
+            font-size:18px;
+            -webkit-text-fill-color: rgb(149, 206, 252);
+            -webkit-text-stroke: 1px #FF3300;
+        }
+        #start_btn {
+            font-size:25px;
+            -webkit-text-fill-color: rgb(149, 206, 252);
+            -webkit-text-stroke: 1px #337ab7;
+        }
+    </style>
+</head>
+<body>
+<div class="background_img"><img src="__IMG__/background_img.jpg" width="100%" height="100%"/></div>
+<div id="share" style="display: none;"><img src="__IMG__/share_text_img.png" width="100%"/></div>
+<div class="moon">
+    <div id="moon"><img src="__IMG__/moon.png" width="100%" height="100%"/></div>
+    <div id="bird_1"><img src="__IMG__/bird_img.png" width="100%" height="100%"/></div>
+    <div id="bird_2"><img src="__IMG__/bird_02_img.png" width="100%" height="100%"/></div>
+    <div id="bird_3"><img src="__IMG__/bird_img.png" width="100%" height="100%"/></div>
+    <div id="bird_4"><img src="__IMG__/bird_img.png" width="100%" height="100%"/></div>
+    <div id="bird_5"><img src="__IMG__/bird_02_img.png" width="100%" height="100%"/></div>
+    <div id="heart_1"><img src="__IMG__/heart_02_img.png" width="100%" height="100%"/></div>
+    <div id="heart_2"><img src="__IMG__/heart_02_img.png" width="100%" height="100%"/></div>
+    <div id="heart_3"><img src="__IMG__/heart_02_img.png" width="100%" height="100%"/></div>
+    <div id="heart_4"><img src="__IMG__/heart_02_img.png" width="100%" height="100%"/></div>
+    <div id="heart_5"><img src="__IMG__/heart_01_img.png" width="100%" height="100%"/></div>
+</div>
+<div class="bridge">
+    <div id="bridge_left"><img src="__IMG__/bridge_left_img.png" width="100%" height="100%"/></div>
+    <div id="bridge_right"><img src="__IMG__/bridge_right_img.png" width="100%" height="100%"/></div>
+    <div id="water"><img src="__IMG__/water_img.png" width="100%" height="100%"/></div>
+    <div id="niulang"><img src="__IMG__/niulang_img.png" width="100%" height="100%"/></div>
+    <div id="zhinv"><img src="__IMG__/zhinv_img.png" width="100%" height="100%"/></div>
+    <div id="cloud_niulang"><img src="__IMG__/cloud_left_01.png" width="100%" height="100%"/></div>
+    <div id="avatar_n"><img id="img_avatar_n" src="__IMG__/jiahao.png" width="100%" height="100%" class="img_cir img-circle"/></div>
+    <div id="cloud_zhinv"><img src="__IMG__/cloud_right.png" width="100%" height="100%"/></div>
+    <div id="avatar_z"><img id="img_avatar_z" src="__IMG__/jiahao.png" width="100%" class="img_cir img-circle"/></div>
+    <div id="flower_right"><img src="__IMG__/flower_right.png" width="100%" height="100%"/></div>
+    <div id="right_corner"><img src="__IMG__/RightCorner.png" width="100%" height="100%"/></div>
+    <div id="cloud_left"><img src="__IMG__/cloud_left.png" width="100%" height="100%"/></div>
+    <div id="flower_01"><img src="__IMG__/flower_01.png" width="100%" height="100%"/></div>
+    <div id="rule_text_btn"><a data-toggle="modal" data-target="#Rule"><img src="__IMG__/rule_text_btn.png" width="100%" height="100%"/></a></div>
+    <div id="start_cloud"><img src="__IMG__/cloud.png" width="100%" height="100%"/></div>
+    <div id="start_btn"></div>
+    <div id="cloud_bottom"><img src="__IMG__/cloud_01.png" width="100%" height="100%"/></div>
+</div>
+
+<form id="launchForm">
+    <input type="hidden" name="open_id" value="{$userinfo['openid']}" />
+    <input type="hidden" name="nickname" value="{$userinfo['nickname']}" />
+    <input type="hidden" name="sex" value="{$userinfo['sex']}" />
+    <input type="hidden" name="niu_avatar" id="niu_avatar" value="" />
+    <input type="hidden" name="zhi_avatar" id="zhi_avatar" value="" />
+</form>
+
+<div id="Attention" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body" style="height: 200px">
+                <div id="dialog-body" style="padding: 60px 40px">
+                    <span>欢迎来到</span>
+                    <span class="primary-word">捉影银河星空</span>
+                    <br/>
+                    <span>鹊桥的那一头就是你亲爱的TA</span>
+                    <br/>
+                    <span id="spn_message">点击“开始”上传TA的头像</span>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a id="btn_preview" class="btn btn-primary btn-block btn-lg" href="#" style="border-radius: 0px 0px 5px 5px">马上开始捉爱之旅</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Rule" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 30px 20px;height: 220px; width: 300px; margin: 0 auto;">
+                    <p>第一步：点击 + 号上传ta的头像；</p>
+                    <p>第二步：点击开始搭桥，然后将链接发送给好友或分享至朋友圈，向好友征集祝福；</p>
+                    <p>第三步：集齐<span class="primary-number">17</span>个祝福即可获得当期电影票1张，集齐<span class="primary-number">77</span>个祝福可获得当期电影票2张和惊喜大奖<span class="primary-word">丽江双人游</span>的抽奖机会！
+                    </p>
+                </div>
+                
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a id="btn_close_rule" onclick="$('#Rule').modal('hide')" class="btn btn-primary btn-block btn-lg" href="#" style="border-radius: 0px 0px 5px 5px">我已经了解了</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="over" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="dialog-body" style="padding: 20px 40px">
+                    <span>本活动已经结束，感谢大家的参与！欢迎持续关注“捉影",更多精彩等着你哦！</span>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0">
+                <a class="btn btn-primary btn-block btn-lg" href="{:U('Qixi/zhufu?activityid='.$activity['id'])}" style="border-radius: 0px 0px 5px 5px">查看好友祝福</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="JavaScript" src="__JS__/move.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.modal').on('show.bs.modal', function(){
+            var $this = $(this);
+            var $modal_dialog = $this.find('.modal-dialog');
+            $this.css('display', 'block');
+
+            $('.modal-footer').css('opacity', '1');
+            $modal_dialog.css({'margin-top': Math.max(0, (($(window).height() - $modal_dialog.height())/2 - 10)) });
+        });
+        $('#over').modal({
+            'backdrop': 'static',
+            'show': true
+        });
+    })
+//    $(function() {
+//        $(document).click(function(){
+//            $("#share").hide();
+//        });
+//
+//        setTimeout(function() {
+//            wx.hideOptionMenu();
+//        }, 0);
+//
+//        //注册显示时事件,用于垂直居中
+//        $('.modal').on('show.bs.modal', function(){
+//            var $this = $(this);
+//            var $modal_dialog = $this.find('.modal-dialog');
+//            $this.css('display', 'block');
+//            $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+//        });
+//
+//        var isAttention = "{$userinfo['subscribe']}";
+//        var activityId = "{$activity['id']}";
+//
+//        var sex = "{$userinfo['sex']}";
+//
+//        if (sex == '1') {
+//            $('#img_avatar_n').attr('src', '{$userinfo["headimgurl"]}');
+//            $('#img_avatar_n').attr('isChange', 'true');
+//            $('#niu_avatar').val('{$userinfo["headimgurl"]}');
+//        }
+//        else {
+//            $('#img_avatar_z').attr('src', '{$userinfo["headimgurl"]}');
+//            $('#img_avatar_z').attr('isChange', 'true');
+//            $('#zhi_avatar').val('{$userinfo["headimgurl"]}');
+//        }
+//
+//        if (isAttention == "" || isAttention == 0) {
+//            $('#spn_message').text('参加活动请先关注捉影公众号').css('color', 'red');
+//            $('#btn_preview').text('点此关注捉影公众号').attr('href', 'http://mp.weixin.qq.com/s?__biz=MzAxOTUwMTE0MQ==&mid=208798531&idx=1&sn=27055c0fe5497df24daa6ef0984fae33#rd');
+//
+//            $('#Attention').modal({
+//                'backdrop': 'static',
+//                'show': true
+//            });
+//        }
+//        else if (activityId != '') {
+//            $('#spn_message').text('你已经发起过活动，点击查看').css('color', 'red');
+//            $('#btn_preview').text('查看我的人气指数').attr('href', 'http://weixin.myline.cc/Weixin/Qixi/blessing?activityid=' + activityId);
+//
+//            $('#Attention').modal({
+//                'backdrop': 'static',
+//                'show': true
+//            });
+//        }
+//        else {
+//            // $('#start_btn').text('请上传' + (sex == '1' ? '织女' : '牛郎') + '头像');
+//
+//            // $('#btn_preview').click(function() {
+//
+//            //     $('#Attention').modal('hide');
+//            // });
+//        }
+//
+//
+//
+//        $('.img_cir').click(function(){
+//            var that = $(this);
+//            wx.chooseImage({
+//                count: 1,
+//                success: function (res) {
+//                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+//                    that.attr('src', localIds);
+//                    that.attr('isChange', 'true');
+//
+//                    var imgId = that.attr('id');
+//
+//                    upload(that.attr('src'), imgId);
+//                }
+//            });
+//        });
+//
+//        $('#start_btn').click(function() {
+//            var niu_avatar = $('#img_avatar_n').attr('isChange');
+//            var zhi_avatar = $('#img_avatar_z').attr('isChange');
+//
+//            if (niu_avatar && zhi_avatar) {
+//                var formData=$("#launchForm").serialize();
+//                $.ajax({
+//                    type: "POST",
+//                    url: '{:U()}',
+//                    data:formData,
+//                    success: function(result){
+//                        if (result.success) {
+//                            success(result.data);
+//                        }
+//                        else {
+//                            $.notify(result.errmsg, { allow_dismiss: false, delay: 1000});
+//                        }
+//                    }
+//                });
+//            }
+//            else {
+//                var that = $('#img_avatar_n');
+//                if (sex == '1') {
+//                    that = $('#img_avatar_z');
+//                }
+//
+//                wx.chooseImage({
+//                    count: 1,
+//                    success: function (res) {
+//                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+//                        that.attr('src', localIds);
+//                        that.attr('isChange', 'true');
+//
+//                        var imgId = that.attr('id');
+//
+//                        upload(that.attr('src'), imgId);
+//                    }
+//                });
+//                // var message = '请在' + target_sex + '头像区域上传你亲爱的TA的头像';
+//
+//                // $.notify(message, { allow_dismiss: false, delay: 1000});
+//            }
+//        });
+//
+//        function success(activityId) {
+//            wx.showOptionMenu();
+//
+//            var title = '急死宝宝了，点亮17个喜鹊就能得电影票，快来帮我！';
+//            var desc = '我想要捉影的电影票，还想要免费丽江游，大家快帮我点祝福';
+//            var link = 'http://weixin.myline.cc/Weixin/Qixi/blessing?activityid=' + activityId;
+//            var imgUrl = 'http://7xl1ts.com2.z0.glb.qiniucdn.com/qixi.png';
+//
+//            wx.onMenuShareTimeline({
+//                title: title,
+//                link: link,
+//                imgUrl: imgUrl,
+//                success: function () {
+//                    wx.closeWindow();
+//                },
+//                cancel: function () {
+//                }
+//            });
+//
+//            wx.onMenuShareAppMessage({
+//                title: title,
+//                desc: desc,
+//                link: link,
+//                imgUrl: imgUrl,
+//                success: function () {
+//                    wx.closeWindow();
+//                },
+//                cancel: function () {
+//                }
+//            });
+//
+//            wx.onMenuShareQQ({
+//                title: title,
+//                desc: desc,
+//                link: link,
+//                imgUrl: imgUrl,
+//                success: function () {
+//                },
+//                cancel: function () {
+//                }
+//            });
+//
+//            wx.onMenuShareWeibo({
+//                title: title,
+//                desc: desc,
+//                link: link,
+//                imgUrl: imgUrl,
+//                success: function () {
+//                },
+//                cancel: function () {
+//                }
+//            });
+//
+//            wx.onMenuShareQZone({
+//                title: title,
+//                desc: desc,
+//                link: link,
+//                imgUrl: imgUrl,
+//                success: function () {
+//                },
+//                cancel: function () {
+//                }
+//            });
+//
+//            $("#share").show();
+//        }
+//
+//        function upload(localId, imgId) {
+//            wx.uploadImage({
+//                localId: localId,
+//                isShowProgressTips: 1, // 默认为1，显示进度提示
+//                success: function (res) {
+//                    var serverId = res.serverId; // 返回图片的服务器端ID
+//
+//                    $.ajax({
+//                        url:'{:U("Qixi/uploadResource")}',
+//                        data: {mediaID: serverId},
+//                        dataType:'json',
+//                        async:false,
+//                        success : function(result) {
+//
+//                            if (result.success) {
+//
+//                                var inputId = '#niu_avatar';
+//                                if (imgId == 'img_avatar_n') {
+//                                    inputId = '#niu_avatar';
+//                                }
+//                                else {
+//                                    inputId = '#zhi_avatar';
+//                                }
+//
+//                                $(inputId).val(result.data);
+//                                $('#' + imgId).attr('src', result.data);
+//
+//                                var niu_avatar = $('#img_avatar_n').attr('isChange');
+//                                var zhi_avatar = $('#img_avatar_z').attr('isChange');
+//
+//                                if (niu_avatar && zhi_avatar) {
+//                                    $('#start_btn').text('开始搭桥');
+//                                }
+//                            }
+//                            else {
+//                                $.notify('上传头像出错', { allow_dismiss: false, delay: 1000});
+//                            }
+//                        }
+//                    });
+//                }
+//            });
+//        }
+//    });
+</script>
+
+</body>
+</html>

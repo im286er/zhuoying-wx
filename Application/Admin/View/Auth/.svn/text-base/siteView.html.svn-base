@@ -1,0 +1,95 @@
+<extend name="Public/base" />
+
+<block name="body">
+    <div class="main-title">
+        <h2>审核场地提供者信息</h2>
+    </div>
+
+    <form class="form-horizontal">
+        <div class="form-item">
+            <label for="auth-title" class="item-label">姓名</label>
+            <div class="controls">
+                <input type="text" name="uname" class="text input-large" value="{$info.uname}"/>
+            </div>
+        </div>
+        <div class="form-item">
+            <label for="auth-description" class="item-label">身份证号</label>
+            <div class="controls">
+                <input type="text" name="idcard" class="text input-large" value="{$info.idcard}"/>
+            </div>
+        </div>
+         <div class="form-item">
+            <label for="auth-description" class="item-label">身份证正面</label>
+            <div class="controls">
+                <img src="{$info.img_up}">
+            </div>
+        </div>
+         <div class="form-item">
+            <label for="auth-description" class="item-label">身份证反面</label>
+            <div class="controls">
+                <img src="{$info.img_down}">
+            </div>
+        </div>
+         <div class="form-item">
+            <label for="auth-description" class="item-label">场地名称</label>
+            <div class="controls">
+                 <input type="text" name="uname" class="text input-large" value="{$info.sitename}"/>
+            </div>
+        </div>  
+         <div class="form-item">
+            <label for="auth-description" class="item-label">场地类型</label>
+            <div class="controls">
+                <input type="text" name="uname" class="text input-large" value="{$info.sitetype}"/>                
+            </div>
+        </div>    
+         <div class="form-item">
+            <label for="auth-description" class="item-label">场地详细地址</label>
+            <div class="controls">
+                <input type="text" name="uname" class="text input-large" value="{$info.address}"/> 
+            </div>
+        </div> 
+         <div class="form-item">
+            <label for="auth-description" class="item-label">定位地址</label>
+            <div class="controls">
+                 <input type="text" name="uname" class="text input-large" value="{$info.latitude}"/> 
+                 <input type="text" name="uname" class="text input-large" value="{$info.latitude}"/> 
+            </div>
+        </div>  
+         <div class="form-item">
+            <label for="auth-description" class="item-label">法人名称</label>
+            <div class="controls">
+                 <input type="text" name="uname" class="text input-large" value="{$info.legalname}"/> 
+            </div>
+        </div>  
+         <div class="form-item">
+            <label for="auth-description" class="item-label">联系电话</label>
+            <div class="controls">
+                 <input type="text" name="uname" class="text input-large" value="{$info.tel}"/> 
+            </div>
+        </div>
+         <div class="form-item">
+            <label for="auth-description" class="item-label">工商注册号</label>
+            <div class="controls">
+                 <input type="text" name="uname" class="text input-large" value="{$info.registration}"/> 
+            </div>
+        </div>   
+         <div class="form-item">
+            <label for="auth-description" class="item-label">创建时间</label>
+            <div class="controls">
+                 <input type="text" name="uname" class="text input-large" value="{$info.createtime}"/> 
+            </div>
+        </div>                                                                 
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id}" />
+            <a href="{:U('changeSite?method=consent&id='.$info['id'].'&uid='.$info['uid'])}" class="ajax-get">通过</a>
+            <a href="{:U('changeSite?method=refusal&id='.$info['id'].'&uid='.$info['uid'])}" class="ajax-get">拒绝</a>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+<block name="script">
+<script type="text/javascript" charset="utf-8">
+    //导航高亮
+    highlight_subnav('{:U('hostList')}');
+</script>
+</block>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/zhuodianying/!svn/ver/418/1/Application/Weixin/cert
+END
+apiclient_key.pem
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/zhuodianying/!svn/ver/418/1/Application/Weixin/cert/apiclient_key.pem
+END
+apiclient_cert.pem
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/zhuodianying/!svn/ver/418/1/Application/Weixin/cert/apiclient_cert.pem
+END
